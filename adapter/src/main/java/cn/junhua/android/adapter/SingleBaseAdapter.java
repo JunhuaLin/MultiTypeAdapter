@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 功能：Adapter封装简化使用步骤，适用于ListView单条目类别条目的列表数据填充。
  * 使用：只需要继承实现onConvert方法即可。
- * created by 林军华 on 2016/5/18 0026.<br/>
+ * created by 林军华 on 2016/5/18 0026.
  */
 public abstract class SingleBaseAdapter<T> extends BaseAdapter {
 

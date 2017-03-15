@@ -12,8 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * 功能：Adapter封装简化使用步骤，适用于RecyclerView的单个条目类别条目的列表数据填充<br/>
- * created by 林军华 on 2016/5/18 0026.<br/>
+ * 功能：Adapter封装简化使用步骤，适用于RecyclerView的单个条目类别条目的列表数据填充
+ * created by 林军华 on 2016/5/18 0026.
  */
 public abstract class SingleRecyclerViewAdapter<T> extends RecyclerView.Adapter<SingleRecyclerViewAdapter.ViewHolder> {
     // data res
@@ -96,9 +96,9 @@ public abstract class SingleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
 
 
     /**
-     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码<br/>
-     * 使用方法：<br/>
-     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件<br/>
+     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码
+     * 使用方法：
+     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件
      */
     public final static class ViewHolder extends RecyclerView.ViewHolder {
         private SparseArray<View> mViews;

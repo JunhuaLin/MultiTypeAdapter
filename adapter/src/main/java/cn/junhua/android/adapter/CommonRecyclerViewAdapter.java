@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 功能：Adapter封装简化使用步骤，适用于RecyclerView的任意类别条目的列表数据填充<br/>
- * created by 林军华 on 2016/5/18 0026.<br/>
+ * 功能：Adapter封装简化使用步骤，适用于RecyclerView的任意类别条目的列表数据填充
+ * created by 林军华 on 2016/5/18 0026.
  */
 public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder> {
     // data res
@@ -125,8 +125,8 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         private int mLayoutId;
 
         /**
-         * 填充数据类类型此处仅仅作为不同布局的标识,用于根据数据源区分布局对象<br/>
-         * 因为：Bean->Layout->View<br/>
+         * 填充数据类类型此处仅仅作为不同布局的标识,用于根据数据源区分布局对象
+         * 因为：Bean->Layout->View
          */
         private Class<?> mBeanClass;
 
@@ -185,9 +185,9 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
     }
 
     /**
-     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码<br/>
-     * 使用方法：<br/>
-     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件<br/>
+     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码
+     * 使用方法：
+     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件
      */
     public final static class ViewHolder extends RecyclerView.ViewHolder {
         private SparseArray<View> mViews;

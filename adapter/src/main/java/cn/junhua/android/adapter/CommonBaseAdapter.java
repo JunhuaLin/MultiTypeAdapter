@@ -16,8 +16,10 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 功能：Adapter封装简化使用步骤，适用于ListView任意类别条目的列表数据填充<br/>
- * created by 林军华 on 2016/5/18 0026.<br/>
+ * <p>
+ * 功能：Adapter封装简化使用步骤，适用于ListView任意类别条目的列表数据填充
+ * </p>
+ * created by 林军华 on 2016/5/18 0026.
  */
 public final class CommonBaseAdapter extends BaseAdapter {
     // Log TAG
@@ -76,13 +78,16 @@ public final class CommonBaseAdapter extends BaseAdapter {
     }
 
     /**
-     * 该方法在getItemViewType后调用getView<br/>
+     * <p>
+     * 该方法在getItemViewType后调用getView
+     * </p>
      *
      * @param position
-     * @return 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)<br/>
-     * 采用ArrayList<View>[]缓存多类型条目的复用View<br/>
+     * @return 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)
+     * 采用ArrayList<View>[]缓存多类型条目的复用View
      * <p>
      * 如下为AbsListView中使用getItemViewType(int position)的场景：
+     * </p>
      * <p>
      * View getScrapView(int position) { final int whichScrap =
      * mAdapter.getItemViewType(position); if (whichScrap < 0) { return
@@ -91,10 +96,14 @@ public final class CommonBaseAdapter extends BaseAdapter {
      * < mScrapViews.length) { return
      * retrieveFromScrap(mScrapViews[whichScrap], position); } return
      * null; }
+     * </p>
      * <p>
-     * 从此代码可以看出：getItemViewType的返回值将作为数组下标找到对应的复用数组<br/>
-     * 报ArrayIndexOutOfBoundsException的根本原因<br/>
-     * 结论：<br/>
+     * 从此代码可以看出：getItemViewType的返回值将作为数组下标找到对应的复用数组
+     * </p>
+     * <p>
+     * 报ArrayIndexOutOfBoundsException的根本原因
+     * 结论：
+     * </p>
      * 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)
      */
     @Override
@@ -178,8 +187,8 @@ public final class CommonBaseAdapter extends BaseAdapter {
         private int mTypeId;
 
         /**
-         * 填充数据类类型此处仅仅作为不同布局的标识,用于根据数据源区分布局对象<br/>
-         * 因为：Bean->Layout->View<br/>
+         * 填充数据类类型此处仅仅作为不同布局的标识,用于根据数据源区分布局对象
+         * 因为：Bean->Layout->View
          */
         private Class<?> mBeanClass;
 
@@ -244,9 +253,9 @@ public final class CommonBaseAdapter extends BaseAdapter {
     }
 
     /**
-     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码<br/>
-     * 使用方法：<br/>
-     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件<br/>
+     * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码
+     * 使用方法：
+     * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件
      */
     public final static class ViewHolder {
         private SparseArray<View> mViews;
