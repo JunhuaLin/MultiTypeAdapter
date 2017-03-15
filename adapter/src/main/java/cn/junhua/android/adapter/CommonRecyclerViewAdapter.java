@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,24 +18,11 @@ import java.util.List;
  * created by 林军华 on 2016/5/18 0026.<br/>
  */
 public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecyclerViewAdapter.ViewHolder> {
-    // Log TAG
-    private static final String TAG = CommonRecyclerViewAdapter.class.getSimpleName();
     // data res
     private List<Object> mList;
     private LayoutInflater mLayoutInflater;
     // save ViewBinder
-    private ViewBinderListManager mViewBinderListManager;
-
-    /**
-     * 针对只有一种布局的列表展示
-     *
-     * @param context
-     * @param viewBinder
-     */
-    public CommonRecyclerViewAdapter(Context context, ViewBinder viewBinder) {
-        this(context, null, null);
-        mViewBinderListManager.add(viewBinder);
-    }
+    private ViewBinderManager mViewBinderManager;
 
     /**
      * 创建Adapter必须使用ViewBinder
@@ -49,10 +36,8 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
 
     public CommonRecyclerViewAdapter(Context context, List<ViewBinder> viewBinderList, List<Object> dataList) {
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mViewBinderListManager = new ViewBinderListManager();
-        mList = new ArrayList<>();
-
-        mViewBinderListManager.addAll(viewBinderList);
+        mViewBinderManager = new ViewBinderManager();
+        mViewBinderManager.addAll(viewBinderList);
         setList(dataList);
     }
 
@@ -67,14 +52,16 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
     }
 
     /**
-     * 重置内部数据集合内容
+     * 设置或重置内部数据集合内容
      *
      * @param list
      */
     public void setList(List<Object> list) {
-        mList.clear();
-        mList.addAll(list);
-        notifyDataSetChanged();
+        if (mList != null) {
+            mList.clear();
+        }
+
+        mList = list;
     }
 
     /**
@@ -82,9 +69,12 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
      *
      * @param list
      */
-    public void appendList(List<Object> list) {
-        mList.addAll(list);
-        notifyDataSetChanged();
+    public void append(List<Object> list) {
+        if (mList == null) {
+            mList = list;
+        } else {
+            mList.addAll(list);
+        }
     }
 
     @Override
@@ -95,7 +85,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
     @Override
     public int getItemViewType(int position) {
         Object bean = mList.get(position);
-        int layoutId = mViewBinderListManager.get(bean.getClass()).getLayoutId();
+        int layoutId = mViewBinderManager.get(bean.getClass()).getLayoutId();
         // 你必须创建一个ViewBinder实例与JavaBean对应。
         if (layoutId < 0) {
             throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
@@ -116,7 +106,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         Object bean = mList.get(position);// 要填充的数据
-        ViewBinder viewBinder = mViewBinderListManager.get(bean.getClass());
+        ViewBinder viewBinder = mViewBinderManager.get(bean.getClass());
         // 你必须创建一个ViewBinder实例与JavaBean对应。
         if (viewBinder == null) {
             throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
@@ -266,7 +256,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
      *         <p/>
      *         2016年6月6日上午11:26:57
      */
-    private static class ViewBinderListManager extends ArrayList<ViewBinder> {
+    private static class ViewBinderManager extends HashMap<Class<?>, ViewBinder> {
 
         /**
          *
@@ -274,52 +264,22 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         private static final long serialVersionUID = -7149248838995627451L;
 
         /**
-         * 添加ViewBinder并自动生成ViewBinder的TypeId
+         * 添加ViewBinder
          */
-        @Override
         public boolean add(ViewBinder viewBinder) {
             if (viewBinder == null) {
                 return false;
             }
-            ViewBinder temp = get(viewBinder.getBeanClass());
-            //每类布局只能对应一种绑定数据的方式
-            if (temp == null) {// 首次添加
-                super.add(viewBinder);
-            } else {// 替换
-                // 替换原来的TypeId
-                super.remove(temp);
-                super.add(viewBinder);
-            }
-            return true;
+            //每类布局只能对应一种绑定数据的方式,重复添加会被覆盖
+            return put(viewBinder.getBeanClass(), viewBinder) != null;
         }
 
-        @Override
         public boolean addAll(Collection<? extends ViewBinder> collection) {
-            boolean b = false;
+            boolean b = true;
             for (ViewBinder vb : collection) {
-                b |= add(vb);
+                b &= add(vb);
             }
             return b;
-        }
-
-        /**
-         * 通过JavaBean的Class得到对应的ViewBinder
-         *
-         * @param clazz
-         * @return
-         */
-        public ViewBinder get(Class<?> clazz) {
-            if (clazz == null) {
-                return null;
-            }
-
-            String modelCanonicalName = clazz.getCanonicalName();
-            for (ViewBinder viewBinder : this) {
-                if (viewBinder.getBeanClass().getCanonicalName().equals(modelCanonicalName)) {
-                    return viewBinder;
-                }
-            }
-            return null;
         }
 
     }
