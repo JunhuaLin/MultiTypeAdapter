@@ -92,7 +92,7 @@ c.设置适配器
 
 d.运行效果图
 
-![single adapter]()
+![single adapter](https://github.com/JunhuaLin/CommonAdapter/blob/master/photo/singleadapter.png)
 
 
 #### 多类型数据适配器
@@ -194,7 +194,7 @@ c.创建适配器并填充数据
 
 d.运行效果图
 
-![common adapter]()
+![common adapter](https://github.com/JunhuaLin/CommonAdapter/blob/master/photo/commonadapter.png)
 
 
 ## 结语
