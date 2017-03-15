@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -138,6 +139,19 @@ public abstract class SingleBaseAdapter<T> extends BaseAdapter {
         public ViewHolder setText(int viewId, String text) {
             TextView textView = getView(viewId);
             textView.setText(text);
+            return this;
+        }
+
+        /**
+         * 便捷设置TextView的内容
+         *
+         * @param imageViewId ImageView的id
+         * @param drawableId  ImageView的内容
+         * @return ViewHolder自己实现链式编程
+         */
+        public ViewHolder setImage(int imageViewId, int drawableId) {
+            ImageView imageView = getView(imageViewId);
+            imageView.setImageResource(drawableId);
             return this;
         }
 

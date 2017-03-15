@@ -8,13 +8,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.SingleBaseAdapterActivity"
+            android:label="@string/single_base"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CommonBaseAdapterActivity"
+            android:label="@string/common_base"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.SingleRecyclerViewAdapterActivity"
+            android:label="@string/single_recycler"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CommonRecyclerViewAdapterActivity"
+            android:label="@string/common_recycler"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

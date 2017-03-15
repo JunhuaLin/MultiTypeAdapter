@@ -146,7 +146,7 @@ public abstract class SingleRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         }
 
         /**
-         * 便捷设置TextView的内容
+         * 便捷设置ImageView的内容
          *
          * @param imageViewId ImageView的id
          * @param drawableId  ImageView的内容

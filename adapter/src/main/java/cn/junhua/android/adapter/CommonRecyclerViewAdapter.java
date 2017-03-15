@@ -235,7 +235,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         }
 
         /**
-         * 便捷设置TextView的内容
+         * 便捷设置ImageView的内容
          *
          * @param imageViewId ImageView的id
          * @param drawableId  ImageView的内容
@@ -256,7 +256,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
      *         <p/>
      *         2016年6月6日上午11:26:57
      */
-    private static class ViewBinderManager extends HashMap<Class<?>, ViewBinder> {
+    private static class ViewBinderManager extends HashMap<Class, ViewBinder> {
 
         /**
          *
