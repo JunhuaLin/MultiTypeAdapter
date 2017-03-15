@@ -163,6 +163,8 @@ public class ListViewSecondViewBinder extends CommonBaseAdapter.ViewBinder {
 ```
 ListViewSecondViewBinder用来填充Item2对应的布局文件。
 
+>注意：这里bindView传进来的bean需要强转成你要处理的对象。
+
 其中bindView和单条目适配器中的onBindView一样。
 
 
@@ -180,7 +182,7 @@ c.创建适配器并填充数据
         mCommonBaseAdapter = new CommonBaseAdapter(this, viewBinders);
 
         //设置数据集合
-        mDataList = new ArrayList<>();
+        mDataList = new ArrayList<Object>();
         for (int i = 0; i < 10; i++) {
             mDataList.add(new Item1(R.mipmap.ic_launcher, "第一类条目的item" + i));
             mDataList.add(new Item2("我是第二类条目", "item" + i));
@@ -190,6 +192,8 @@ c.创建适配器并填充数据
         //为ListView设置Adapter
         list_view.setAdapter(mCommonBaseAdapter);
 ```
+
+>注意：此处的数据集合泛型必须为Object，因为要同时处理多种JavaBean。
 
 d.运行效果图
 
