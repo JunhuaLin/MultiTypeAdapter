@@ -70,11 +70,10 @@ public class ListViewSingleAdapter extends SingleBaseAdapter<Item1> {
 看下onBindView方法：
 >public void onBindView(ViewHolder holder, Item1 bean, int position)
 
-第一个参数：ViewHolder，用来封装复用条目的，通过它的getView（id）可以得到条目中所有到View对象，然后进行数据填充即可。
+- 第一个参数：ViewHolder，用来封装复用条目的，通过它的getView（id）可以得到条目中所有到View对象，然后进行数据填充即可。
 ViewHolder的setText()和setImage()是用来快速填充文字和图片到方法，它们的返回值是ViewHolder本身。
-
-第二个参数：Item1，就是我们数据对象的引用。
-第三个参数：position，当前条目位置。
+- 第二个参数：Item1，就是我们数据对象的引用。
+- 第三个参数：position，当前条目位置。
 
 c.设置适配器
 ```java
