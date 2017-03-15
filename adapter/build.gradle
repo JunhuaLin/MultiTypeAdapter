@@ -6,7 +6,7 @@ ext {
 
     publishedGroupId = 'cn.junhua.android.adapter'
     libraryName = 'adapter'
-    artifact = 'commonadapter'
+    artifact = 'adapter'
 
     libraryDescription = 'some common for ListView and RecyclerView on Android'
 
