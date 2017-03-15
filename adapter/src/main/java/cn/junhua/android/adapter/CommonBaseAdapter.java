@@ -16,9 +16,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * <p>
  * 功能：Adapter封装简化使用步骤，适用于ListView任意类别条目的列表数据填充
- * </p>
+ * <p>
  * created by 林军华 on 2016/5/18 0026.
  */
 public final class CommonBaseAdapter extends BaseAdapter {
@@ -78,32 +77,6 @@ public final class CommonBaseAdapter extends BaseAdapter {
     }
 
     /**
-     * <p>
-     * 该方法在getItemViewType后调用getView
-     * </p>
-     *
-     * @param position
-     * @return 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)
-     * 采用ArrayList<View>[]缓存多类型条目的复用View
-     * <p>
-     * 如下为AbsListView中使用getItemViewType(int position)的场景：
-     * </p>
-     * <p>
-     * View getScrapView(int position) { final int whichScrap =
-     * mAdapter.getItemViewType(position); if (whichScrap < 0) { return
-     * null; } if (mViewTypeCount == 1) { return
-     * retrieveFromScrap(mCurrentScrap, position); } else if (whichScrap
-     * < mScrapViews.length) { return
-     * retrieveFromScrap(mScrapViews[whichScrap], position); } return
-     * null; }
-     * </p>
-     * <p>
-     * 从此代码可以看出：getItemViewType的返回值将作为数组下标找到对应的复用数组
-     * </p>
-     * <p>
-     * 报ArrayIndexOutOfBoundsException的根本原因
-     * 结论：
-     * </p>
      * 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)
      */
     @Override
