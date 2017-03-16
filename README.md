@@ -22,7 +22,7 @@
 
 ### 3.在代码中使用
 
-SingleBaseAdapter和SingleRecyclerViewAdapter的使用方法基本一直，CommonBaseAdapter和CommonRecyclerViewAdapter基本使用一直。下面就按单类型和多类型分别介绍。
+SingleBaseAdapter和SingleRecyclerViewAdapter的使用方法基本一样，CommonBaseAdapter和CommonRecyclerViewAdapter基本使用一样。下面就按单类型和多类型分别介绍。
 
 #### 单类型数据适配器
 SingleBaseAdapter和SingleRecyclerViewAdapter采用泛型来指定填充数据类型。所以
@@ -71,7 +71,7 @@ public class ListViewSingleAdapter extends SingleBaseAdapter<Item1> {
 >public void onBindView(ViewHolder holder, Item1 bean, int position)
 
 - 第一个参数：ViewHolder，用来封装复用条目的，通过它的getView（id）可以得到条目中所有到View对象，然后进行数据填充即可。
-ViewHolder的setText()和setImage()是用来快速填充文字和图片到方法，它们的返回值是ViewHolder本身。
+ViewHolder的setText()和setImage()是用来快速填充文字和图片的方法，它们的返回值是ViewHolder本身。
 - 第二个参数：Item1，就是我们数据对象的引用。
 - 第三个参数：position，当前条目位置。
 
@@ -117,7 +117,7 @@ public class Item2 {
 
 b.创建ViewBinder
 
-要继承CommonBaseAdapter和CommonRecyclerViewAdapter对应的ViewBinder。
+要继承CommonBaseAdapter或CommonRecyclerViewAdapter对应的ViewBinder。
 
 ```java
 public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder {
