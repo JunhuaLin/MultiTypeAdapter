@@ -1,5 +1,5 @@
 # CommonAdapter
-通用适配器，适用于ListView和RecyclerView单类型或多类型显示。ListView或RecyclerView在我们开发的过程中使用频率极高，而在创建适配器的时候每次都要写很多相同的代码，每次都这样操作不仅效率低而且很不爽。
+通用适配器，适用于ListView和RecyclerView单类型或多类型显示。ListView和RecyclerView在我们开发的过程中使用频率极高，而在创建适配器的时候每次都要写很多相同的代码，每次都这样操作不仅效率低而且很不爽。
 所有将适配器创建过程中的通用代码提取出来，然后将与业务相关部分留到子类中去实现。该通用适配器已经实现了条目复用，多条目加载等功能。
 
 ## 快速使用
@@ -9,7 +9,11 @@
 使用Android Studio
 
 在build.gradle中添加如下代码：
-> compile 'cn.junhua.android.adapter:adapter:1.0.0'
+```
+dependencies {
+    compile 'cn.junhua.android.adapter:adapter:1.0.0'
+}
+```
 
 ### 2.adapter分类
 
