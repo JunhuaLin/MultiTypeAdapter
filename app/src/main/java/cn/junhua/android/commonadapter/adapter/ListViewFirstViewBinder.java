@@ -10,7 +10,7 @@ import cn.junhua.android.commonadapter.bean.Item1;
  * Created by junhua on 17-3-15.
  */
 
-public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder {
+public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder<Item1> {
 
     private int[] images = new int[]{
             R.mipmap.image1,
@@ -18,17 +18,14 @@ public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder {
             R.mipmap.image3
     };
 
-    public ListViewFirstViewBinder(Class<?> beanClass, int layoutId) {
+    public ListViewFirstViewBinder(Class<Item1> beanClass, int layoutId) {
         super(beanClass, layoutId);
     }
 
     @Override
-    public void bindView(CommonBaseAdapter.ViewHolder holder, Object bean, int position) {
-
-        Item1 item = (Item1) bean;
-
-        holder.setText(R.id.title_tv, item.getTitle())
-                .setImage(R.id.icon_iv, item.getImageId());
+    public void onBindView(CommonBaseAdapter.ViewHolder holder, Item1 bean, int position) {
+        holder.setText(R.id.title_tv, bean.getTitle())
+                .setImage(R.id.icon_iv, bean.getImageId());
 
         LinearLayout linearLayout = holder.getView(R.id.bg_ll);
         linearLayout.setBackgroundResource(images[position % images.length]);

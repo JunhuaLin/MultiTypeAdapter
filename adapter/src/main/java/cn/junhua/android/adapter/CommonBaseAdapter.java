@@ -145,7 +145,7 @@ public final class CommonBaseAdapter extends BaseAdapter {
         }
 
         // 此处抽取出来让不同的布局实现不同数据填充逻辑
-        viewBinder.bindView(holder, bean, position);
+        viewBinder.wrapperBindView(holder, bean, position);
 
         return convertView;
     }
@@ -153,7 +153,7 @@ public final class CommonBaseAdapter extends BaseAdapter {
     /**
      * 设置条目中控件显示信息的封装类
      */
-    public static abstract class ViewBinder {
+    public static abstract class ViewBinder<T> {
         // 布局文件
         private int mLayoutId;
         // 区分不同类别的条目
@@ -163,9 +163,9 @@ public final class CommonBaseAdapter extends BaseAdapter {
          * 填充数据类类型此处仅仅作为不同布局的标识,用于根据数据源区分布局对象
          * 因为：Bean->Layout->View
          */
-        private Class<?> mBeanClass;
+        private Class<T> mBeanClass;
 
-        public ViewBinder(Class<?> beanClass, int layoutId) {
+        public ViewBinder(Class<T> beanClass, int layoutId) {
             this.mLayoutId = layoutId;
             this.mBeanClass = beanClass;
         }
@@ -174,7 +174,7 @@ public final class CommonBaseAdapter extends BaseAdapter {
             return mLayoutId;
         }
 
-        public Class<?> getBeanClass() {
+        public Class<T> getBeanClass() {
             return mBeanClass;
         }
 
@@ -216,13 +216,24 @@ public final class CommonBaseAdapter extends BaseAdapter {
         }
 
         /**
+         * 内部进行数据类型强制转化
+         *
+         * @param holder
+         * @param bean
+         * @param position
+         */
+        private void wrapperBindView(ViewHolder holder, Object bean, int position) {
+            onBindView(holder, (T) bean, position);
+        }
+
+        /**
          * 设置条目中控件显示的信息
          *
          * @param holder   封装adapter中item的复用操作代码的对象
          * @param bean     数据Bean需要强制类型转化
          * @param position 当前条目位置
          */
-        public abstract void bindView(ViewHolder holder, Object bean, int position);
+        public abstract void onBindView(ViewHolder holder, T bean, int position);
     }
 
     /**

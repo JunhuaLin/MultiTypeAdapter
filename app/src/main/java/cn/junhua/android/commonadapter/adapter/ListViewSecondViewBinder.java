@@ -8,15 +8,14 @@ import cn.junhua.android.commonadapter.bean.Item2;
  * Created by junhua on 17-3-15.
  */
 
-public class ListViewSecondViewBinder extends CommonBaseAdapter.ViewBinder {
-    public ListViewSecondViewBinder(Class<?> beanClass, int layoutId) {
+public class ListViewSecondViewBinder extends CommonBaseAdapter.ViewBinder<Item2> {
+    public ListViewSecondViewBinder(Class<Item2> beanClass, int layoutId) {
         super(beanClass, layoutId);
     }
 
     @Override
-    public void bindView(CommonBaseAdapter.ViewHolder holder, Object bean, int position) {
-        Item2 item = (Item2) bean;
-        holder.setText(R.id.title_tv, item.getTitle())
-                .setText(R.id.info_tv, item.getInfo());
+    public void onBindView(CommonBaseAdapter.ViewHolder holder, Item2 bean, int position) {
+        holder.setText(R.id.title_tv, bean.getTitle())
+                .setText(R.id.info_tv, bean.getInfo());
     }
 }
