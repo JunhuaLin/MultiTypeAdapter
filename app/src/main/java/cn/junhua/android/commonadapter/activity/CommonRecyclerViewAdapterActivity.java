@@ -12,8 +12,10 @@ import cn.junhua.android.adapter.CommonRecyclerViewAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.adapter.RecyclerFirstViewBinder;
 import cn.junhua.android.commonadapter.adapter.RecyclerSecondViewBinder;
+import cn.junhua.android.commonadapter.adapter.RecyclerThreeViewBinder;
 import cn.junhua.android.commonadapter.bean.Item1;
 import cn.junhua.android.commonadapter.bean.Item2;
+import cn.junhua.android.commonadapter.bean.Item3;
 
 /**
  * Created by junhua on 17-3-15.
@@ -36,6 +38,7 @@ public class CommonRecyclerViewAdapterActivity extends Activity {
         List<CommonRecyclerViewAdapter.ViewBinder> viewBinders = new ArrayList<>();
         viewBinders.add(new RecyclerFirstViewBinder(Item1.class, R.layout.layout_item1));
         viewBinders.add(new RecyclerSecondViewBinder(Item2.class, R.layout.layout_item2));
+        viewBinders.add(new RecyclerThreeViewBinder(Item3.class, R.layout.layout_item3));
 
         //再创建CommonRecyclerViewAdapter
         mCommonRecyclerViewAdapter = new CommonRecyclerViewAdapter(this, viewBinders);
@@ -45,6 +48,7 @@ public class CommonRecyclerViewAdapterActivity extends Activity {
         for (int i = 0; i < 10; i++) {
             mDataList.add(new Item1(R.mipmap.ic_launcher, "第一类条目的item" + i));
             mDataList.add(new Item2("我是第二类条目", "item" + i));
+            mDataList.add(new Item3("我是第3类条目", "item" + i));
         }
 
         mCommonRecyclerViewAdapter.setList(mDataList);
