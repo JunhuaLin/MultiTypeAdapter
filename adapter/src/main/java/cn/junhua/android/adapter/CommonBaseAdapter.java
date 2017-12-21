@@ -41,20 +41,10 @@ public final class CommonBaseAdapter extends BaseAdapter {
     }
 
 
-    /**
-     * 得到内部数据集合
-     *
-     * @return
-     */
     public List<Object> getList() {
         return mList;
     }
 
-    /**
-     * 重置内部数据集合内容
-     *
-     * @param list
-     */
     public void setList(List<Object> list) {
         if (mList != null) {
             mList.clear();
@@ -63,46 +53,29 @@ public final class CommonBaseAdapter extends BaseAdapter {
         mList = list;
     }
 
-    /**
-     * 向内部数据集合追加数据
-     *
-     * @param list
-     */
     public void append(List<Object> list) {
-        if (mList == null) {
-            mList = list;
-        } else {
+        if (mList != null) {
             mList.addAll(list);
         }
     }
 
     /**
-     * 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)
+     * 该返回值必须小于getViewTypeCount的值，并且不同类型返回值要从0依次递增1(因为要做数组下标...)<br/>
+     * 并作为内部不同条目缓存索引
      */
     @Override
     public int getItemViewType(int position) {
-        Object obj = getItem(position);
-        int index = mViewBinderListManager.indexOf(obj);
-        // 你必须创建一个ViewBinder实例与JavaBean对应。
+        Object bean = getItem(position);
+        int index = mViewBinderListManager.indexOf(bean);
         if (index < 0) {
-            throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
-                    + obj.getClass().getCanonicalName() + " .");
+            throw new BinderNotFoundException(bean.getClass());
         }
-        // 布局文件的Type是自动生成的
         return index;
     }
 
     @Override
     public int getViewTypeCount() {
-        int count = mViewBinderListManager.size();
-        // 没有具体的ViewBinder不能正常运行
-        if (count <= 0) {
-            throw new RuntimeException(
-                    "You need to create at least one concrete " + ViewBinder.class.getCanonicalName());
-        }
-        Log.d(TAG, "getViewTypeCount:" + count);
-        // 有多少种填充的数据Bean就有至少有多少种布局与之对应
-        return count;
+        return mViewBinderListManager.size();
     }
 
     @Override
@@ -123,30 +96,23 @@ public final class CommonBaseAdapter extends BaseAdapter {
     @SuppressLint("ViewTag")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-
-        Object bean = getItem(position);// 要填充的数据
+        Object bean = getItem(position);
         ViewBinder viewBinder = mViewBinderListManager.get(bean.getClass());
-        // 你必须创建一个ViewBinder实例与JavaBean对应。
         if (viewBinder == null) {
-            throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
-                    + bean.getClass().getCanonicalName() + " .");
+            throw new BinderNotFoundException(bean.getClass());
         }
-        int layoutId = viewBinder.getLayoutId();
 
-        // Vie复用
+        int layoutId = viewBinder.getLayoutId();
+        ViewHolder holder;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(layoutId, parent, false);
-            // 此处holder用来辅助findView操作
             holder = new ViewHolder(convertView);
             convertView.setTag(layoutId, holder);
         } else {
             holder = (ViewHolder) convertView.getTag(layoutId);
         }
 
-        // 此处抽取出来让不同的布局实现不同数据填充逻辑
         viewBinder.wrapperBindView(holder, bean, position);
-
         return convertView;
     }
 

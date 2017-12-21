@@ -28,7 +28,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
      * 创建Adapter必须使用ViewBinder
      *
      * @param context
-     * @param viewBinderList
+     * @param viewBinderList binder集合
      */
     public CommonRecyclerViewAdapter(Context context, List<ViewBinder> viewBinderList) {
         this(context, viewBinderList, null);
@@ -41,21 +41,10 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         setList(dataList);
     }
 
-
-    /**
-     * 得到内部数据集合
-     *
-     * @return
-     */
     public List<Object> getList() {
         return mList;
     }
 
-    /**
-     * 设置或重置内部数据集合内容
-     *
-     * @param list
-     */
     public void setList(List<Object> list) {
         if (mList != null) {
             mList.clear();
@@ -64,11 +53,6 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         mList = list;
     }
 
-    /**
-     * 向内部数据集合追加数据
-     *
-     * @param list
-     */
     public void append(List<Object> list) {
         if (mList == null) {
             mList = list;
@@ -82,38 +66,31 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         return mList.size();
     }
 
+    /**
+     * 此处利用布局ID唯一性区分不同条目
+     *
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         Object bean = mList.get(position);
-        int layoutId = mViewBinderManager.get(bean.getClass()).getLayoutId();
-        // 你必须创建一个ViewBinder实例与JavaBean对应。
-        if (layoutId < 0) {
-            throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
-                    + bean.getClass().getCanonicalName() + " .");
+        Class clazz = bean.getClass();
+        if (!mViewBinderManager.containsKey(clazz)) {
+            throw new BinderNotFoundException(clazz);
         }
-        // 布局文件的id作为标识来创建ViewHolder
-        return layoutId;
+        return mViewBinderManager.get(clazz).getLayoutId();
     }
 
-    //当viewholder创建的时候回调
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(mLayoutInflater.inflate(viewType, parent, false));
     }
 
-    //当viewholder和数据绑定时回调
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
-        Object bean = mList.get(position);// 要填充的数据
-        ViewBinder viewBinder = mViewBinderManager.get(bean.getClass());
-        // 你必须创建一个ViewBinder实例与JavaBean对应。
-        if (viewBinder == null) {
-            throw new RuntimeException("You must create a " + ViewBinder.class.getCanonicalName() + " instance for "
-                    + bean.getClass().getCanonicalName() + " .");
-        }
-
-        viewBinder.wrapperBindView(holder, bean, position);
+        Object bean = mList.get(position);
+        mViewBinderManager.get(bean.getClass()).wrapperBindView(holder, bean, position);
     }
 
 
@@ -121,7 +98,6 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
      * 设置条目中控件显示信息的封装类
      */
     public static abstract class ViewBinder<T> {
-        // 布局文件并区分不同类别的条目
         private int mLayoutId;
 
         /**

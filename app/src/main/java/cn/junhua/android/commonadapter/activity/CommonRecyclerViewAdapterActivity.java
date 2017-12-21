@@ -16,6 +16,7 @@ import cn.junhua.android.commonadapter.adapter.RecyclerThreeViewBinder;
 import cn.junhua.android.commonadapter.bean.Item1;
 import cn.junhua.android.commonadapter.bean.Item2;
 import cn.junhua.android.commonadapter.bean.Item3;
+import cn.junhua.android.commonadapter.bean.Item4;
 
 /**
  * Created by junhua on 17-3-15.
