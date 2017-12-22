@@ -18,8 +18,8 @@ public class RecyclerFirstViewBinder extends CommonRecyclerViewAdapter.ViewBinde
             R.mipmap.image3
     };
 
-    public RecyclerFirstViewBinder(Class<Item1> beanClass, int layoutId) {
-        super(beanClass, layoutId);
+    public RecyclerFirstViewBinder() {
+        super(Item1.class, R.layout.layout_item1);
     }
 
     @Override

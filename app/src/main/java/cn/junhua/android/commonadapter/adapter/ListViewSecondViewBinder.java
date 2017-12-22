@@ -9,8 +9,8 @@ import cn.junhua.android.commonadapter.bean.Item2;
  */
 
 public class ListViewSecondViewBinder extends CommonBaseAdapter.ViewBinder<Item2> {
-    public ListViewSecondViewBinder(Class<Item2> beanClass, int layoutId) {
-        super(beanClass, layoutId);
+    public ListViewSecondViewBinder() {
+        super(Item2.class, R.layout.layout_item2);
     }
 
     @Override

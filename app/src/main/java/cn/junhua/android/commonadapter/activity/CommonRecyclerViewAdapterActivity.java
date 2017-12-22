@@ -37,9 +37,9 @@ public class CommonRecyclerViewAdapterActivity extends Activity {
 
         //创建ViewBinder
         List<CommonRecyclerViewAdapter.ViewBinder> viewBinders = new ArrayList<>();
-        viewBinders.add(new RecyclerFirstViewBinder(Item1.class, R.layout.layout_item1));
-        viewBinders.add(new RecyclerSecondViewBinder(Item2.class, R.layout.layout_item2));
-        viewBinders.add(new RecyclerThreeViewBinder(Item3.class, R.layout.layout_item3));
+        viewBinders.add(new RecyclerFirstViewBinder());
+        viewBinders.add(new RecyclerSecondViewBinder());
+        viewBinders.add(new RecyclerThreeViewBinder());
 
         //再创建CommonRecyclerViewAdapter
         mCommonRecyclerViewAdapter = new CommonRecyclerViewAdapter(this, viewBinders);

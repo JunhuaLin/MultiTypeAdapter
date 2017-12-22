@@ -9,8 +9,8 @@ import cn.junhua.android.commonadapter.bean.Item3;
  */
 
 public class RecyclerThreeViewBinder extends CommonRecyclerViewAdapter.ViewBinder<Item3> {
-    public RecyclerThreeViewBinder(Class<Item3> beanClass, int layoutId) {
-        super(beanClass, layoutId);
+    public RecyclerThreeViewBinder() {
+        super(Item3.class, R.layout.layout_item3);
     }
 
     @Override

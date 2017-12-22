@@ -10,8 +10,8 @@ import cn.junhua.android.commonadapter.bean.Item2;
  */
 
 public class RecyclerSecondViewBinder extends CommonRecyclerViewAdapter.ViewBinder<Item2> {
-    public RecyclerSecondViewBinder(Class<Item2> beanClass, int layoutId) {
-        super(beanClass, layoutId);
+    public RecyclerSecondViewBinder() {
+        super(Item2.class, R.layout.layout_item2);
     }
 
     @Override

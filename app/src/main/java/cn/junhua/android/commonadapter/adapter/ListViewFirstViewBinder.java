@@ -18,8 +18,8 @@ public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder<Item1>
             R.mipmap.image3
     };
 
-    public ListViewFirstViewBinder(Class<Item1> beanClass, int layoutId) {
-        super(beanClass, layoutId);
+    public ListViewFirstViewBinder() {
+        super(Item1.class, R.layout.layout_item1);
     }
 
     @Override

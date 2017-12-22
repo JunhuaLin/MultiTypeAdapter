@@ -33,8 +33,8 @@ public class CommonBaseAdapterActivity extends Activity {
 
         //创建ViewBinder
         List<CommonBaseAdapter.ViewBinder> viewBinders = new ArrayList<>();
-        viewBinders.add(new ListViewFirstViewBinder(Item1.class, R.layout.layout_item1));
-        viewBinders.add(new ListViewSecondViewBinder(Item2.class, R.layout.layout_item2));
+        viewBinders.add(new ListViewFirstViewBinder());
+        viewBinders.add(new ListViewSecondViewBinder());
 
         //在创建CommonBaseAdapter
         mCommonBaseAdapter = new CommonBaseAdapter(this, viewBinders);

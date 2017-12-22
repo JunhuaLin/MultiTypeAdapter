@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.junhua.android.commonadapter.R;
 
 import static cn.junhua.android.commonadapter.R.id.single_base_btn;
