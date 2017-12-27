@@ -27,18 +27,30 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
     /**
      * 创建Adapter必须使用ViewBinder
      *
-     * @param context
-     * @param viewBinderList binder集合
+     * @param context Context
      */
-    public CommonRecyclerViewAdapter(Context context, List<ViewBinder> viewBinderList) {
-        this(context, viewBinderList, null);
-    }
-
-    public CommonRecyclerViewAdapter(Context context, List<ViewBinder> viewBinderList, List<Object> dataList) {
+    public CommonRecyclerViewAdapter(Context context) {
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mViewBinderManager = new ViewBinderManager();
-        mViewBinderManager.addAll(viewBinderList);
-        setList(dataList);
+    }
+
+    /**
+     * 注册ViewBinder
+     *
+     * @param viewBinder ViewBinder
+     */
+    public void registerViewBinder(ViewBinder viewBinder) {
+        mViewBinderManager.add(viewBinder);
+    }
+
+    /**
+     * 注销ViewBinder
+     *
+     * @param viewBinder ViewBinder
+     * @return ViewBinder
+     */
+    public ViewBinder unregisterViewBinder(ViewBinder viewBinder) {
+        return mViewBinderManager.remove(viewBinder);
     }
 
     public List<Object> getList() {
@@ -51,14 +63,6 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         }
 
         mList = list;
-    }
-
-    public void append(List<Object> list) {
-        if (mList == null) {
-            mList = list;
-        } else {
-            mList.addAll(list);
-        }
     }
 
     @Override
@@ -77,7 +81,7 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
         Object bean = mList.get(position);
         Class clazz = bean.getClass();
         if (!mViewBinderManager.containsKey(clazz)) {
-            throw new BinderNotFoundException(clazz);
+            throw new ViewBinderNotFoundException(clazz);
         }
         return mViewBinderManager.get(clazz).getLayoutId();
     }
@@ -269,5 +273,8 @@ public class CommonRecyclerViewAdapter extends RecyclerView.Adapter<CommonRecycl
             return b;
         }
 
+        public ViewBinder remove(ViewBinder viewBinder) {
+            return super.remove(viewBinder.getBeanClass());
+        }
     }
 }

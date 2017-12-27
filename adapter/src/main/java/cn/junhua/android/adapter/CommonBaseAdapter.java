@@ -2,7 +2,6 @@ package cn.junhua.android.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +67,7 @@ public final class CommonBaseAdapter extends BaseAdapter {
         Object bean = getItem(position);
         int index = mViewBinderListManager.indexOf(bean);
         if (index < 0) {
-            throw new BinderNotFoundException(bean.getClass());
+            throw new ViewBinderNotFoundException(bean.getClass());
         }
         return index;
     }
@@ -99,7 +98,7 @@ public final class CommonBaseAdapter extends BaseAdapter {
         Object bean = getItem(position);
         ViewBinder viewBinder = mViewBinderListManager.get(bean.getClass());
         if (viewBinder == null) {
-            throw new BinderNotFoundException(bean.getClass());
+            throw new ViewBinderNotFoundException(bean.getClass());
         }
 
         int layoutId = viewBinder.getLayoutId();

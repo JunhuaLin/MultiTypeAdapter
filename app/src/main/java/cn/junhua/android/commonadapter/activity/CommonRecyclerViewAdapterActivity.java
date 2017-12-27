@@ -35,14 +35,12 @@ public class CommonRecyclerViewAdapterActivity extends Activity {
 
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
-        //创建ViewBinder
-        List<CommonRecyclerViewAdapter.ViewBinder> viewBinders = new ArrayList<>();
-        viewBinders.add(new RecyclerFirstViewBinder());
-        viewBinders.add(new RecyclerSecondViewBinder());
-        viewBinders.add(new RecyclerThreeViewBinder());
-
         //再创建CommonRecyclerViewAdapter
-        mCommonRecyclerViewAdapter = new CommonRecyclerViewAdapter(this, viewBinders);
+        mCommonRecyclerViewAdapter = new CommonRecyclerViewAdapter(this);
+        //注册ViewBinder
+        mCommonRecyclerViewAdapter.registerViewBinder(new RecyclerFirstViewBinder());
+        mCommonRecyclerViewAdapter.registerViewBinder(new RecyclerSecondViewBinder());
+        mCommonRecyclerViewAdapter.registerViewBinder(new RecyclerThreeViewBinder());
 
         //设置数据集合
         mDataList = new ArrayList<>();
