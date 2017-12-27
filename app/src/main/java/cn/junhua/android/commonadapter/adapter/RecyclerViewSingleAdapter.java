@@ -3,7 +3,7 @@ package cn.junhua.android.commonadapter.adapter;
 import android.content.Context;
 import android.widget.LinearLayout;
 
-import cn.junhua.android.adapter.SingleRecyclerViewAdapter;
+import cn.junhua.android.adapter.recyclerview.SingleRecyclerViewAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.Item1;
 

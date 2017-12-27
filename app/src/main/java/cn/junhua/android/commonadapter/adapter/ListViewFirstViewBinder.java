@@ -2,7 +2,7 @@ package cn.junhua.android.commonadapter.adapter;
 
 import android.widget.LinearLayout;
 
-import cn.junhua.android.adapter.CommonBaseAdapter;
+import cn.junhua.android.adapter.listview.CommonBaseAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.Item1;
 

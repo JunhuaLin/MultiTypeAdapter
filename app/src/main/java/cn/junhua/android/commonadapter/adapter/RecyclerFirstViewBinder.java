@@ -2,7 +2,9 @@ package cn.junhua.android.commonadapter.adapter;
 
 import android.widget.LinearLayout;
 
-import cn.junhua.android.adapter.CommonRecyclerViewAdapter;
+import cn.junhua.android.adapter.recyclerview.CommonRecyclerViewAdapter;
+import cn.junhua.android.adapter.recyclerview.SingleTypeViewBinder;
+import cn.junhua.android.adapter.recyclerview.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.Item1;
 
@@ -10,7 +12,7 @@ import cn.junhua.android.commonadapter.bean.Item1;
  * Created by junhua on 17-3-15.
  */
 
-public class RecyclerFirstViewBinder extends CommonRecyclerViewAdapter.ViewBinder<Item1> {
+public class RecyclerFirstViewBinder extends SingleTypeViewBinder<Item1> {
 
     private int[] images = new int[]{
             R.mipmap.image1,
@@ -23,7 +25,7 @@ public class RecyclerFirstViewBinder extends CommonRecyclerViewAdapter.ViewBinde
     }
 
     @Override
-    public void onBindView(CommonRecyclerViewAdapter.ViewHolder holder, Item1 bean, int position) {
+    public void onBindView(ViewHolder holder, Item1 bean, int position) {
         holder.setText(R.id.title_tv, bean.getTitle())
                 .setImage(R.id.icon_iv, bean.getImageId());
 

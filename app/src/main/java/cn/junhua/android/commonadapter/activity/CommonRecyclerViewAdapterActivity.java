@@ -6,9 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cn.junhua.android.adapter.CommonRecyclerViewAdapter;
+import cn.junhua.android.adapter.recyclerview.CommonRecyclerViewAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.adapter.RecyclerFirstViewBinder;
 import cn.junhua.android.commonadapter.adapter.RecyclerSecondViewBinder;
@@ -16,7 +15,6 @@ import cn.junhua.android.commonadapter.adapter.RecyclerThreeViewBinder;
 import cn.junhua.android.commonadapter.bean.Item1;
 import cn.junhua.android.commonadapter.bean.Item2;
 import cn.junhua.android.commonadapter.bean.Item3;
-import cn.junhua.android.commonadapter.bean.Item4;
 
 /**
  * Created by junhua on 17-3-15.

@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter;
+package cn.junhua.android.adapter.exception;
 
 import android.support.annotation.NonNull;
 
@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
  */
 public class ViewBinderNotFoundException extends RuntimeException {
 
-    ViewBinderNotFoundException(@NonNull Class<?> clazz) {
+    public ViewBinderNotFoundException(@NonNull Class<?> clazz) {
         super("Do you have added the binder for {className}.class in the adapter?"
                 .replace("{className}", clazz.getSimpleName()));
     }

@@ -7,7 +7,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.junhua.android.adapter.CommonBaseAdapter;
+import cn.junhua.android.adapter.listview.CommonBaseAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.adapter.ListViewFirstViewBinder;
 import cn.junhua.android.commonadapter.adapter.ListViewSecondViewBinder;
