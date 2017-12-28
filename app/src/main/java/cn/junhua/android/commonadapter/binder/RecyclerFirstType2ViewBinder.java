@@ -2,8 +2,8 @@ package cn.junhua.android.commonadapter.binder;
 
 import android.widget.LinearLayout;
 
-import cn.junhua.android.adapter.recyclerview.SingleTypeViewBinder;
-import cn.junhua.android.adapter.recyclerview.ViewHolder;
+import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.Item1;
 

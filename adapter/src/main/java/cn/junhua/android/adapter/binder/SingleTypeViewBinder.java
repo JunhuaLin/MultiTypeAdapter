@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter.binder;
 
 
 /**

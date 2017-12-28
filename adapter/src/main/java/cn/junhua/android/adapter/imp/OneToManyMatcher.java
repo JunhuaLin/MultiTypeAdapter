@@ -1,6 +1,6 @@
 package cn.junhua.android.adapter.imp;
 
-import cn.junhua.android.adapter.recyclerview.MultiTypeViewBinder;
+import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
 
 /**
  * Created by junhua.lin on 2017/12/28.

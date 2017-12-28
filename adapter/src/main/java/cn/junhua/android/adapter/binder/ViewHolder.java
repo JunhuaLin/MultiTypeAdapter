@@ -1,16 +1,13 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter.binder;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 通用ViewHolder MultiTypeBaseAdapter的内部类，封装adapter中item的复用操作代码
- * 使用方法：
- * 通过ViewHolder对象的方法getView(...)传入View的id得到对应控件
+ * 通用ViewHolder
  */
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
@@ -18,8 +15,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * 传入复用对象
-     *
-     * @param root
      */
     public ViewHolder(View root) {
         this(root, -1);
@@ -27,17 +22,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * 传入复用对象
-     *
-     * @param root
      */
     public ViewHolder(View root, int initialCapacity) {
         super(root);
         if (initialCapacity < 0) {
-            this.mViews = new SparseArray<View>();
+            this.mViews = new SparseArray<>();
         } else {
-            this.mViews = new SparseArray<View>(initialCapacity);
+            this.mViews = new SparseArray<>(initialCapacity);
         }
-        Log.d("666", "ViewHolder:" + initialCapacity + "");
         this.convertView = root;
     }
 

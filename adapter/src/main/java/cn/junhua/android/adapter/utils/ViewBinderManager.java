@@ -4,7 +4,7 @@ package cn.junhua.android.adapter.utils;
 import java.util.Collection;
 import java.util.HashMap;
 
-import cn.junhua.android.adapter.recyclerview.ViewBinder;
+import cn.junhua.android.adapter.binder.ViewBinder;
 
 /**
  * ViewBinder的列表管理器

@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter.binder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,6 @@ import cn.junhua.android.adapter.imp.OneToManyMatcher;
  * MultiTypeViewBinder构造器
  * Created by junhua.lin on 2017/12/28.
  */
-
 public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher<T> {
 
     private MultiTypeAdapter multiTypeAdapter;
@@ -27,24 +26,15 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public OneToManyMatcher<T> map(ViewBinder<T>... viewBinderList) {
         this.viewBinderList = Arrays.asList(viewBinderList);
         return this;
     }
 
     @Override
-    public MultiTypeViewBinder<T> match(final OnMatchViewBinder<T> onMatchViewBinder) {
-        MultiTypeViewBinder<T> viewBinder = new MultiTypeViewBinder<T>(mBeanClass, viewBinderList) {
-            @Override
-            public Class<? extends ViewBinder> onMatch(Object bean, int position) {
-                return onMatchViewBinder.onMatch((T) bean, position);
-            }
-
-            @Override
-            public int initialCapacity() {
-                return viewBinderList.size();
-            }
-        };
+    public MultiTypeViewBinder<T> match(OnMatchViewBinder<T> onMatchViewBinder) {
+        MultiTypeViewBinder<T> viewBinder = new MultiTypeViewBinder<>(mBeanClass, viewBinderList, onMatchViewBinder, viewBinderList.size());
         multiTypeAdapter.registerViewBinder(viewBinder);
         return viewBinder;
     }

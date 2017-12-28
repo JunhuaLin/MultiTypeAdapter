@@ -10,9 +10,9 @@ import java.util.List;
 
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
-import cn.junhua.android.adapter.recyclerview.OneToManyBuilder;
-import cn.junhua.android.adapter.recyclerview.ViewBinder;
-import cn.junhua.android.adapter.recyclerview.ViewHolder;
+import cn.junhua.android.adapter.binder.OneToManyBuilder;
+import cn.junhua.android.adapter.binder.ViewBinder;
+import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.adapter.utils.ViewBinderManager;
 
 /**
@@ -54,17 +54,14 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
      * @return OneToManyMapper<T>
      */
     public <T> OneToManyMapper<T> registerViewBinder(Class<T> beanClass) {
-        return new OneToManyBuilder<T>(this, beanClass);
+        return new OneToManyBuilder<>(this, beanClass);
     }
 
     /**
      * 注销ViewBinder
-     *
-     * @param viewBinder SingleTypeViewBinder
-     * @return SingleTypeViewBinder
      */
-    public ViewBinder unregisterViewBinder(ViewBinder viewBinder) {
-        return mViewBinderManager.remove(viewBinder);
+    public void unregisterViewBinder(ViewBinder viewBinder) {
+        mViewBinderManager.remove(viewBinder);
     }
 
     public List<?> getList() {

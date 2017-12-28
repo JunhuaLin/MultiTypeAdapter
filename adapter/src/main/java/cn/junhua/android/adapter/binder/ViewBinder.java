@@ -1,13 +1,12 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter.binder;
 
 /**
  * 视图绑定器基类
  * Created by junhua.lin on 2017/12/27.
  */
-
 public abstract class ViewBinder<T> {
 
-    protected Class<T> mBeanClass;
+    private Class<T> mBeanClass;
 
     public ViewBinder(Class<T> clazz) {
         this.mBeanClass = clazz;
@@ -32,6 +31,7 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
+    @SuppressWarnings("unchecked")
     public int performCreateViewHolder(Object bean, int position) {
         return onCreateViewHolder((T) bean, position);
     }
@@ -63,6 +63,7 @@ public abstract class ViewBinder<T> {
      * @param bean     数据
      * @param position 在列表中的位置
      */
+    @SuppressWarnings("unchecked")
     public void performBindView(ViewHolder holder, Object bean, int position) {
         onBindView(holder, (T) bean, position);
     }
