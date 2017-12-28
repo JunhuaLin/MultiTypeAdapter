@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

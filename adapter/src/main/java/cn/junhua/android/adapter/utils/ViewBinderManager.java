@@ -1,8 +1,10 @@
-package cn.junhua.android.adapter.recyclerview;
+package cn.junhua.android.adapter.utils;
 
 
 import java.util.Collection;
 import java.util.HashMap;
+
+import cn.junhua.android.adapter.recyclerview.ViewBinder;
 
 /**
  * ViewBinder的列表管理器
@@ -11,7 +13,7 @@ import java.util.HashMap;
  *         <p/>
  *         2016年6月6日上午11:26:57
  */
-public class ViewBinderManager extends HashMap<Class, ViewBinder> {
+public class ViewBinderManager extends HashMap<Class<?>, ViewBinder> {
 
     /**
      *

@@ -1,4 +1,4 @@
-package cn.junhua.android.commonadapter.adapter;
+package cn.junhua.android.commonadapter.binder;
 
 import cn.junhua.android.adapter.listview.CommonBaseAdapter;
 import cn.junhua.android.commonadapter.R;

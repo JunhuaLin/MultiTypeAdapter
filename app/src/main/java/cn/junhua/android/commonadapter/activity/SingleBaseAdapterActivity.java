@@ -29,7 +29,7 @@ public class SingleBaseAdapterActivity extends Activity {
 
         mListView = (ListView) findViewById(R.id.list_view);
 
-        mListViewSingleAdapter = new ListViewSingleAdapter(this, R.layout.layout_item1);
+        mListViewSingleAdapter = new ListViewSingleAdapter(this, R.layout.layout_item1_type1);
 
         mDataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {

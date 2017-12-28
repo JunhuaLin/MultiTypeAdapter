@@ -7,6 +7,7 @@ package cn.junhua.android.commonadapter.bean;
 public class Item1 {
     private int imageId;
     private String title;
+    private int type;
 
     public Item1() {
     }
@@ -14,6 +15,20 @@ public class Item1 {
     public Item1(int imageId, String title) {
         this.imageId = imageId;
         this.title = title;
+    }
+
+    public Item1(int imageId, String title, int type) {
+        this.imageId = imageId;
+        this.title = title;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getImageId() {

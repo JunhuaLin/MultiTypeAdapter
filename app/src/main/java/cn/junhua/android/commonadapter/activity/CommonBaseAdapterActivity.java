@@ -9,8 +9,8 @@ import java.util.List;
 
 import cn.junhua.android.adapter.listview.CommonBaseAdapter;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.adapter.ListViewFirstViewBinder;
-import cn.junhua.android.commonadapter.adapter.ListViewSecondViewBinder;
+import cn.junhua.android.commonadapter.binder.ListViewFirstViewBinder;
+import cn.junhua.android.commonadapter.binder.ListViewSecondViewBinder;
 import cn.junhua.android.commonadapter.bean.Item1;
 import cn.junhua.android.commonadapter.bean.Item2;
 

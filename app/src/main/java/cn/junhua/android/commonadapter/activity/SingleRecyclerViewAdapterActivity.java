@@ -28,7 +28,7 @@ public class SingleRecyclerViewAdapterActivity extends Activity {
 
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerViewSingleAdapter = new RecyclerViewSingleAdapter(this, R.layout.layout_item1);
+        mRecyclerViewSingleAdapter = new RecyclerViewSingleAdapter(this, R.layout.layout_item1_type1);
 
         mDataList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {

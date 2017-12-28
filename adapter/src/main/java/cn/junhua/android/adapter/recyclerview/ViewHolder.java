@@ -1,10 +1,7 @@
 package cn.junhua.android.adapter.recyclerview;
 
-/**
- * Created by junhua.lin on 2017/12/27.
- */
-
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,8 +22,22 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * @param root
      */
     public ViewHolder(View root) {
+        this(root, -1);
+    }
+
+    /**
+     * 传入复用对象
+     *
+     * @param root
+     */
+    public ViewHolder(View root, int initialCapacity) {
         super(root);
-        this.mViews = new SparseArray<View>();
+        if (initialCapacity < 0) {
+            this.mViews = new SparseArray<View>();
+        } else {
+            this.mViews = new SparseArray<View>(initialCapacity);
+        }
+        Log.d("666", "ViewHolder:" + initialCapacity + "");
         this.convertView = root;
     }
 

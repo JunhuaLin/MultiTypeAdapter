@@ -1,9 +1,8 @@
-package cn.junhua.android.commonadapter.adapter;
+package cn.junhua.android.commonadapter.binder;
 
-import android.content.Context;
 import android.widget.LinearLayout;
 
-import cn.junhua.android.adapter.SingleRecyclerViewAdapter;
+import cn.junhua.android.adapter.listview.CommonBaseAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.Item1;
 
@@ -11,7 +10,7 @@ import cn.junhua.android.commonadapter.bean.Item1;
  * Created by junhua on 17-3-15.
  */
 
-public class RecyclerViewSingleAdapter extends SingleRecyclerViewAdapter<Item1> {
+public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder<Item1> {
 
     private int[] images = new int[]{
             R.mipmap.image1,
@@ -19,17 +18,16 @@ public class RecyclerViewSingleAdapter extends SingleRecyclerViewAdapter<Item1> 
             R.mipmap.image3
     };
 
-    public RecyclerViewSingleAdapter(Context mContext, int layoutId) {
-        super(mContext, layoutId);
+    public ListViewFirstViewBinder() {
+        super(Item1.class, R.layout.layout_item1_type1);
     }
 
     @Override
-    public void onBindView(ViewHolder holder, Item1 bean, int position) {
+    public void onBindView(CommonBaseAdapter.ViewHolder holder, Item1 bean, int position) {
         holder.setText(R.id.title_tv, bean.getTitle())
                 .setImage(R.id.icon_iv, bean.getImageId());
 
         LinearLayout linearLayout = holder.getView(R.id.bg_ll);
         linearLayout.setBackgroundResource(images[position % images.length]);
     }
-
 }

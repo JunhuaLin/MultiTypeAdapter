@@ -1,10 +1,8 @@
-package cn.junhua.android.commonadapter.adapter;
+package cn.junhua.android.commonadapter.binder;
 
-import cn.junhua.android.adapter.recyclerview.CommonRecyclerViewAdapter;
 import cn.junhua.android.adapter.recyclerview.SingleTypeViewBinder;
 import cn.junhua.android.adapter.recyclerview.ViewHolder;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.bean.Item2;
 import cn.junhua.android.commonadapter.bean.Item3;
 
 /**

@@ -14,14 +14,26 @@ public abstract class ViewBinder<T> {
     }
 
     /**
-     * 数据分发
+     * 应该在子类中重写该方法<br/>
+     * 作用：<br/>
+     * 1.减少存储结构扩容带来的性能消耗。<br/>
+     * 2.避免容量未完全使用带来的内存浪费。<br/>
+     *
+     * @return 需要缓存View的个数，默认值6
+     */
+    public int onCountView() {
+        return 6;
+    }
+
+    /**
+     * 执行获取布局id操作
      *
      * @param bean     数据
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    public int dispatchLayoutId(Object bean, int position) {
-        return getLayoutId((T) bean, position);
+    public int performCreateViewHolder(Object bean, int position) {
+        return onCreateViewHolder((T) bean, position);
     }
 
     /**
@@ -31,7 +43,7 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    public abstract int getLayoutId(T bean, int position);
+    public abstract int onCreateViewHolder(T bean, int position);
 
 
     /**
@@ -45,13 +57,13 @@ public abstract class ViewBinder<T> {
 
 
     /**
-     * 数据分发
+     * 执行绑定视图操作
      *
      * @param holder   视图的holder
      * @param bean     数据
      * @param position 在列表中的位置
      */
-    void dispatchBindView(ViewHolder holder, Object bean, int position) {
+    public void performBindView(ViewHolder holder, Object bean, int position) {
         onBindView(holder, (T) bean, position);
     }
 
