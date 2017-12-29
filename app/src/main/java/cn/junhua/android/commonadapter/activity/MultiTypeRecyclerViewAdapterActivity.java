@@ -2,8 +2,10 @@ package cn.junhua.android.commonadapter.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,14 +80,31 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
         //设置数据集合
         mDataList = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            mDataList.add(new Item1(R.mipmap.ic_launcher, Item1.class.getSimpleName() + "条目", i % 2 + 1));
-//            mDataList.add(new Item2(Item2.class.getSimpleName() + "条目", "item"));
-//            mDataList.add(new Item3(Item3.class.getSimpleName() + "条目", "item"));
+            mDataList.add(new Item1(R.mipmap.ic_launcher, Item1.class.getSimpleName() + "条目", R.layout.layout_item1_type1));
+            mDataList.add(new Item2(Item2.class.getSimpleName() + "条目", "item"));
+            for (int j = 0; j < 10; j++) {
+                mDataList.add(new Item3(Item3.class.getSimpleName() + "条目", "item"));
+            }
         }
 
         mMultiTypeAdapter.setList(mDataList);
-        //为ListView设置Adapter
-        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (mDataList.get(position).getClass() == Item3.class) {
+                    return 1;
+                }
+                return gridLayoutManager.getSpanCount();
+            }
+        });
+
+//        recycler_view.setLayoutManager(gridLayoutManager);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+//        recycler_view.setLayoutManager(staggeredGridLayoutManager);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recycler_view.setLayoutManager(linearLayoutManager);
         recycler_view.setAdapter(mMultiTypeAdapter);
     }
 }
