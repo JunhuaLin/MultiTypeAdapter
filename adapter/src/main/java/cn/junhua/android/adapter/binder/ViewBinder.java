@@ -4,6 +4,7 @@ package cn.junhua.android.adapter.binder;
  * 视图绑定器基类
  * Created by junhua.lin on 2017/12/27.
  */
+@SuppressWarnings("unchecked")
 public abstract class ViewBinder<T> {
 
     private Class<T> mBeanClass;
@@ -13,16 +14,35 @@ public abstract class ViewBinder<T> {
     }
 
     /**
-     * 应该在子类中重写该方法<br/>
+     * 返回数据类的Class
+     *
+     * @return 返回数据类的Class
+     */
+    public final Class<T> getBeanClass() {
+        return mBeanClass;
+    }
+
+
+    /**
+     * 获得ViewBinder中findView次数,即需要缓存View的个数
+     *
+     * @param bean     数据
+     * @param position 数据在集合中的位置
+     * @return ViewBinder中findView次数
+     */
+    public int performCountView(Object bean, int position) {
+        return onCountView((T) bean, position);
+    }
+
+    /**
+     * 在子类中重写该方法<br/>
      * 作用：<br/>
      * 1.减少存储结构扩容带来的性能消耗。<br/>
      * 2.避免容量未完全使用带来的内存浪费。<br/>
      *
-     * @return 需要缓存View的个数，默认值6
+     * @return 需要缓存View的个数
      */
-    public int onCountView() {
-        return 6;
-    }
+    public abstract int onCountView(T bean, int position);
 
     /**
      * 执行获取布局id操作
@@ -31,9 +51,8 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    @SuppressWarnings("unchecked")
-    public int performCreateViewHolder(Object bean, int position) {
-        return onCreateViewHolder((T) bean, position);
+    public int performItemViewType(Object bean, int position) {
+        return onItemViewType((T) bean, position);
     }
 
     /**
@@ -43,17 +62,7 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    public abstract int onCreateViewHolder(T bean, int position);
-
-
-    /**
-     * 返回数据类的Class
-     *
-     * @return 返回数据类的Class
-     */
-    public Class<T> getBeanClass() {
-        return mBeanClass;
-    }
+    public abstract int onItemViewType(T bean, int position);
 
 
     /**
@@ -63,7 +72,6 @@ public abstract class ViewBinder<T> {
      * @param bean     数据
      * @param position 在列表中的位置
      */
-    @SuppressWarnings("unchecked")
     public void performBindView(ViewHolder holder, Object bean, int position) {
         onBindView(holder, (T) bean, position);
     }

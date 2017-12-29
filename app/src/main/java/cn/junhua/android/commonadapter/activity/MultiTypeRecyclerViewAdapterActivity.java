@@ -6,13 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
 import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
-import cn.junhua.android.adapter.imp.OnMatchViewBinder;
+import cn.junhua.android.adapter.imp.OnMatchListener;
 import cn.junhua.android.adapter.binder.ViewBinder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.binder.RecyclerFirstType1ViewBinder;
@@ -51,7 +49,7 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
         List<ViewBinder<Item1>> list = new ArrayList<>();
         list.add(new RecyclerFirstType1ViewBinder());
         list.add(new RecyclerFirstType2ViewBinder());
-        MultiTypeViewBinder<Item1> multiTypeViewBinder = new MultiTypeViewBinder<>(Item1.class, list, new OnMatchViewBinder<Item1>() {
+        MultiTypeViewBinder<Item1> multiTypeViewBinder = new MultiTypeViewBinder<>(Item1.class, list, new OnMatchListener<Item1>() {
             @Override
             public Class<? extends ViewBinder<Item1>> onMatch(Item1 bean, int position) {
                 if (bean.getType() == 1) {
@@ -63,10 +61,10 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
         mMultiTypeAdapter.registerViewBinder(multiTypeViewBinder);
         mMultiTypeAdapter.unregisterViewBinder(multiTypeViewBinder);
 
-        //方式二：一对多条目注册
+        //方式二：一对多条目注册(推荐)
         multiTypeViewBinder = mMultiTypeAdapter.registerViewBinder(Item1.class)
-                .map(new RecyclerFirstType1ViewBinder(), new RecyclerFirstType2ViewBinder())
-                .match(new OnMatchViewBinder<Item1>() {
+                .mapping(new RecyclerFirstType1ViewBinder(), new RecyclerFirstType2ViewBinder())
+                .match(new OnMatchListener<Item1>() {
                     @Override
                     public Class<? extends ViewBinder<Item1>> onMatch(Item1 bean, int position) {
                         if (bean.getType() == 1) {
@@ -75,7 +73,7 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
                         return RecyclerFirstType2ViewBinder.class;
                     }
                 });
-        mMultiTypeAdapter.unregisterViewBinder(multiTypeViewBinder);
+//        mMultiTypeAdapter.unregisterViewBinder(multiTypeViewBinder);
 
         //设置数据集合
         mDataList = new ArrayList<>();
@@ -86,7 +84,6 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
         }
 
         mMultiTypeAdapter.setList(mDataList);
-
         //为ListView设置Adapter
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.setAdapter(mMultiTypeAdapter);

@@ -1,11 +1,11 @@
 package cn.junhua.android.adapter.binder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
-import cn.junhua.android.adapter.imp.OnMatchViewBinder;
+import cn.junhua.android.adapter.imp.OnMatchListener;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
 
@@ -15,27 +15,27 @@ import cn.junhua.android.adapter.imp.OneToManyMatcher;
  */
 public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher<T> {
 
-    private MultiTypeAdapter multiTypeAdapter;
+    private MultiTypeAdapter mMultiTypeAdapter;
     private Class<T> mBeanClass;
-    private List<ViewBinder<T>> viewBinderList;
+    private List<ViewBinder<T>> mViewBinderList;
 
-    public OneToManyBuilder(MultiTypeAdapter multiTypeAdapter, Class<T> mBeanClass) {
-        this.multiTypeAdapter = multiTypeAdapter;
+    public OneToManyBuilder(MultiTypeAdapter mMultiTypeAdapter, Class<T> mBeanClass) {
+        this.mMultiTypeAdapter = mMultiTypeAdapter;
         this.mBeanClass = mBeanClass;
-        viewBinderList = new ArrayList<>();
+        mViewBinderList = Collections.emptyList();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public OneToManyMatcher<T> map(ViewBinder<T>... viewBinderList) {
-        this.viewBinderList = Arrays.asList(viewBinderList);
+    public OneToManyMatcher<T> mapping(ViewBinder<T>... viewBinderList) {
+        mViewBinderList = Arrays.asList(viewBinderList);
         return this;
     }
 
     @Override
-    public MultiTypeViewBinder<T> match(OnMatchViewBinder<T> onMatchViewBinder) {
-        MultiTypeViewBinder<T> viewBinder = new MultiTypeViewBinder<>(mBeanClass, viewBinderList, onMatchViewBinder, viewBinderList.size());
-        multiTypeAdapter.registerViewBinder(viewBinder);
+    public MultiTypeViewBinder<T> match(OnMatchListener<T> onMatchListener) {
+        MultiTypeViewBinder<T> viewBinder = new MultiTypeViewBinder<>(mBeanClass, mViewBinderList, onMatchListener);
+        mMultiTypeAdapter.registerViewBinder(viewBinder);
         return viewBinder;
     }
 }

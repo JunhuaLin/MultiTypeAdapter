@@ -15,6 +15,11 @@ public class RecyclerSecondViewBinder extends SingleTypeViewBinder<Item2> {
     }
 
     @Override
+    public int onCountView(Item2 bean, int position) {
+        return 2;
+    }
+
+    @Override
     public void onBindView(ViewHolder holder, Item2 bean, int position) {
         holder.setText(R.id.title_tv, bean.getTitle())
                 .setText(R.id.info_tv, bean.getInfo());

@@ -8,10 +8,14 @@ import cn.junhua.android.commonadapter.bean.Item3;
 /**
  * Created by junhua.lin on 2017/12/21.
  */
-
 public class RecyclerThreeViewBinder extends SingleTypeViewBinder<Item3> {
     public RecyclerThreeViewBinder() {
         super(Item3.class, R.layout.layout_item3);
+    }
+
+    @Override
+    public int onCountView(Item3 bean, int position) {
+        return 2;
     }
 
     @Override

@@ -24,16 +24,16 @@ public class RecyclerFirstType1ViewBinder extends SingleTypeViewBinder<Item1> {
     }
 
     @Override
-    public int onCountView() {
+    public int onCountView(Item1 bean, int position) {
         return 3;
     }
 
     @Override
     public void onBindView(ViewHolder holder, Item1 bean, int position) {
         holder.setText(R.id.title_tv, bean.getTitle())
-                .setImage(R.id.icon_iv, bean.getImageId());
+                .setImageResource(R.id.icon_iv, bean.getImageId());
 
-        LinearLayout linearLayout = holder.getView(R.id.bg_ll);
+        LinearLayout linearLayout = holder.findView(R.id.bg_ll);
         linearLayout.setBackgroundResource(images[position % images.length]);
     }
 }

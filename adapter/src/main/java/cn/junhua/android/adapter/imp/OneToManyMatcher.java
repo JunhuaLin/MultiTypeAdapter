@@ -8,5 +8,5 @@ import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
 
 public interface OneToManyMatcher<T> {
 
-    MultiTypeViewBinder<T> match(OnMatchViewBinder<T> onMatchViewBinder);
+    MultiTypeViewBinder<T> match(OnMatchListener<T> onMatchListener);
 }

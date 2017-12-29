@@ -7,7 +7,6 @@ import android.view.View;
 
 import cn.junhua.android.commonadapter.R;
 
-import static cn.junhua.android.commonadapter.R.id.single_base_btn;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -16,8 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(single_base_btn).setOnClickListener(this);
-        findViewById(R.id.common_base_btn).setOnClickListener(this);
         findViewById(R.id.single_recycler_btn).setOnClickListener(this);
         findViewById(R.id.common_recycler_btn).setOnClickListener(this);
     }
@@ -27,12 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
 
         switch (v.getId()) {
-            case single_base_btn:
-                intent.setClass(this, SingleBaseAdapterActivity.class);
-                break;
-            case R.id.common_base_btn:
-                intent.setClass(this, CommonBaseAdapterActivity.class);
-                break;
             case R.id.single_recycler_btn:
                 intent.setClass(this, SingleRecyclerViewAdapterActivity.class);
                 break;
