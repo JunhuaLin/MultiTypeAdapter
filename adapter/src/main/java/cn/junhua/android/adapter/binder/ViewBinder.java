@@ -1,5 +1,7 @@
 package cn.junhua.android.adapter.binder;
 
+import android.support.annotation.LayoutRes;
+
 /**
  * 视图绑定器基类
  * Created by junhua.lin on 2017/12/27.
@@ -51,8 +53,9 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    public int performItemViewType(Object bean, int position) {
-        return onItemViewType((T) bean, position);
+    public @LayoutRes
+    int performCreateItemView(Object bean, int position) {
+        return onCreateItemView((T) bean, position);
     }
 
     /**
@@ -62,7 +65,8 @@ public abstract class ViewBinder<T> {
      * @param position 在列表中的位置
      * @return 返回布局文件的id
      */
-    public abstract int onItemViewType(T bean, int position);
+    public abstract @LayoutRes
+    int onCreateItemView(T bean, int position);
 
 
     /**

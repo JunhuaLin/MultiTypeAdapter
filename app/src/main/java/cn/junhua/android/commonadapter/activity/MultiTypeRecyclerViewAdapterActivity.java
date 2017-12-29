@@ -77,10 +77,10 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
 
         //设置数据集合
         mDataList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mDataList.add(new Item1(R.mipmap.ic_launcher, "第一类条目的item" + i, i % 2 + 1));
-            mDataList.add(new Item2("我是第二类条目", "item" + i));
-            mDataList.add(new Item3("我是第3类条目", "item" + i));
+        for (int i = 0; i < 30; i++) {
+            mDataList.add(new Item1(R.mipmap.ic_launcher, Item1.class.getSimpleName() + "条目", i % 2 + 1));
+//            mDataList.add(new Item2(Item2.class.getSimpleName() + "条目", "item"));
+//            mDataList.add(new Item3(Item3.class.getSimpleName() + "条目", "item"));
         }
 
         mMultiTypeAdapter.setList(mDataList);

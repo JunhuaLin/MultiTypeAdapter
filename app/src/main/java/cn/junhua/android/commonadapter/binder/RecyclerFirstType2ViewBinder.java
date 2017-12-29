@@ -35,6 +35,6 @@ public class RecyclerFirstType2ViewBinder extends SingleTypeViewBinder<Item1> {
                 .setText(R.id.type_tv, "layout_item1_type2");
 
         LinearLayout linearLayout = holder.findView(R.id.bg_ll);
-        linearLayout.setBackgroundResource(images[position % images.length]);
+        linearLayout.setBackgroundResource(images[(position + 2) % images.length]);
     }
 }

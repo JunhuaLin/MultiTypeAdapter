@@ -30,10 +30,8 @@ public class RecyclerFirstType1ViewBinder extends SingleTypeViewBinder<Item1> {
 
     @Override
     public void onBindView(ViewHolder holder, Item1 bean, int position) {
-        holder.setText(R.id.title_tv, bean.getTitle())
-                .setImageResource(R.id.icon_iv, bean.getImageId());
-
-        LinearLayout linearLayout = holder.findView(R.id.bg_ll);
-        linearLayout.setBackgroundResource(images[position % images.length]);
+        holder.setText(R.id.title_tv, bean.getTitle() + "  layout_item1_type1")
+                .setImageResource(R.id.icon_iv, bean.getImageId())
+                .setBackgroundResource(R.id.bg_ll, images[(position + 1) % images.length]);
     }
 }

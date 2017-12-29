@@ -19,7 +19,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     /**
      * 传入复用对象
      *
-     * @param root            parent -> RecyclerView.onItemViewType(ViewGroup parent, int viewType)
+     * @param root            parent -> RecyclerView.onCreateItemView(ViewGroup parent, int viewType)
      * @param initialCapacity 缓存的初始大小
      */
     public ViewHolder(View root, int initialCapacity) {

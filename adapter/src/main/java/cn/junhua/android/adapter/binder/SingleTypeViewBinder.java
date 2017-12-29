@@ -13,8 +13,7 @@ public abstract class SingleTypeViewBinder<T> extends ViewBinder<T> {
     }
 
     @Override
-    public int onItemViewType(T bean, int position) {
+    public int onCreateItemView(T bean, int position) {
         return mLayoutId;
     }
-
 }

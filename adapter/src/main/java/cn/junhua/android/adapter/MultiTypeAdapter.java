@@ -89,7 +89,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
         ViewBinder viewBinder = mViewBinderMap.get(beanClass);
         mViewSizeTemp = viewBinder.performCountView(bean, position);
-        return viewBinder.performItemViewType(bean, position);
+        return viewBinder.performCreateItemView(bean, position);
     }
 
     @Override

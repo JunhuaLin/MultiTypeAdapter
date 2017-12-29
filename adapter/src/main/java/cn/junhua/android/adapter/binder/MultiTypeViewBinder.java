@@ -32,8 +32,8 @@ public class MultiTypeViewBinder<T> extends ViewBinder<T> {
     }
 
     @Override
-    public int onItemViewType(T bean, int position) {
-        return getViewBinder(bean, position).performItemViewType(bean, position);
+    public int onCreateItemView(T bean, int position) {
+        return getViewBinder(bean, position).performCreateItemView(bean, position);
     }
 
     @Override
