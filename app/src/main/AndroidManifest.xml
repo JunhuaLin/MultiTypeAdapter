@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.junhua.android.commonadapter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,17 +19,13 @@
         </activity>
 
         <activity
-            android:name=".activity.SingleRecyclerViewAdapterActivity"
-            android:label="@string/single_recycler"
-            android:launchMode="singleTop" />
-        <activity
-            android:name=".activity.MultiTypeRecyclerViewAdapterActivity"
-            android:label="@string/common_recycler"
+            android:name=".activity.One2ManyActivity"
+            android:label="@string/one2many"
             android:launchMode="singleTop" />
 
         <activity
             android:name=".activity.TaobaoActivity"
-            android:label="@string/common_recycler"
+            android:label="@string/taobao"
             android:launchMode="singleTop" />
     </application>
 

@@ -11,14 +11,14 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <Button
-        android:id="@+id/single_recycler_btn"
+        android:id="@+id/btn_taobao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Single RecyclerView Adapter" />
+        android:text="@string/taobao" />
 
     <Button
-        android:id="@+id/common_recycler_btn"
+        android:id="@+id/btn_one2many"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Common RecyclerView Adapter" />
+        android:text="@string/one2many" />
 </LinearLayout>

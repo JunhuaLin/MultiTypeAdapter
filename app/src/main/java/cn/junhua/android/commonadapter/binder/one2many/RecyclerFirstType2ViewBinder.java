@@ -1,11 +1,11 @@
-package cn.junhua.android.commonadapter.binder;
+package cn.junhua.android.commonadapter.binder.one2many;
 
 import android.widget.LinearLayout;
 
 import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.bean.Item1;
+import cn.junhua.android.commonadapter.bean.one2many.Item1;
 
 /**
  * Created by junhua on 17-3-15.

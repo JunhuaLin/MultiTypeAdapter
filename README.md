@@ -1,6 +1,11 @@
-# CommonAdapter
-通用适配器，适用于ListView和RecyclerView单类型或多类型显示。ListView和RecyclerView在我们开发的过程中使用频率极高，而在创建适配器的时候每次都要写很多相同的代码，每次都这样操作不仅效率低而且很不爽。
-所有将适配器创建过程中的通用代码提取出来，然后将与业务相关部分留到子类中去实现。该通用适配器已经实现了条目复用，多条目加载等功能。
+# MultiTypeAdapter
+RecyclerView在我们开发的过程中使用频率极高，而在创建适配器的时候每次都要写很多相同的代码，每次都这样操作效率很低。
+当在处理多类型条目时候，虽然写几个判断条件创建不同的ViewHolder和对应布局就可以了，但是当布局非常复杂的时候这种方式就很难维护了。
+因此该项目将适配器创建的过程进行了封装，使代码量大幅降低同时还使适配器的复用粒度降低到布局条目级别。
+MultiTypeAdapter的优点如下：
+1.易维护
+2.复用粒度更细
+3.易上手
 
 ## 快速使用
 
@@ -15,194 +20,211 @@ dependencies {
 }
 ```
 
-### 2.adapter分类
+### 2.基本用法
 
-- SingleBaseAdapter：适用于ListView或GridView单类型数据条目填充。
-- CommonBaseAdapter：适用于ListView或GridView多类型数据条目填充。
-- SingleRecyclerViewAdapter：适用于RecyclerView单类型数据条目填充。
-- CommonRecyclerViewAdapter：适用于RecyclerView多类型数据条目填充。
+#### a.首先创建JavaBean和布局文件
 
-注：单类型多类型指代的是Item的布局文件是一种还是多种。
-
-### 3.在代码中使用
-
-SingleBaseAdapter和SingleRecyclerViewAdapter的使用方法基本一样，CommonBaseAdapter和CommonRecyclerViewAdapter基本使用一样。下面就按单类型和多类型分别介绍。
-
-#### 单类型数据适配器
-SingleBaseAdapter和SingleRecyclerViewAdapter采用泛型来指定填充数据类型。所以
-
-a.首先创建JavaBean
-
-```java
+Item1.class
+```
 public class Item1 {
     private int imageId;
     private String title;
 }
 ```
-
 为了方便省略构造方法，getter和setter方法。
 
+layout_item1_type1.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bg_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
 
-b.继承SingleBaseAdapter或SingleRecyclerViewAdapter
+    <ImageView
+        android:id="@+id/icon_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-```java
-public class ListViewSingleAdapter extends SingleBaseAdapter<Item1> {
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+```
 
-    private int[] images = new int[]{
-            R.mipmap.image1,
-            R.mipmap.image2,
-            R.mipmap.image3
-    };
+b.继承SingleTypeViewBinder<Item1>
 
-    public ListViewSingleAdapter(Context mContext, int layoutId) {
-        super(mContext, layoutId);
+RecyclerFirstType1ViewBinder.java
+```
+public class RecyclerFirstType1ViewBinder extends SingleTypeViewBinder<Item1> {
+
+    public RecyclerFirstType1ViewBinder() {
+        super(Item1.class, R.layout.layout_item1_type1);
+    }
+
+    @Override
+    public int onCountView(Item1 bean, int position) {
+        return 3;
+    }
+
+    @Override
+    public void onBindView(ViewHolder holder, Item1 bean, int position) {
+        //通用方法
+        TextView title_tv = holder.findView(R.id.title_tv);
+        title_tv.setText(bean.getTitle());
+        //便捷方法
+        holder.setText(R.id.title_tv, bean.getTitle() + "  layout_item1_type1")
+                .setImageResource(R.id.icon_iv, bean.getImageId())
+                .setBackgroundResource(R.id.bg_ll, R.mipmap.image1);
+    }
+}
+```
+
+方法介绍：
+>public SingleTypeViewBinder(Class<T> beanClass, int layoutId)
+
+- 参数1：beanClass为泛型T的类类型，如Item1.class,用于区分条目。
+- 参数2：layoutId，为条目布局资源id。
+
+>public int onCountView(Item1 bean, int position)
+
+该方法返回用于初始化该布局View缓存的初始值，默认值为6，建议重写减少扩容和内存浪费。
+
+>public void onBindView(ViewHolder holder, Item1 bean, int position)
+
+- 第一个参数：ViewHolder，用来封装复用条目的，通过它的findView（id）可以得到条目中所有到View对象，然后进行数据填充即可。同一个id的View findView只会查找一次，之后从缓存中获取。
+ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充文字和图片的方法，它们的返回值是ViewHolder本身。
+- 第二个参数：Item1，就是我们数据对象的引用。
+- 第三个参数：position，当前条目位置。
+
+c.设置适配器
+```
+    RecyclerView recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+    //再创建MultiTypeAdapter
+    MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter(this);
+    //注册ViewBinder
+    multiTypeAdapter.registerViewBinder(new RecyclerFirstType1ViewBinder());
+```
+
+
+#### 高级用法：一对多
+
+a.再创建一个布局文件
+
+layout_item1_type2.xml
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bg_ll"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/icon_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="2" />
+</LinearLayout>
+```
+
+b.再创建ViewBinder
+
+RecyclerFirstType2ViewBinder.java
+```
+public class RecyclerFirstType2ViewBinder extends SingleTypeViewBinder<Item1> {
+
+    public RecyclerFirstType2ViewBinder() {
+        super(Item1.class, R.layout.layout_item1_type2);
+    }
+
+    @Override
+    public int onCountView(Item1 bean, int position) {
+        return 3;
     }
 
     @Override
     public void onBindView(ViewHolder holder, Item1 bean, int position) {
         holder.setText(R.id.title_tv, bean.getTitle())
-                .setImage(R.id.icon_iv, bean.getImageId());
+                .setImageResource(R.id.icon_iv, bean.getImageId())
+                .setText(R.id.type_tv, "layout_item1_type2");
 
-        LinearLayout linearLayout = holder.getView(R.id.bg_ll);
-        linearLayout.setBackgroundResource(images[position % images.length]);
+        LinearLayout linearLayout = holder.findView(R.id.bg_ll);
+        linearLayout.setBackgroundResource(R.mipmap.image2);
     }
-
 }
 ```
 
+c.创建一对多适配器并填充数据
 
-看下onBindView方法：
->public void onBindView(ViewHolder holder, Item1 bean, int position)
+```
+    RecyclerView recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
-- 第一个参数：ViewHolder，用来封装复用条目的，通过它的getView（id）可以得到条目中所有到View对象，然后进行数据填充即可。
-ViewHolder的setText()和setImage()是用来快速填充文字和图片的方法，它们的返回值是ViewHolder本身。
-- 第二个参数：Item1，就是我们数据对象的引用。
-- 第三个参数：position，当前条目位置。
+    //再创建MultiTypeAdapter
+    MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter(this);
+    recycler_view.setLayoutManager(new LinearLayoutManager(this));
 
-c.设置适配器
-```java
-        mListView = (ListView) findViewById(R.id.list_view);
+    //注册ViewBinder
+    multiTypeAdapter.registerViewBinder(new RecyclerSecondViewBinder());
+    multiTypeAdapter.registerViewBinder(new RecyclerThreeViewBinder());
 
-        mListViewSingleAdapter = new ListViewSingleAdapter(this, R.layout.layout_item1);
-
-        mDataList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            mDataList.add(new Item1(R.mipmap.ic_launcher, "item " + i));
+    //方式一：一对多条目注册
+    List<ViewBinder<Item1>> list = new ArrayList<>();
+    list.add(new RecyclerFirstType1ViewBinder());
+    list.add(new RecyclerFirstType2ViewBinder());
+    MultiTypeViewBinder<Item1> multiTypeViewBinder = new MultiTypeViewBinder<>(Item1.class, list, new OnMatchListener<Item1>() {
+        @Override
+        public Class<? extends ViewBinder<Item1>> onMatch(Item1 bean, int position) {
+            if (bean.getType() == 1) {
+                return RecyclerFirstType1ViewBinder.class;
+            }
+            return RecyclerFirstType2ViewBinder.class;
         }
-        mListViewSingleAdapter.setList(mDataList);
-        mListView.setAdapter(mListViewSingleAdapter);
-```
+    });
+    multiTypeAdapter.registerViewBinder(multiTypeViewBinder);
 
-d.运行效果图
+    //方式二：一对多条目注册(推荐)
+    multiTypeAdapter.registerViewBinder(Item1.class)
+            .mapping(new RecyclerFirstType1ViewBinder(), new RecyclerFirstType2ViewBinder())
+            .match(new OnMatchListener<Item1>() {
+                @Override
+                public Class<? extends ViewBinder<Item1>> onMatch(Item1 bean, int position) {
+                    if (bean.getType() == 1) {
+                        return RecyclerFirstType1ViewBinder.class;
+                    }
+                    return RecyclerFirstType2ViewBinder.class;
+                }
+            });
 
-![single adapter](https://github.com/JunhuaLin/CommonAdapter/blob/master/photo/singleadapter.png)
-
-
-#### 多类型数据适配器
-
-CommonBaseAdapter和CommonRecyclerViewAdapter需要通过JavaBean的类类型即Class来区分其所要对应的布局文件。
-
-a.创建JavaBean
-
-```java
-public class Item1 {
-    private int imageId;
-    private String title;
-}
-```
-
-再增加一个Item2
-```java
-public class Item2 {
-    private String title;
-    private String info;
-}
-```
-
-b.创建ViewBinder
-
-要继承CommonBaseAdapter或CommonRecyclerViewAdapter对应的ViewBinder。
-
-```java
-public class ListViewFirstViewBinder extends CommonBaseAdapter.ViewBinder {
-
-    private int[] images = new int[]{
-            R.mipmap.image1,
-            R.mipmap.image2,
-            R.mipmap.image3
-    };
-
-    public ListViewFirstViewBinder(Class<?> beanClass, int layoutId) {
-        super(beanClass, layoutId);
-    }
-
-    @Override
-    public void bindView(CommonBaseAdapter.ViewHolder holder, Object bean, int position) {
-
-        Item1 item = (Item1) bean;
-
-        holder.setText(R.id.title_tv, item.getTitle())
-                .setImage(R.id.icon_iv, item.getImageId());
-
-        LinearLayout linearLayout = holder.getView(R.id.bg_ll);
-        linearLayout.setBackgroundResource(images[position % images.length]);
-    }
-}
-```
-ListViewFirstViewBinder用来填充Item1对应的布局文件。
-
-```java
-public class ListViewSecondViewBinder extends CommonBaseAdapter.ViewBinder {
-    public ListViewSecondViewBinder(Class<?> beanClass, int layoutId) {
-        super(beanClass, layoutId);
-    }
-
-    @Override
-    public void bindView(CommonBaseAdapter.ViewHolder holder, Object bean, int position) {
-        Item2 item = (Item2) bean;
-        holder.setText(R.id.title_tv, item.getTitle())
-                .setText(R.id.info_tv, item.getInfo());
-    }
-}
-```
-ListViewSecondViewBinder用来填充Item2对应的布局文件。
-
->注意：这里bindView传进来的bean需要强转成你要处理的对象。
-
-其中bindView和单条目适配器中的onBindView一样。
-
-
-c.创建适配器并填充数据
-
-```java
-        list_view = (ListView) findViewById(R.id.list_view);
-
-        //创建ViewBinder
-        List<CommonBaseAdapter.ViewBinder> viewBinders = new ArrayList<>();
-        viewBinders.add(new ListViewFirstViewBinder(Item1.class, R.layout.layout_item1));
-        viewBinders.add(new ListViewSecondViewBinder(Item2.class, R.layout.layout_item2));
-
-        //在创建CommonBaseAdapter
-        mCommonBaseAdapter = new CommonBaseAdapter(this, viewBinders);
-
-        //设置数据集合
-        mDataList = new ArrayList<Object>();
-        for (int i = 0; i < 10; i++) {
-            mDataList.add(new Item1(R.mipmap.ic_launcher, "第一类条目的item" + i));
-            mDataList.add(new Item2("我是第二类条目", "item" + i));
+    //设置数据集合
+    mDataList = new ArrayList<>();
+    for (int i = 0; i < 30; i++) {
+        mDataList.add(new Item1(R.mipmap.ic_launcher, Item1.class.getSimpleName() + "条目", R.layout.layout_item1_type1));
+        mDataList.add(new Item2(Item2.class.getSimpleName() + "条目", "item"));
+        for (int j = 0; j < 10; j++) {
+            mDataList.add(new Item3(Item3.class.getSimpleName() + "条目", "item"));
         }
-        mCommonBaseAdapter.setList(mDataList);
+    }
 
-        //为ListView设置Adapter
-        list_view.setAdapter(mCommonBaseAdapter);
+    multiTypeAdapter.setList(mDataList);
+    recycler_view.setAdapter(multiTypeAdapter);
 ```
-
->注意：此处的数据集合泛型必须为Object，因为要同时处理多种JavaBean。
-
-d.运行效果图
-
-![common adapter](https://github.com/JunhuaLin/CommonAdapter/blob/master/photo/commonadapter.png)
-
 
 ## 结语
 

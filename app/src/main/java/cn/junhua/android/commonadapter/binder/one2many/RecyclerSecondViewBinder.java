@@ -1,9 +1,9 @@
-package cn.junhua.android.commonadapter.binder;
+package cn.junhua.android.commonadapter.binder.one2many;
 
 import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.bean.Item2;
+import cn.junhua.android.commonadapter.bean.one2many.Item2;
 
 /**
  * Created by junhua on 17-3-15.

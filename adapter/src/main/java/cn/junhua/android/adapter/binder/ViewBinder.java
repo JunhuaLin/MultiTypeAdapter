@@ -42,9 +42,11 @@ public abstract class ViewBinder<T> {
      * 1.减少存储结构扩容带来的性能消耗。<br/>
      * 2.避免容量未完全使用带来的内存浪费。<br/>
      *
-     * @return 需要缓存View的个数
+     * @return 需要缓存View的个数, 默认值6
      */
-    public abstract int onCountView(T bean, int position);
+    public int onCountView(T bean, int position) {
+        return 6;
+    }
 
     /**
      * 执行获取布局id操作

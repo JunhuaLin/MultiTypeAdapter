@@ -15,23 +15,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.single_recycler_btn).setOnClickListener(this);
-        findViewById(R.id.common_recycler_btn).setOnClickListener(this);
+        findViewById(R.id.btn_taobao).setOnClickListener(this);
+        findViewById(R.id.btn_one2many).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
-
+        Class target = null;
         switch (v.getId()) {
-            case R.id.single_recycler_btn:
-                intent.setClass(this, SingleRecyclerViewAdapterActivity.class);
+            case R.id.btn_one2many:
+                target = One2ManyActivity.class;
                 break;
-            case R.id.common_recycler_btn:
-                intent.setClass(this, MultiTypeRecyclerViewAdapterActivity.class);
+            case R.id.btn_taobao:
+                target = TaobaoActivity.class;
                 break;
         }
-
+        intent.setClass(this, target);
         startActivity(intent);
 
     }

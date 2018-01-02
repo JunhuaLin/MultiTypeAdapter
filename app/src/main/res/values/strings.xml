@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">CommonAdapter</string>
-    <string name="single_base">SingleBaseAdapterActivity</string>
-    <string name="common_base">CommonBaseAdapterActivity</string>
-    <string name="single_recycler">SingleRecyclerViewAdapterActivity</string>
-    <string name="common_recycler">CommonRecyclerViewAdapterActivity</string>
+    <string name="app_name">MultiTypeAdapter</string>
+    <string name="taobao">淘宝首页效果</string>
+    <string name="one2many">一对多效果</string>
 </resources>

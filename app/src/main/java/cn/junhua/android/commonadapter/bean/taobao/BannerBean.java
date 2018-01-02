@@ -3,10 +3,12 @@ package cn.junhua.android.commonadapter.bean.taobao;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.junhua.android.commonadapter.imp.SpanSize;
+
 /**
  * Created by junhua.lin on 2017/12/29.
  */
-public class BannerBean {
+public class BannerBean implements SpanSize {
     private List<String> urlList;
 
     public BannerBean() {
@@ -25,5 +27,10 @@ public class BannerBean {
 
     public void setUrlList(List<String> urlList) {
         this.urlList = urlList;
+    }
+
+    @Override
+    public int getSpanSize() {
+        return 2;
     }
 }

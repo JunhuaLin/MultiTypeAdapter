@@ -1,4 +1,4 @@
-package cn.junhua.android.commonadapter.bean;
+package cn.junhua.android.commonadapter.bean.one2many;
 
 /**
  * Created by junhua on 17-3-15.

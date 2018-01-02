@@ -15,20 +15,20 @@ import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
 import cn.junhua.android.adapter.imp.OnMatchListener;
 import cn.junhua.android.adapter.binder.ViewBinder;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.binder.RecyclerFirstType1ViewBinder;
-import cn.junhua.android.commonadapter.binder.RecyclerFirstType2ViewBinder;
-import cn.junhua.android.commonadapter.binder.RecyclerSecondViewBinder;
-import cn.junhua.android.commonadapter.binder.RecyclerThreeViewBinder;
-import cn.junhua.android.commonadapter.bean.Item1;
-import cn.junhua.android.commonadapter.bean.Item2;
-import cn.junhua.android.commonadapter.bean.Item3;
+import cn.junhua.android.commonadapter.binder.one2many.RecyclerFirstType1ViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.RecyclerFirstType2ViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.RecyclerSecondViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.RecyclerThreeViewBinder;
+import cn.junhua.android.commonadapter.bean.one2many.Item1;
+import cn.junhua.android.commonadapter.bean.one2many.Item2;
+import cn.junhua.android.commonadapter.bean.one2many.Item3;
 
 /**
  * MultiTypeAdapter demo
  * Created by junhua on 17-3-15.
  */
 
-public class MultiTypeRecyclerViewAdapterActivity extends Activity {
+public class One2ManyActivity extends Activity {
 
     private RecyclerView recycler_view;
     private MultiTypeAdapter mMultiTypeAdapter;
@@ -41,7 +41,7 @@ public class MultiTypeRecyclerViewAdapterActivity extends Activity {
 
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
-        //再创建CommonRecyclerViewAdapter
+        //再创建MultiTypeAdapter
         mMultiTypeAdapter = new MultiTypeAdapter(this);
         //注册ViewBinder
         mMultiTypeAdapter.registerViewBinder(new RecyclerSecondViewBinder());
