@@ -14,7 +14,7 @@ MultiTypeAdapter的优点如下：
 使用Android Studio
 
 在build.gradle中添加如下代码：
-```
+```java
 dependencies {
     compile 'cn.junhua.android.adapter:adapter:1.0.0'
 }
@@ -25,7 +25,7 @@ dependencies {
 #### a.首先创建JavaBean和布局文件
 
 Item1.class
-```
+```java
 public class Item1 {
     private int imageId;
     private String title;
@@ -34,7 +34,7 @@ public class Item1 {
 为了方便省略构造方法，getter和setter方法。
 
 layout_item1_type1.xml
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bg_ll"
@@ -58,7 +58,7 @@ layout_item1_type1.xml
 b.继承SingleTypeViewBinder<Item1>
 
 RecyclerFirstType1ViewBinder.java
-```
+```java
 public class RecyclerFirstType1ViewBinder extends SingleTypeViewBinder<Item1> {
 
     public RecyclerFirstType1ViewBinder() {
@@ -101,7 +101,7 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 - 第三个参数：position，当前条目位置。
 
 c.设置适配器
-```
+```java
     RecyclerView recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
     //再创建MultiTypeAdapter
     MultiTypeAdapter multiTypeAdapter = new MultiTypeAdapter(this);
@@ -115,7 +115,7 @@ c.设置适配器
 a.再创建一个布局文件
 
 layout_item1_type2.xml
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bg_ll"
@@ -147,7 +147,7 @@ layout_item1_type2.xml
 b.再创建ViewBinder
 
 RecyclerFirstType2ViewBinder.java
-```
+```java
 public class RecyclerFirstType2ViewBinder extends SingleTypeViewBinder<Item1> {
 
     public RecyclerFirstType2ViewBinder() {
@@ -173,7 +173,7 @@ public class RecyclerFirstType2ViewBinder extends SingleTypeViewBinder<Item1> {
 
 c.创建一对多适配器并填充数据
 
-```
+```java
     RecyclerView recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
     //再创建MultiTypeAdapter
