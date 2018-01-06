@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
-import cn.junhua.android.adapter.imp.OnMatchListener;
+import cn.junhua.android.adapter.imp.TypeMatcher;
 
 /**
  * 多类型条目包装类->多条目由多个SingleTypeViewBinder组成
@@ -14,16 +14,16 @@ import cn.junhua.android.adapter.imp.OnMatchListener;
 public class MultiTypeViewBinder<T> extends ViewBinder<T> {
 
     private Map<Class, ViewBinder<T>> mViewBinderManager;
-    private OnMatchListener<T> mOnMatchListener;
+    private TypeMatcher<T> mTypeMatcher;
 
 
-    public MultiTypeViewBinder(Class<T> beanClass, List<ViewBinder<T>> viewBinderList, OnMatchListener<T> matchViewBinder) {
+    public MultiTypeViewBinder(Class<T> beanClass, List<ViewBinder<T>> viewBinderList, TypeMatcher<T> matchViewBinder) {
         super(beanClass);
         mViewBinderManager = new HashMap<>(viewBinderList.size());
         for (ViewBinder<T> viewBinder : viewBinderList) {
             mViewBinderManager.put(viewBinder.getClass(), viewBinder);
         }
-        mOnMatchListener = matchViewBinder;
+        mTypeMatcher = matchViewBinder;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MultiTypeViewBinder<T> extends ViewBinder<T> {
     }
 
     private ViewBinder<T> getViewBinder(T bean, int position) {
-        Class<? extends ViewBinder<T>> viewBinderClass = mOnMatchListener.onMatch(bean, position);
+        Class<? extends ViewBinder<T>> viewBinderClass = mTypeMatcher.onMatch(bean, position);
         if (!mViewBinderManager.containsKey(viewBinderClass)) {
             throw new ViewBinderNotFoundException(bean.getClass(), viewBinderClass);
         }

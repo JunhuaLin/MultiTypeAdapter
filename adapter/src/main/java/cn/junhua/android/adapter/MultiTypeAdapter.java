@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +55,20 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
      */
     public <T> OneToManyMapper<T> registerViewBinder(Class<T> beanClass) {
         return new OneToManyBuilder<>(this, beanClass);
+    }
+
+    /**
+     * 注册ViewBinder
+     *
+     * @param viewBinderCollection ViewBinder集合
+     */
+    public void registerViewBinder(Collection<? extends ViewBinder> viewBinderCollection) {
+        if (viewBinderCollection == null) {
+            return;
+        }
+        for (ViewBinder vb : viewBinderCollection) {
+            mViewBinderMap.put(vb.getBeanClass(), vb);
+        }
     }
 
     /**

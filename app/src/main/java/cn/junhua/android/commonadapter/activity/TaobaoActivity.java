@@ -32,7 +32,6 @@ public class TaobaoActivity extends AppCompatActivity {
     private List<Object> dataList;
 
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
@@ -49,10 +48,8 @@ public class TaobaoActivity extends AppCompatActivity {
             dataList.add(new LikeBean());
         }
 
-
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
 
-//        recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         //设置布局管理器
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -71,9 +68,9 @@ public class TaobaoActivity extends AppCompatActivity {
         multiTypeAdapter = new MultiTypeAdapter(this);
         //注册ViewBinder
         multiTypeAdapter.registerViewBinder(new BannerViewHinder());
-        multiTypeAdapter.registerViewBinder(new MenuViewHinder(this));
-        multiTypeAdapter.registerViewBinder(new LikeViewHinder(this));
-        multiTypeAdapter.registerViewBinder(new GoodsShowViewHinder(this));
+        multiTypeAdapter.registerViewBinder(new MenuViewHinder());
+        multiTypeAdapter.registerViewBinder(new LikeViewHinder());
+        multiTypeAdapter.registerViewBinder(new GoodsShowViewHinder());
         multiTypeAdapter.registerViewBinder(new BigTitleViewHinder());
 
         multiTypeAdapter.setList(dataList);

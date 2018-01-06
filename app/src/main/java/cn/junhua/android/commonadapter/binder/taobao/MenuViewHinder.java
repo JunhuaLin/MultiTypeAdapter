@@ -1,6 +1,5 @@
 package cn.junhua.android.commonadapter.binder.taobao;
 
-import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,7 +14,6 @@ import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
  * Created by junhua.lin on 2017/12/29.
  */
 public class MenuViewHinder extends SingleTypeViewBinder<MenuBean> {
-    private Context context;
     private int[] ids = new int[]{
             R.id.iv_menu1,
             R.id.iv_menu2,
@@ -30,9 +28,8 @@ public class MenuViewHinder extends SingleTypeViewBinder<MenuBean> {
             R.id.iv_menu10,
     };
 
-    public MenuViewHinder(Context context) {
+    public MenuViewHinder() {
         super(MenuBean.class, R.layout.binder_menu);
-        this.context = context;
     }
 
     @Override
@@ -49,6 +46,6 @@ public class MenuViewHinder extends SingleTypeViewBinder<MenuBean> {
 
     private void setSrc(ViewHolder holder, MenuBean bean, int id) {
         ImageView iv_menu = holder.findView(id);
-        Glide.with(context).load(bean.getUrl()).into(iv_menu);
+        Glide.with(iv_menu.getContext()).load(bean.getUrl()).into(iv_menu);
     }
 }

@@ -1,8 +1,5 @@
 package cn.junhua.android.commonadapter.binder.taobao;
 
-import android.content.Context;
-import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 
 import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
@@ -17,11 +14,8 @@ import cn.junhua.android.commonadapter.view.RectImageView;
  */
 public class LikeViewHinder extends SingleTypeViewBinder<LikeBean> {
 
-    private Context context;
-
-    public LikeViewHinder(Context context) {
+    public LikeViewHinder() {
         super(LikeBean.class, R.layout.binder_like);
-        this.context = context;
     }
 
 
@@ -33,7 +27,7 @@ public class LikeViewHinder extends SingleTypeViewBinder<LikeBean> {
     @Override
     public void onBindView(ViewHolder holder, LikeBean bean, int position) {
         RectImageView riv_goods = holder.findView(R.id.riv_goods);
-        Glide.with(context).load(bean.getUrl()).into(riv_goods);
+        Glide.with(riv_goods.getContext()).load(bean.getUrl()).into(riv_goods);
 
         holder.setText(R.id.tv_title, bean.getTitle())
                 .setText(R.id.tv_price, "￥" + bean.getPrice())

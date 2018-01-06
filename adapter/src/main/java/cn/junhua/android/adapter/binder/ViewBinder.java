@@ -1,5 +1,6 @@
 package cn.junhua.android.adapter.binder;
 
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 
 /**
@@ -24,6 +25,10 @@ public abstract class ViewBinder<T> {
         return mBeanClass;
     }
 
+    public Context getContext() {
+        return null;
+    }
+
 
     /**
      * 获得ViewBinder中findView次数,即需要缓存View的个数
@@ -37,9 +42,9 @@ public abstract class ViewBinder<T> {
     }
 
     /**
-     * 在子类中重写该方法<br/>
+     * 应该在子类中重写该方法<br/>
      * 作用：<br/>
-     * 1.减少存储结构扩容带来的性能消耗。<br/>
+     * 1.避免存储结构扩容带来的性能消耗。<br/>
      * 2.避免容量未完全使用带来的内存浪费。<br/>
      *
      * @return 需要缓存View的个数, 默认值6

@@ -1,6 +1,5 @@
 package cn.junhua.android.commonadapter.binder.taobao;
 
-import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -8,7 +7,6 @@ import com.bumptech.glide.Glide;
 import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
-import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 
 /**
@@ -17,11 +15,8 @@ import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
  */
 public class GoodsShowViewHinder extends SingleTypeViewBinder<GoodsShowBean> {
 
-    private Context context;
-
-    public GoodsShowViewHinder(Context context) {
+    public GoodsShowViewHinder() {
         super(GoodsShowBean.class, R.layout.binder_goods_show);
-        this.context = context;
     }
 
     @Override
@@ -57,6 +52,6 @@ public class GoodsShowViewHinder extends SingleTypeViewBinder<GoodsShowBean> {
 
     private void setImage(ViewHolder holder, String url, int id) {
         ImageView iv_goods_photo1 = holder.findView(id);
-        Glide.with(context).load(url).into(iv_goods_photo1);
+        Glide.with(iv_goods_photo1.getContext()).load(url).into(iv_goods_photo1);
     }
 }
