@@ -34,7 +34,7 @@ dependencies {
 
 ### 3.实例展示
 #### 3.1淘宝首页效果（基本用法）
-a.首先创建JavaBean和布局文件
+##### a.首先创建JavaBean和布局文件
 
 GoodsShowBean.class
 ```java
@@ -69,7 +69,7 @@ public class GoodsShowBean {
 }
 ```
 为了方便省略构造方法，getter和setter方法。
-以及省略的BannerBean.class、LikeBean.class、BigTitleBean.class和MenuBean.class等java bean同GoodsShowBean.class。
+以及省略的BannerBean.class、LikeBean.class、BigTitleBean.class和MenuBean.class等java bean同GoodsShowBean.class类似。
 
 binder_goods_show.xml
 ```xml
@@ -347,9 +347,10 @@ binder_goods_show.xml
 </FrameLayout>
 ```
 
-b.创建ViewBinder
+##### b.创建ViewBinder
 
 单类型条目直接继承SingleViewBinder。
+
 GoodsShowViewHinder.java
 ```java
 public class GoodsShowViewHinder extends SingleViewBinder<GoodsShowBean> {
@@ -393,7 +394,7 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 - 第二个参数：bean，就是我们数据对象的引用。
 - 第三个参数：position，当前条目位置。
 
-c.设置适配器
+##### c.设置适配器
 TaobaoActivity.class
 ```java
    public class TaobaoActivity extends AppCompatActivity {
@@ -450,12 +451,12 @@ TaobaoActivity.class
 ```
 注：SpanSize接口用于返回条目在网格布局中占得空间。
 
-d.效果图
+##### d.效果图
 
 
 #### 3.2朋友圈多图效果（高级用法：一对多）
 
-a.创建JavaBean和多个不同的布局
+##### a.创建JavaBean和多个不同的布局
 
 FriendBean.class
 ```java
@@ -759,7 +760,7 @@ binder_friend_photo4.xml
 
 </LinearLayout>
 ```
-b.创建ViewBinder
+##### b.创建ViewBinder
 
 先创建单类型条目继承SingleViewBinder。
 
@@ -848,7 +849,7 @@ public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
 ```
 省略FriendPhoto1ViewBinder.class和FriendPhoto4ViewBinder.class。代码效果同FriendPhoto3ViewBinder.class。
 
-c.设置适配器
+##### c.设置适配器
 
 ```java
     
@@ -908,6 +909,8 @@ public class One2ManyActivity extends AppCompatActivity {
 }
 ```
 
+##### d.效果图
+
 ## 结语
 
-欢迎Pull Requests 和 Issues。
+欢迎PR 和 Issues。

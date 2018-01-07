@@ -8,9 +8,9 @@ import cn.junhua.android.commonadapter.imp.SpanSize;
  */
 
 public class LikeBean implements SpanSize {
-    private String url = "http://img.alicdn.com/bao/uploaded/i4/3185860334/TB2KB3xcgwjyKJjSsppXXaxUpXa_!!3185860334.jpg_560x370Q50s50.jpg_.webp";
-    private String title = "[为你推荐]日本成人男女士隐形矫正衣脊椎驼背矫正带儿童背部纠正防驼背神器";
-    private String price = "66";
+    private String url = "https://gw.alicdn.com/imgextra/i2/2989471133/TB2Sns2bLjM8KJjSZFNXXbQjFXa_!!2989471133.jpg_760x760q50s150.jpg_.webp";
+    private String title = "[为你推荐]春装女装新款名媛气质红色礼服裙女中长款年会正式场合连衣裙";
+    private String price = "666";
     private String count = "12345";
 
     public String getUrl() {

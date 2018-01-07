@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">MultiTypeAdapter</string>
     <string name="taobao">淘宝首页效果</string>
-    <string name="one2many">一对多效果</string>
+    <string name="one2many">朋友圈效果</string>
 </resources>

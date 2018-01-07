@@ -7,14 +7,15 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <TextView
             android:id="@+id/tv_name"
@@ -35,7 +36,7 @@
             android:textColor="#0E0E0E"
             android:textSize="12sp" />
 
-        <cn.junhua.android.commonadapter.view.RectImageView
+        <ImageView
             android:id="@+id/iv_photo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -44,7 +44,7 @@ public class TaobaoActivity extends AppCompatActivity {
         }
 
         dataList.add(new BigTitleBean("猜你喜欢"));
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             dataList.add(new LikeBean());
         }
 
