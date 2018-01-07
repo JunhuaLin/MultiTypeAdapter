@@ -452,6 +452,7 @@ TaobaoActivity.class
 注：SpanSize接口用于返回条目在网格布局中占得空间。
 
 ##### d.效果图
+![淘宝首页效果](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/淘宝首页.gif)
 
 
 #### 3.2朋友圈多图效果（高级用法：一对多）
@@ -910,6 +911,7 @@ public class One2ManyActivity extends AppCompatActivity {
 ```
 
 ##### d.效果图
+![朋友圈效果](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/朋友圈.gif)
 
 ## 结语
 
