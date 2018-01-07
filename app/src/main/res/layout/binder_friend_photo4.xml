@@ -44,10 +44,11 @@
                 android:id="@+id/iv_photo1"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
-                android:visibility="visible"
                 android:layout_margin="2dp"
                 android:layout_marginTop="6dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:visibility="visible" />
 
             <cn.junhua.android.commonadapter.view.RectImageView
                 android:id="@+id/iv_photo2"
@@ -55,7 +56,8 @@
                 android:layout_height="200dp"
                 android:layout_margin="2dp"
                 android:layout_marginTop="6dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,7 +71,8 @@
                 android:layout_height="200dp"
                 android:layout_margin="2dp"
                 android:layout_marginTop="6dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
 
             <cn.junhua.android.commonadapter.view.RectImageView
                 android:id="@+id/iv_photo4"
@@ -77,7 +80,8 @@
                 android:layout_height="200dp"
                 android:layout_margin="2dp"
                 android:layout_marginTop="6dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
         </LinearLayout>
 
     </LinearLayout>

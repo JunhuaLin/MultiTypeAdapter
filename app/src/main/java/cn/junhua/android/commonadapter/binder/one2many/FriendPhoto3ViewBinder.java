@@ -9,7 +9,7 @@ import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
 
 /**
- * 朋友圈一张图片
+ * 朋友圈2-3或5-9张图片
  * Created by linjunhua on 2018/1/6.
  */
 public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
@@ -40,7 +40,7 @@ public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
 
     @Override
     public void onBindImage(ViewHolder holder, FriendBean bean, int position) {
-        List<String> urls = bean.getPhotos();
+        List<Integer> urls = bean.getPhotos();
         int size = urls.size();
         for (int i = 0; i < imageViewIds.length; i++) {
             if (i < size) {

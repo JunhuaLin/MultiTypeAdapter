@@ -39,7 +39,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     /**
      * 注册ViewBinder
      *
-     * @param viewBinder SingleTypeViewBinder
+     * @param viewBinder SingleViewBinder
      */
     public void registerViewBinder(ViewBinder viewBinder) {
         if (viewBinder == null) {

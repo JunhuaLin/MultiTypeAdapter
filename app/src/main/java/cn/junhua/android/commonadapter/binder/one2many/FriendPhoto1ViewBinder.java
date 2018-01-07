@@ -20,7 +20,7 @@ public class FriendPhoto1ViewBinder extends FriendPhotoViewBinder {
 
     @Override
     public void onBindImage(ViewHolder holder, FriendBean bean, int position) {
-        List<String> urls = bean.getPhotos();
+        List<Integer> urls = bean.getPhotos();
         int size = urls.size();
         if (1 == size) {
             setImageRes(holder, R.id.iv_photo1, urls.get(0));

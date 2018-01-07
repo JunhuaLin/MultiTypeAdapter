@@ -4,10 +4,10 @@ package cn.junhua.android.adapter.binder;
 /**
  * 单类型条目封装类
  */
-public abstract class SingleTypeViewBinder<T> extends ViewBinder<T> {
+public abstract class SingleViewBinder<T> extends ViewBinder<T> {
     private int mLayoutId;
 
-    public SingleTypeViewBinder(Class<T> beanClass, int layoutId) {
+    public SingleViewBinder(Class<T> beanClass, int layoutId) {
         super(beanClass);
         this.mLayoutId = layoutId;
     }

@@ -2,7 +2,7 @@ package cn.junhua.android.commonadapter.binder.taobao;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.SingleViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.LikeBean;
@@ -12,7 +12,7 @@ import cn.junhua.android.commonadapter.view.RectImageView;
  * 淘宝banner
  * Created by junhua.lin on 2017/12/29.
  */
-public class LikeViewHinder extends SingleTypeViewBinder<LikeBean> {
+public class LikeViewHinder extends SingleViewBinder<LikeBean> {
 
     public LikeViewHinder() {
         super(LikeBean.class, R.layout.binder_like);

@@ -1,6 +1,6 @@
 package cn.junhua.android.adapter.imp;
 
-import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
+import cn.junhua.android.adapter.binder.MultiViewBinder;
 
 /**
  * 绑定一对多对应关系处理监听器
@@ -9,5 +9,5 @@ import cn.junhua.android.adapter.binder.MultiTypeViewBinder;
 
 public interface OneToManyMatcher<T> {
 
-    MultiTypeViewBinder<T> match(TypeMatcher<T> typeMatcher);
+    MultiViewBinder<T> match(TypeMatcher<T> typeMatcher);
 }

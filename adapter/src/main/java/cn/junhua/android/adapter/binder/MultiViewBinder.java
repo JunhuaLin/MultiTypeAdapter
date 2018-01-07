@@ -11,13 +11,13 @@ import cn.junhua.android.adapter.imp.TypeMatcher;
 /**
  * 多类型条目包装类->多条目由多个SingleTypeViewBinder组成
  */
-public class MultiTypeViewBinder<T> extends ViewBinder<T> {
+public class MultiViewBinder<T> extends ViewBinder<T> {
 
     private Map<Class, ViewBinder<T>> mViewBinderManager;
     private TypeMatcher<T> mTypeMatcher;
 
 
-    public MultiTypeViewBinder(Class<T> beanClass, List<ViewBinder<T>> viewBinderList, TypeMatcher<T> matchViewBinder) {
+    public MultiViewBinder(Class<T> beanClass, List<ViewBinder<T>> viewBinderList, TypeMatcher<T> matchViewBinder) {
         super(beanClass);
         mViewBinderManager = new HashMap<>(viewBinderList.size());
         for (ViewBinder<T> viewBinder : viewBinderList) {

@@ -4,16 +4,16 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.SingleViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 
 /**
- * 淘宝banner
+ * 淘宝商品展示
  * Created by junhua.lin on 2017/12/29.
  */
-public class GoodsShowViewHinder extends SingleTypeViewBinder<GoodsShowBean> {
+public class GoodsShowViewHinder extends SingleViewBinder<GoodsShowBean> {
 
     public GoodsShowViewHinder() {
         super(GoodsShowBean.class, R.layout.binder_goods_show);

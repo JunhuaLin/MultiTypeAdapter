@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.SingleViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
@@ -16,7 +16,7 @@ import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
  * 淘宝banner
  * Created by junhua.lin on 2017/12/29.
  */
-public class BannerViewHinder extends SingleTypeViewBinder<BannerBean> {
+public class BannerViewHinder extends SingleViewBinder<BannerBean> {
 
     public BannerViewHinder() {
         super(BannerBean.class, R.layout.binder_banner);

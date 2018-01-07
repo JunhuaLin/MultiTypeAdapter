@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.SingleViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
@@ -13,7 +13,7 @@ import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
  * 淘宝菜单
  * Created by junhua.lin on 2017/12/29.
  */
-public class MenuViewHinder extends SingleTypeViewBinder<MenuBean> {
+public class MenuViewHinder extends SingleViewBinder<MenuBean> {
     private int[] ids = new int[]{
             R.id.iv_menu1,
             R.id.iv_menu2,

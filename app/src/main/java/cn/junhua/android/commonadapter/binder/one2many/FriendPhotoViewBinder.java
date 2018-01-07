@@ -1,12 +1,11 @@
 package cn.junhua.android.commonadapter.binder.one2many;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
-import cn.junhua.android.adapter.binder.SingleTypeViewBinder;
+import cn.junhua.android.adapter.binder.SingleViewBinder;
 import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
@@ -15,7 +14,7 @@ import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
  * 朋友圈图片
  * Created by linjunhua on 2018/1/6.
  */
-public abstract class FriendPhotoViewBinder extends SingleTypeViewBinder<FriendBean> {
+public abstract class FriendPhotoViewBinder extends SingleViewBinder<FriendBean> {
 
     public FriendPhotoViewBinder(int layoutId) {
         super(FriendBean.class, layoutId);
@@ -41,11 +40,9 @@ public abstract class FriendPhotoViewBinder extends SingleTypeViewBinder<FriendB
      */
     public abstract void onBindImage(ViewHolder holder, FriendBean bean, int position);
 
-    public void setImageRes(ViewHolder holder, @IdRes int id, String url) {
+    public void setImageRes(ViewHolder holder, @IdRes int id,@DrawableRes int mipmap) {
         ImageView imageView = holder.findView(id);
         imageView.setVisibility(View.VISIBLE);
-        Glide.with(imageView.getContext())
-                .load(url)
-                .into(imageView);
+        imageView.setImageResource(mipmap);
     }
 }
