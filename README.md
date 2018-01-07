@@ -801,7 +801,7 @@ public abstract class FriendPhotoViewBinder extends SingleViewBinder<FriendBean>
 }
 ```
 
-FriendPhoto3ViewBinder.java基类提取公共代码
+FriendPhoto3ViewBinder.java
 ```java
 /**
  * 朋友圈2-3或5-9张图片
@@ -848,7 +848,35 @@ public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
 
 }
 ```
-省略FriendPhoto1ViewBinder.class和FriendPhoto4ViewBinder.class。代码效果同FriendPhoto3ViewBinder.class。
+FriendPhoto4ViewBinder.class
+```java
+/**
+ * 朋友圈4张图片
+ * Created by linjunhua on 2018/1/6.
+ */
+public class FriendPhoto4ViewBinder extends FriendPhotoViewBinder {
+
+    private int[] imageViewIds;
+
+    public FriendPhoto4ViewBinder() {
+        super(R.layout.binder_friend_photo4);
+        imageViewIds = new int[]{
+                R.id.iv_photo1,
+                R.id.iv_photo2,
+                R.id.iv_photo3,
+                R.id.iv_photo4
+        };
+    }
+
+    @Override
+    public void onBindImage(ViewHolder holder, FriendBean bean, int position) {
+        for (int i = 0; i < imageViewIds.length; i++) {
+            setImageRes(holder, imageViewIds[i], bean.getPhotos().get(i));
+        }
+    }
+}
+```
+省略FriendPhoto1ViewBinder.class。代码效果同FriendPhoto3ViewBinder.class。
 
 ##### c.设置适配器
 
