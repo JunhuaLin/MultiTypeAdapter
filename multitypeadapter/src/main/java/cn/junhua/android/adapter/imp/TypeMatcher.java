@@ -3,7 +3,7 @@ package cn.junhua.android.adapter.imp;
 import cn.junhua.android.adapter.binder.ViewBinder;
 
 /**
- * 类型匹配器：处理一对多匹配条件
+ * TypeMatcher
  * Created by junhua.lin on 2017/12/28.
  */
 public interface TypeMatcher<T> {

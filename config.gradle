@@ -1,0 +1,19 @@
+rootProject.ext {
+    android = [
+            compileSdkVersion: 25,
+            buildToolsVersion: "26.0.2",
+            applicationId    : "cn.junhua.android.commonadapter",
+            minSdkVersion    : 15,
+            targetSdkVersion : 25,
+            versionCode      : 2,
+            versionName      : "2.0.0"
+    ]
+
+    supportVersion = "25.2.0"
+    supportLib = [
+            "appcompat-v7"   : "com.android.support:appcompat-v7:$supportVersion",
+            "recyclerview-v7": "com.android.support:recyclerview-v7:$supportVersion",
+            "support-annotations": "com.android.support:support-annotations:$supportVersion",
+    ]
+    
+}

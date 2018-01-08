@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 
 /**
- * 视图绑定器基类
+ * the base class for binding view.
  * Created by junhua.lin on 2017/12/27.
  */
 @SuppressWarnings("unchecked")
@@ -16,11 +16,6 @@ public abstract class ViewBinder<T> {
         this.mBeanClass = clazz;
     }
 
-    /**
-     * 返回数据类的Class
-     *
-     * @return 返回数据类的Class
-     */
     public final Class<T> getBeanClass() {
         return mBeanClass;
     }
@@ -30,70 +25,27 @@ public abstract class ViewBinder<T> {
     }
 
 
-    /**
-     * 获得ViewBinder中findView次数,即需要缓存View的个数
-     *
-     * @param bean     数据
-     * @param position 数据在集合中的位置
-     * @return ViewBinder中findView次数
-     */
     public int performCountView(Object bean, int position) {
         return onCountView((T) bean, position);
     }
 
-    /**
-     * 应该在子类中重写该方法<br/>
-     * 作用：<br/>
-     * 1.避免存储结构扩容带来的性能消耗。<br/>
-     * 2.避免容量未完全使用带来的内存浪费。<br/>
-     *
-     * @return 需要缓存View的个数, 默认值6
-     */
     public int onCountView(T bean, int position) {
         return 6;
     }
 
-    /**
-     * 执行获取布局id操作
-     *
-     * @param bean     数据
-     * @param position 在列表中的位置
-     * @return 返回布局文件的id
-     */
     public @LayoutRes
     int performCreateItemView(Object bean, int position) {
         return onCreateItemView((T) bean, position);
     }
 
-    /**
-     * 返回布局文件的id
-     *
-     * @param bean     数据
-     * @param position 在列表中的位置
-     * @return 返回布局文件的id
-     */
     public abstract @LayoutRes
     int onCreateItemView(T bean, int position);
 
 
-    /**
-     * 执行绑定视图操作
-     *
-     * @param holder   视图的holder
-     * @param bean     数据
-     * @param position 在列表中的位置
-     */
     public void performBindView(ViewHolder holder, Object bean, int position) {
         onBindView(holder, (T) bean, position);
     }
 
-    /**
-     * 处理数据与视图绑定
-     *
-     * @param holder   封装adapter中item的复用操作代码的对象
-     * @param bean     数据Bean需要强制类型转化
-     * @param position 当前条目位置
-     */
     public abstract void onBindView(ViewHolder holder, T bean, int position);
 
 

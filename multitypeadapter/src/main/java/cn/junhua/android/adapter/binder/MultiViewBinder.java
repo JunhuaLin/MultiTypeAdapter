@@ -9,7 +9,7 @@ import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 
 /**
- * 多类型条目包装类->多条目由多个SingleTypeViewBinder组成
+ * MultiViewBinder consists of multiple ViewBinder
  */
 public class MultiViewBinder<T> extends ViewBinder<T> {
 

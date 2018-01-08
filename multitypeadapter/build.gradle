@@ -2,18 +2,19 @@ apply plugin: 'com.android.library'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'adapter'
+    bintrayName = 'multitypeadapter'
 
+    //GROUP_ID:ARTIFACT_ID:VERSION dependencies format
     publishedGroupId = 'cn.junhua.android.adapter'
-    libraryName = 'adapter'
-    artifact = 'adapter'
+    artifact = 'multitypeadapter'
+    libraryVersion = rootProject.android.versionName
+    //cn.junhua.android.adapter:MultiTypeAdapter:x.y.z
+    libraryName = 'MultiTypeAdapter'
 
-    libraryDescription = 'some common for ListView and RecyclerView on Android'
+    libraryDescription = 'a common adapter for RecyclerView on Android'
 
-    siteUrl = 'https://github.com/JunhuaLin/CommonAdapter'
-    gitUrl = 'https://github.com/JunhuaLin/CommonAdapter.git'
-
-    libraryVersion = '1.0.0'
+    siteUrl = 'https://github.com/JunhuaLin/MultiTypeAdapter'
+    gitUrl = 'https://github.com/JunhuaLin/MultiTypeAdapter.git'
 
     developerId = 'linjunhua'
     developerName = 'linjunhua'
@@ -25,18 +26,17 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
-
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,7 +48,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
+    //supportLib
+    implementation rootProject.ext.supportLib['recyclerview-v7']
+    implementation rootProject.ext.supportLib['support-annotations']
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

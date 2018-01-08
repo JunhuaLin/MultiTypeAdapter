@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
     defaultConfig {
-        applicationId "cn.junhua.android.commonadapter"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.android.applicationId
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,14 +24,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:25.2.0'
     testImplementation 'junit:junit:4.12'
-    implementation project(':adapter')
-    implementation 'com.android.support:recyclerview-v7:25.2.0'
-    implementation 'com.android.support:cardview-v7:25.2.0'
-    implementation 'cn.junhua.android.view:indicatorviewlibrary:1.0.0'
+    implementation project(':multitypeadapter')
+    //supportLib
+    implementation rootProject.ext.supportLib['appcompat-v7']
+    implementation rootProject.ext.supportLib['recyclerview-v7']
+    implementation rootProject.ext.supportLib['support-annotations']
+    //three lib
     implementation 'com.youth.banner:banner:1.4.10'
-    compile('com.github.bumptech.glide:glide:3.7.0') {
+    implementation('com.github.bumptech.glide:glide:3.7.0') {
         exclude group: 'com.android.support'
     }
 }

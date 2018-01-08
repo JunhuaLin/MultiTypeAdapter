@@ -2,7 +2,8 @@ package cn.junhua.android.adapter.binder;
 
 
 /**
- * 单类型条目封装类
+ * SingleViewBinder
+ * Created by junhua.lin on 2017/12/28.
  */
 public abstract class SingleViewBinder<T> extends ViewBinder<T> {
     private int mLayoutId;

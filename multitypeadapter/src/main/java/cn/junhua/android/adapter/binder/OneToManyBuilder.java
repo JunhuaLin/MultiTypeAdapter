@@ -10,7 +10,7 @@ import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
 
 /**
- * MultiTypeViewBinder构造器
+ * MultiTypeViewBinder Builder
  * Created by junhua.lin on 2017/12/28.
  */
 public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher<T> {
