@@ -8,7 +8,7 @@ ext {
     publishedGroupId = 'cn.junhua.android.adapter'
     artifact = 'multitypeadapter'
     libraryVersion = rootProject.android.versionName
-    //cn.junhua.android.adapter:MultiTypeAdapter:x.y.z
+    //cn.junhua.android.adapter:multitypeadapter:x.y.z
     libraryName = 'MultiTypeAdapter'
 
     libraryDescription = 'a common adapter for RecyclerView on Android'
