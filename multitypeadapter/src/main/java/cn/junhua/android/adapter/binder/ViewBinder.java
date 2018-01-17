@@ -71,12 +71,6 @@ public abstract class ViewBinder<T> {
     public void onViewDetachedFromWindow(ViewHolder holder) {
     }
 
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-    }
-
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

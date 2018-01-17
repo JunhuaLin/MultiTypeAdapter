@@ -30,8 +30,6 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Map<Class, ViewBinder> mViewBinderMap;
     // count view
     private int mViewSizeTemp;
-    // current position
-    private int mPosition;
 
     public MultiTypeAdapter(Context context) {
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -90,7 +88,6 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
         ViewBinder viewBinder = mViewBinderMap.get(beanClass);
         mViewSizeTemp = viewBinder.performCountView(bean, position);
-        mPosition = position;
         return viewBinder.performCreateItemView(bean, position);
     }
 
@@ -107,55 +104,30 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public long getItemId(int position) {
-        Log.d("666", "getItemId " + mPosition);
-
-        return getCurrentViewBinder().performGetItemId(mList.get(position));
+        return getCurrentViewBinder(position).performGetItemId(mList.get(position));
     }
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
-        Log.d("666", "onViewRecycled " + mPosition);
-
-        getCurrentViewBinder().onViewRecycled(holder);
+        getCurrentViewBinder(holder.getAdapterPosition()).onViewRecycled(holder);
     }
 
     @Override
     public boolean onFailedToRecycleView(ViewHolder holder) {
-        Log.d("666", "onFailedToRecycleView " + mPosition);
-
-        return getCurrentViewBinder().onFailedToRecycleView(holder);
+        return getCurrentViewBinder(holder.getAdapterPosition()).onFailedToRecycleView(holder);
     }
 
     @Override
     public void onViewAttachedToWindow(ViewHolder holder) {
-        Log.d("666", "onViewAttachedToWindow " + mPosition);
-
-        getCurrentViewBinder().onViewAttachedToWindow(holder);
+        getCurrentViewBinder(holder.getAdapterPosition()).onViewAttachedToWindow(holder);
     }
 
     @Override
     public void onViewDetachedFromWindow(ViewHolder holder) {
-        Log.d("666", "onViewDetachedFromWindow " + mPosition);
-
-        getCurrentViewBinder().onViewDetachedFromWindow(holder);
+        getCurrentViewBinder(holder.getAdapterPosition()).onViewDetachedFromWindow(holder);
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        Log.d("666", "onAttachedToRecyclerView " + mPosition);
-
-        getCurrentViewBinder().onAttachedToRecyclerView(recyclerView);
-    }
-
-    @Override
-    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
-        Log.d("666", "onDetachedFromRecyclerView " + mPosition);
-
-        getCurrentViewBinder().onDetachedFromRecyclerView(recyclerView);
-    }
-
-    private ViewBinder getCurrentViewBinder() {
-        Log.d("666", "getCurrentViewBinder " + mPosition);
-        return mViewBinderMap.get(mList.get(mPosition).getClass());
+    private ViewBinder getCurrentViewBinder(int position) {
+        return mViewBinderMap.get(mList.get(position).getClass());
     }
 }
