@@ -438,11 +438,11 @@ TaobaoActivity.class
            //初始化MultiTypeAdapter
            multiTypeAdapter = new MultiTypeAdapter(this);
            //注册ViewBinder
-           multiTypeAdapter.registerViewBinder(new BannerViewHinder());
-           multiTypeAdapter.registerViewBinder(new MenuViewHinder());
-           multiTypeAdapter.registerViewBinder(new LikeViewHinder());
-           multiTypeAdapter.registerViewBinder(new GoodsShowViewHinder());
-           multiTypeAdapter.registerViewBinder(new BigTitleViewHinder());
+           multiTypeAdapter.register(new BannerViewHinder());
+           multiTypeAdapter.register(new MenuViewHinder());
+           multiTypeAdapter.register(new LikeViewHinder());
+           multiTypeAdapter.register(new GoodsShowViewHinder());
+           multiTypeAdapter.register(new BigTitleViewHinder());
    
            multiTypeAdapter.setList(dataList);
            recycler_view.setAdapter(multiTypeAdapter);
@@ -911,11 +911,11 @@ public class One2ManyActivity extends AppCompatActivity {
                 return FriendPhoto3ViewBinder.class;
             }
         });
-        mMultiTypeAdapter.registerViewBinder(multiViewBinder);
-        mMultiTypeAdapter.unregisterViewBinder(multiViewBinder);
+        mMultiTypeAdapter.register(multiViewBinder);
+        mMultiTypeAdapter.unregister(multiViewBinder);
 
         //方式二：一对多条目注册(推荐)
-        mMultiTypeAdapter.registerViewBinder(FriendBean.class)
+        mMultiTypeAdapter.register(FriendBean.class)
                 .mapping(new FriendPhoto1ViewBinder(),
                         new FriendPhoto3ViewBinder(),
                         new FriendPhoto4ViewBinder())
