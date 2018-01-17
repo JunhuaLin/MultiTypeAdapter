@@ -53,11 +53,11 @@ public class One2ManyActivity extends AppCompatActivity {
                 return FriendPhoto3ViewBinder.class;
             }
         });
-        mMultiTypeAdapter.registerViewBinder(multiViewBinder);
-        mMultiTypeAdapter.unregisterViewBinder(multiViewBinder);
+        mMultiTypeAdapter.register(multiViewBinder);
+        mMultiTypeAdapter.unregister(multiViewBinder);
 
         //方式二：一对多条目注册(推荐)
-        mMultiTypeAdapter.registerViewBinder(FriendBean.class)
+        mMultiTypeAdapter.register(FriendBean.class)
                 .mapping(new FriendPhoto1ViewBinder(),
                         new FriendPhoto3ViewBinder(),
                         new FriendPhoto4ViewBinder())

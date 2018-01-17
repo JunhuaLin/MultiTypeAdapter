@@ -67,11 +67,11 @@ public class TaobaoActivity extends AppCompatActivity {
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter(this);
         //注册ViewBinder
-        multiTypeAdapter.registerViewBinder(new BannerViewHinder());
-        multiTypeAdapter.registerViewBinder(new MenuViewHinder());
-        multiTypeAdapter.registerViewBinder(new LikeViewHinder());
-        multiTypeAdapter.registerViewBinder(new GoodsShowViewHinder());
-        multiTypeAdapter.registerViewBinder(new BigTitleViewHinder());
+        multiTypeAdapter.register(new BannerViewHinder());
+        multiTypeAdapter.register(new MenuViewHinder());
+        multiTypeAdapter.register(new LikeViewHinder());
+        multiTypeAdapter.register(new GoodsShowViewHinder());
+        multiTypeAdapter.register(new BigTitleViewHinder());
 
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);

@@ -2,6 +2,8 @@ package cn.junhua.android.adapter.binder;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 /**
  * the base class for binding view.
@@ -48,6 +50,32 @@ public abstract class ViewBinder<T> {
 
     public abstract void onBindView(ViewHolder holder, T bean, int position);
 
+    public long performGetItemId(@NonNull Object bean) {
+        return getItemId((T) bean);
+    }
+
+    public long getItemId(@NonNull T bean) {
+        return RecyclerView.NO_ID;
+    }
+
+    public void onViewRecycled(ViewHolder holder) {
+    }
+
+    public boolean onFailedToRecycleView(ViewHolder holder) {
+        return false;
+    }
+
+    public void onViewAttachedToWindow(ViewHolder holder) {
+    }
+
+    public void onViewDetachedFromWindow(ViewHolder holder) {
+    }
+
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    }
+
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+    }
 
     @Override
     public boolean equals(Object o) {

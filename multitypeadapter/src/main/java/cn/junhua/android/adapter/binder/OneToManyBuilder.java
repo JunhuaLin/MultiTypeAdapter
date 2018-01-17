@@ -35,7 +35,7 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
     @Override
     public MultiViewBinder<T> match(TypeMatcher<T> typeMatcher) {
         MultiViewBinder<T> viewBinder = new MultiViewBinder<>(mBeanClass, mViewBinderList, typeMatcher);
-        mMultiTypeAdapter.registerViewBinder(viewBinder);
+        mMultiTypeAdapter.register(viewBinder);
         return viewBinder;
     }
 }
