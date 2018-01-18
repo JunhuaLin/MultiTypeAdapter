@@ -11,7 +11,7 @@ import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
 import cn.junhua.android.adapter.binder.MultiViewBinder;
-import cn.junhua.android.adapter.binder.ViewBinder;
+import cn.junhua.android.adapter.ViewBinder;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;

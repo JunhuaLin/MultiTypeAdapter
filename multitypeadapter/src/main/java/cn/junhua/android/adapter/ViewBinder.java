@@ -1,6 +1,5 @@
-package cn.junhua.android.adapter.binder;
+package cn.junhua.android.adapter;
 
-import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,66 +8,54 @@ import android.support.v7.widget.RecyclerView;
  * the base class for binding view.
  * Created by junhua.lin on 2017/12/27.
  */
-@SuppressWarnings("unchecked")
 public abstract class ViewBinder<T> {
 
     private Class<T> mBeanClass;
+    private MultiTypeAdapter mAdapter;
 
     public ViewBinder(Class<T> clazz) {
         this.mBeanClass = clazz;
     }
 
-    public final Class<T> getBeanClass() {
+    public void setAdapter(MultiTypeAdapter mAdapter) {
+        this.mAdapter = mAdapter;
+    }
+
+    public final MultiTypeAdapter getAdapter() {
+        return mAdapter;
+    }
+
+    final Class<T> getBeanClass() {
         return mBeanClass;
-    }
-
-    public Context getContext() {
-        return null;
-    }
-
-
-    public int performCountView(Object bean, int position) {
-        return onCountView((T) bean, position);
     }
 
     public int onCountView(T bean, int position) {
         return 6;
     }
 
-    public @LayoutRes
-    int performCreateItemView(Object bean, int position) {
-        return onCreateItemView((T) bean, position);
-    }
-
+    /**
+     * @return layout id
+     */
     public abstract @LayoutRes
     int onCreateItemView(T bean, int position);
 
-
-    public void performBindView(ViewHolder holder, Object bean, int position) {
-        onBindView(holder, (T) bean, position);
-    }
-
     public abstract void onBindView(ViewHolder holder, T bean, int position);
 
-    public long performGetItemId(@NonNull Object bean) {
-        return getItemId((T) bean);
-    }
-
-    public long getItemId(@NonNull T bean) {
+    protected long getItemId(@NonNull T bean) {
         return RecyclerView.NO_ID;
     }
 
-    public void onViewRecycled(ViewHolder holder) {
+    protected void onViewRecycled(ViewHolder holder) {
     }
 
-    public boolean onFailedToRecycleView(ViewHolder holder) {
+    protected boolean onFailedToRecycleView(ViewHolder holder) {
         return false;
     }
 
-    public void onViewAttachedToWindow(ViewHolder holder) {
+    protected void onViewAttachedToWindow(ViewHolder holder) {
     }
 
-    public void onViewDetachedFromWindow(ViewHolder holder) {
+    protected void onViewDetachedFromWindow(ViewHolder holder) {
     }
 
     @Override

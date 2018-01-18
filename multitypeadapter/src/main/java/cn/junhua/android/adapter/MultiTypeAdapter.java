@@ -2,7 +2,6 @@ package cn.junhua.android.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,8 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import cn.junhua.android.adapter.binder.OneToManyBuilder;
-import cn.junhua.android.adapter.binder.ViewBinder;
-import cn.junhua.android.adapter.binder.ViewHolder;
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 
@@ -22,6 +19,7 @@ import cn.junhua.android.adapter.imp.OneToManyMapper;
  * a common adapter for RecyclerView on Android
  * created by linjunhua on 2016/5/18 0026.
  */
+@SuppressWarnings("unused")
 public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     // data res
     private List<?> mList;
@@ -41,6 +39,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         if (viewBinder == null) {
             return;
         }
+        viewBinder.setAdapter(this);
         mViewBinderMap.put(viewBinder.getBeanClass(), viewBinder);
     }
 
@@ -79,6 +78,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         return mList.size();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public int getItemViewType(int position) {
         Object bean = mList.get(position);
@@ -87,8 +87,8 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
             throw new ViewBinderNotFoundException(beanClass);
         }
         ViewBinder viewBinder = mViewBinderMap.get(beanClass);
-        mViewSizeTemp = viewBinder.performCountView(bean, position);
-        return viewBinder.performCreateItemView(bean, position);
+        mViewSizeTemp = viewBinder.onCountView(bean, position);
+        return viewBinder.onCreateItemView(bean, position);
     }
 
     @Override
@@ -96,15 +96,17 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         return new ViewHolder(mLayoutInflater.inflate(viewType, parent, false), mViewSizeTemp);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Object bean = mList.get(position);
-        mViewBinderMap.get(bean.getClass()).performBindView(holder, bean, position);
+        mViewBinderMap.get(bean.getClass()).onBindView(holder, bean, position);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public long getItemId(int position) {
-        return getCurrentViewBinder(position).performGetItemId(mList.get(position));
+        return getCurrentViewBinder(position).getItemId(mList.get(position));
     }
 
     @Override

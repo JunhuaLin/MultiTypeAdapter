@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.junhua.android.adapter.ViewBinder;
+import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 
@@ -28,17 +30,17 @@ public class MultiViewBinder<T> extends ViewBinder<T> {
 
     @Override
     public int onCountView(T bean, int position) {
-        return getViewBinder(bean, position).performCountView(bean, position);
+        return getViewBinder(bean, position).onCountView(bean, position);
     }
 
     @Override
     public int onCreateItemView(T bean, int position) {
-        return getViewBinder(bean, position).performCreateItemView(bean, position);
+        return getViewBinder(bean, position).onCreateItemView(bean, position);
     }
 
     @Override
     public void onBindView(ViewHolder holder, T bean, int position) {
-        getViewBinder(bean, position).performBindView(holder, bean, position);
+        getViewBinder(bean, position).onBindView(holder, bean, position);
     }
 
     private ViewBinder<T> getViewBinder(T bean, int position) {

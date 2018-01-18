@@ -1,6 +1,7 @@
 package cn.junhua.android.commonadapter.binder.taobao;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -8,7 +9,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
 import cn.junhua.android.adapter.binder.SingleViewBinder;
-import cn.junhua.android.adapter.binder.ViewHolder;
+import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
 
@@ -16,9 +17,9 @@ import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
  * 淘宝banner
  * Created by junhua.lin on 2017/12/29.
  */
-public class BannerViewHinder extends SingleViewBinder<BannerBean> {
+public class BannerViewBinder extends SingleViewBinder<BannerBean> {
 
-    public BannerViewHinder() {
+    public BannerViewBinder() {
         super(BannerBean.class, R.layout.binder_banner);
     }
 
@@ -45,5 +46,30 @@ public class BannerViewHinder extends SingleViewBinder<BannerBean> {
         banner.setImages(bean.getUrlList());
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    @Override
+    protected long getItemId(@NonNull BannerBean bean) {
+        return super.getItemId(bean);
+    }
+
+    @Override
+    protected void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
+    @Override
+    protected boolean onFailedToRecycleView(ViewHolder holder) {
+        return super.onFailedToRecycleView(holder);
+    }
+
+    @Override
+    protected void onViewAttachedToWindow(ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+    }
+
+    @Override
+    protected void onViewDetachedFromWindow(ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
     }
 }

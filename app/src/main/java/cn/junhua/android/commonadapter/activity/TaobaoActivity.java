@@ -16,7 +16,7 @@ import cn.junhua.android.commonadapter.bean.taobao.BigTitleBean;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 import cn.junhua.android.commonadapter.bean.taobao.LikeBean;
 import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
-import cn.junhua.android.commonadapter.binder.taobao.BannerViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.BannerViewBinder;
 import cn.junhua.android.commonadapter.binder.taobao.GoodsShowViewHinder;
 import cn.junhua.android.commonadapter.binder.taobao.LikeViewHinder;
 import cn.junhua.android.commonadapter.binder.taobao.MenuViewHinder;
@@ -67,7 +67,7 @@ public class TaobaoActivity extends AppCompatActivity {
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter(this);
         //注册ViewBinder
-        multiTypeAdapter.register(new BannerViewHinder());
+        multiTypeAdapter.register(new BannerViewBinder());
         multiTypeAdapter.register(new MenuViewHinder());
         multiTypeAdapter.register(new LikeViewHinder());
         multiTypeAdapter.register(new GoodsShowViewHinder());

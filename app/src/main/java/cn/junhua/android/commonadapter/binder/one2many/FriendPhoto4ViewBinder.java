@@ -1,6 +1,6 @@
 package cn.junhua.android.commonadapter.binder.one2many;
 
-import cn.junhua.android.adapter.binder.ViewHolder;
+import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
 

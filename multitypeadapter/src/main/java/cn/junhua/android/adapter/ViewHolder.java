@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter.binder;
+package cn.junhua.android.adapter;
 
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 /**
  * the common ViewHolder
  */
+@SuppressWarnings({"unused", "unchecked"})
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
@@ -22,7 +23,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         this.mConvertView = root;
     }
 
-    @SuppressWarnings("unchecked")
     public <T extends View> T findView(@IdRes int viewId) {
         View view = mViews.get(viewId);
         if (view == null) {
