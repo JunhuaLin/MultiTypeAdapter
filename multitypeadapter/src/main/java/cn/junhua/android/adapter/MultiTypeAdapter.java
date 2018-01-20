@@ -52,7 +52,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
             return;
         }
         for (ViewBinder vb : viewBinderCollection) {
-            mViewBinderMap.put(vb.getBeanClass(), vb);
+            register(vb);
         }
     }
 
