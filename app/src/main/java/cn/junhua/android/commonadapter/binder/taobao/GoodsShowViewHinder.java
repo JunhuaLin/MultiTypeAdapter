@@ -4,7 +4,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.binder.SingleViewBinder;
+import cn.junhua.android.adapter.SingleViewBinder;
 import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;

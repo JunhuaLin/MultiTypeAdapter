@@ -11,18 +11,22 @@ import android.support.v7.widget.RecyclerView;
 public abstract class ViewBinder<T> {
 
     private Class<T> mBeanClass;
-    private MultiTypeAdapter mAdapter;
+    private MultiTypeAdapter adapter;
 
     public ViewBinder(Class<T> clazz) {
         this.mBeanClass = clazz;
     }
 
-    public void setAdapter(MultiTypeAdapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public final MultiTypeAdapter getAdapter() {
+        if (adapter == null) {
+            throw new IllegalStateException("ItemViewBinder " + this + " not attached to MultiTypeAdapter. " +
+                    "You should not call the method before registering the binder.");
+        }
+        return adapter;
     }
 
-    public final MultiTypeAdapter getAdapter() {
-        return mAdapter;
+    void setAdapter(MultiTypeAdapter adapter) {
+        this.adapter = adapter;
     }
 
     final Class<T> getBeanClass() {

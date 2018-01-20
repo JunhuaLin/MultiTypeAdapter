@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.junhua.android.adapter.binder.OneToManyBuilder;
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 
@@ -21,6 +20,7 @@ import cn.junhua.android.adapter.imp.OneToManyMapper;
  */
 @SuppressWarnings("unused")
 public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private static final String TAG = MultiTypeAdapter.class.getSimpleName();
     // data res
     private List<?> mList;
     private LayoutInflater mLayoutInflater;
@@ -29,16 +29,22 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     // count view
     private int mViewSizeTemp;
 
-    public MultiTypeAdapter(Context context) {
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public MultiTypeAdapter() {
         mViewBinderMap = new HashMap<>(3);
         mList = Collections.emptyList();
     }
 
+    /**
+     * @see cn.junhua.android.adapter.MultiTypeAdapter#MultiTypeAdapter()
+     */
+    @Deprecated
+    public MultiTypeAdapter(Context context) {
+        this();
+        mLayoutInflater = LayoutInflater.from(context);
+    }
+
     public void register(ViewBinder viewBinder) {
-        if (viewBinder == null) {
-            return;
-        }
+        if (viewBinder == null) return;
         viewBinder.setAdapter(this);
         mViewBinderMap.put(viewBinder.getBeanClass(), viewBinder);
     }
@@ -48,19 +54,14 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public void register(Collection<? extends ViewBinder> viewBinderCollection) {
-        if (viewBinderCollection == null) {
-            return;
-        }
+        if (viewBinderCollection == null) return;
         for (ViewBinder vb : viewBinderCollection) {
             register(vb);
         }
     }
 
-
     public void unregister(ViewBinder viewBinder) {
-        if (viewBinder == null) {
-            return;
-        }
+        if (viewBinder == null) return;
         mViewBinderMap.remove(viewBinder.getBeanClass());
     }
 
@@ -93,7 +94,12 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(mLayoutInflater.inflate(viewType, parent, false), mViewSizeTemp);
+        if (mLayoutInflater == null) {
+            mLayoutInflater = LayoutInflater.from(parent.getContext());
+        }
+        return new ViewHolder(
+                mLayoutInflater.inflate(viewType, parent, false),
+                parent, mViewSizeTemp);
     }
 
     @SuppressWarnings("unchecked")

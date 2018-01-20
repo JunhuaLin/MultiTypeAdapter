@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_basis).setOnClickListener(this);
         findViewById(R.id.btn_taobao).setOnClickListener(this);
         findViewById(R.id.btn_one2many).setOnClickListener(this);
     }
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         Class target = null;
         switch (v.getId()) {
+            case R.id.btn_basis:
+                target = BasisActivity.class;
+                break;
             case R.id.btn_one2many:
                 target = One2ManyActivity.class;
                 break;

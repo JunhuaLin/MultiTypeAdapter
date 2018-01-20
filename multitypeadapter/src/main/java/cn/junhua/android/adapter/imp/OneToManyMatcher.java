@@ -1,6 +1,6 @@
 package cn.junhua.android.adapter.imp;
 
-import cn.junhua.android.adapter.binder.MultiViewBinder;
+import cn.junhua.android.adapter.MultiViewBinder;
 
 /**
  * OneToManyMatcher

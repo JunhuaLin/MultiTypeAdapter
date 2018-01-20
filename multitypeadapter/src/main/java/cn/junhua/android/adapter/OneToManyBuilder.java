@@ -1,11 +1,9 @@
-package cn.junhua.android.adapter.binder;
+package cn.junhua.android.adapter;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import cn.junhua.android.adapter.MultiTypeAdapter;
-import cn.junhua.android.adapter.ViewBinder;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
@@ -36,7 +34,6 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
     @Override
     public MultiViewBinder<T> match(TypeMatcher<T> typeMatcher) {
         MultiViewBinder<T> viewBinder = new MultiViewBinder<>(mBeanClass, mViewBinderList, typeMatcher);
-        viewBinder.setAdapter(mMultiTypeAdapter);
         mMultiTypeAdapter.register(viewBinder);
         return viewBinder;
     }

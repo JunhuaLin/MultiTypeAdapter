@@ -6,6 +6,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,11 +17,13 @@ import android.widget.TextView;
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
+    private RecyclerView mRecyclerView;
 
-    public ViewHolder(View root, int initialCapacity) {
+    public ViewHolder(View root, ViewGroup parent, int initialCapacity) {
         super(root);
         this.mViews = new SparseArray<>(initialCapacity >= 0 ? initialCapacity : 6);
         this.mConvertView = root;
+        this.mRecyclerView = (RecyclerView) parent;
     }
 
     public <T extends View> T findView(@IdRes int viewId) {
@@ -30,6 +33,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             mViews.put(viewId, view);
         }
         return (T) view;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
     }
 
     public ViewHolder setText(@IdRes int viewId, String text) {

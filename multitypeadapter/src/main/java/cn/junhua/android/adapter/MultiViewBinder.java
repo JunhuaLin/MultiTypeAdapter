@@ -1,12 +1,10 @@
-package cn.junhua.android.adapter.binder;
+package cn.junhua.android.adapter;
 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.junhua.android.adapter.ViewBinder;
-import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 
@@ -26,6 +24,14 @@ public class MultiViewBinder<T> extends ViewBinder<T> {
             mViewBinderManager.put(viewBinder.getClass(), viewBinder);
         }
         mTypeMatcher = matchViewBinder;
+    }
+
+    @Override
+    void setAdapter(MultiTypeAdapter adapter) {
+        super.setAdapter(adapter);
+        for (ViewBinder vb : mViewBinderManager.values()) {
+            vb.setAdapter(adapter);
+        }
     }
 
     @Override

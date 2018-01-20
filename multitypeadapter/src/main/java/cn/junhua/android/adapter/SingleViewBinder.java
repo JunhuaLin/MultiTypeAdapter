@@ -1,4 +1,4 @@
-package cn.junhua.android.adapter.binder;
+package cn.junhua.android.adapter;
 
 
 import cn.junhua.android.adapter.ViewBinder;

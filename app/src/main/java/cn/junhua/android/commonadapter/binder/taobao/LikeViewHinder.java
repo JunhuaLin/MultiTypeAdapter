@@ -2,7 +2,7 @@ package cn.junhua.android.commonadapter.binder.taobao;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.binder.SingleViewBinder;
+import cn.junhua.android.adapter.SingleViewBinder;
 import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.LikeBean;

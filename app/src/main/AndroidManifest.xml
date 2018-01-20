@@ -27,6 +27,11 @@
             android:name=".activity.TaobaoActivity"
             android:label="@string/taobao"
             android:launchMode="singleTop" />
+
+        <activity
+            android:name=".activity.BasisActivity"
+            android:label="@string/basis"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

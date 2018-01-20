@@ -5,7 +5,7 @@ import android.support.annotation.IdRes;
 import android.view.View;
 import android.widget.ImageView;
 
-import cn.junhua.android.adapter.binder.SingleViewBinder;
+import cn.junhua.android.adapter.SingleViewBinder;
 import cn.junhua.android.adapter.ViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
@@ -23,6 +23,11 @@ public abstract class FriendPhotoViewBinder extends SingleViewBinder<FriendBean>
     @Override
     public int onCountView(FriendBean bean, int position) {
         return 3 + bean.getPhotos().size();
+    }
+
+    @Override
+    protected void onViewAttachedToWindow(ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
     }
 
     @Override

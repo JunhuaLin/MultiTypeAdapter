@@ -24,6 +24,7 @@ import cn.junhua.android.commonadapter.binder.taobao.BigTitleViewHinder;
 import cn.junhua.android.commonadapter.imp.SpanSize;
 
 /**
+ * 淘宝首页
  * Created by junhua.lin on 2017/12/29.
  */
 public class TaobaoActivity extends AppCompatActivity {
@@ -65,7 +66,7 @@ public class TaobaoActivity extends AppCompatActivity {
         recycler_view.setLayoutManager(gridLayoutManager);
 
         //初始化MultiTypeAdapter
-        multiTypeAdapter = new MultiTypeAdapter(this);
+        multiTypeAdapter = new MultiTypeAdapter();
         //注册ViewBinder
         multiTypeAdapter.register(new BannerViewBinder());
         multiTypeAdapter.register(new MenuViewHinder());

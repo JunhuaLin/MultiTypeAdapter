@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
-import cn.junhua.android.adapter.binder.MultiViewBinder;
+import cn.junhua.android.adapter.MultiViewBinder;
 import cn.junhua.android.adapter.ViewBinder;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.commonadapter.R;
@@ -20,7 +20,7 @@ import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto3ViewBinder;
 import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto4ViewBinder;
 
 /**
- * MultiTypeAdapter demo
+ * 朋友圈效果
  * Created by junhua on 17-3-15.
  */
 
