@@ -133,7 +133,26 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 #### c.效果图jpg
 ![基础用法](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/基础用法.jpg)
 
-### 3.更多实例展示
+#### 3.UML以及更多方法
+![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml.png)
+
+ViewHolder：
+>public <T extends View> T findView(@IdRes int viewId)
+>public RecyclerView getRecyclerView()
+>public ViewHolder setText(@IdRes int viewId, String text)
+>public ViewHolder setText(@IdRes int viewId, @StringRes int resId)
+>public ViewHolder setImageResource(@IdRes int imageViewId, @DrawableRes int drawableId) 
+>public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId)
+
+BinderView：
+>protected long getItemId(@NonNull T bean) 
+>protected void onViewRecycled(ViewHolder holder) 
+>protected boolean onFailedToRecycleView(ViewHolder holder)
+>protected void onViewAttachedToWindow(ViewHolder holder)
+>protected void onViewDetachedFromWindow(ViewHolder holder)
+
+
+### 4.更多实例展示
 
 #### 淘宝首页效果（基本用法） 效果图gif
 ![淘宝首页效果](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/淘宝首页.gif)
