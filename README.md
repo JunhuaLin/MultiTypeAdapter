@@ -44,8 +44,8 @@ public class BasisTextBean {
     private String text = "BasisTextBean.class";
 }
 ```
-
 2.创建布局文件（略）
+
 3.创建ViewBinder
 ```java
 public class ImgBinderView extends SingleViewBinder<BasisImgBean> {
