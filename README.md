@@ -137,20 +137,23 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 ![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml.png)
 
 ViewHolder：
->public <T extends View> T findView(@IdRes int viewId)
->public RecyclerView getRecyclerView()
->public ViewHolder setText(@IdRes int viewId, String text)
->public ViewHolder setText(@IdRes int viewId, @StringRes int resId)
->public ViewHolder setImageResource(@IdRes int imageViewId, @DrawableRes int drawableId) 
->public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId)
+```java
+public <T extends View> T findView(@IdRes int viewId)
+public RecyclerView getRecyclerView()
+public ViewHolder setText(@IdRes int viewId, String text)
+public ViewHolder setText(@IdRes int viewId, @StringRes int resId)
+public ViewHolder setImageResource(@IdRes int imageViewId, @DrawableRes int drawableId) 
+public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId)
+```
 
 BinderView：
->protected long getItemId(@NonNull T bean) 
->protected void onViewRecycled(ViewHolder holder) 
->protected boolean onFailedToRecycleView(ViewHolder holder)
->protected void onViewAttachedToWindow(ViewHolder holder)
->protected void onViewDetachedFromWindow(ViewHolder holder)
-
+```java
+protected long getItemId(@NonNull T bean) 
+protected void onViewRecycled(ViewHolder holder) 
+protected boolean onFailedToRecycleView(ViewHolder holder)
+protected void onViewAttachedToWindow(ViewHolder holder)
+protected void onViewDetachedFromWindow(ViewHolder holder)
+```
 
 ### 4.更多实例展示
 
