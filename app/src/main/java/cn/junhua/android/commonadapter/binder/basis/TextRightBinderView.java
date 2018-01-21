@@ -19,6 +19,11 @@ public class TextRightBinderView extends SingleViewBinder<BasisTextBean> {
     }
 
     @Override
+    public int onCountView(BasisTextBean bean, int position) {
+        return 3;
+    }
+
+    @Override
     public void onBindView(ViewHolder holder, BasisTextBean bean, final int position) {
         holder.setText(R.id.tv_type_right, "R.layout.binder_right_text")
                 .setText(R.id.tv_class_right, bean.getText());
