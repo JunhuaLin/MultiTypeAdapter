@@ -18,15 +18,15 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
     private Class<T> mBeanClass;
     private List<ViewBinder<T>> mViewBinderList;
 
-    public OneToManyBuilder(MultiTypeAdapter mMultiTypeAdapter, Class<T> mBeanClass) {
+    OneToManyBuilder(MultiTypeAdapter mMultiTypeAdapter, Class<T> mBeanClass) {
         this.mMultiTypeAdapter = mMultiTypeAdapter;
         this.mBeanClass = mBeanClass;
         mViewBinderList = Collections.emptyList();
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public OneToManyMatcher<T> mapping(ViewBinder<T>... viewBinderList) {
+    @SafeVarargs
+    public final OneToManyMatcher<T> mapping(ViewBinder<T>... viewBinderList) {
         mViewBinderList = Arrays.asList(viewBinderList);
         return this;
     }
