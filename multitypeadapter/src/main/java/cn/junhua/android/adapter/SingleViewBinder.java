@@ -1,8 +1,6 @@
 package cn.junhua.android.adapter;
 
 
-import cn.junhua.android.adapter.ViewBinder;
-
 /**
  * SingleViewBinder
  * Created by junhua.lin on 2017/12/28.
