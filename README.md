@@ -30,6 +30,9 @@ dependencies {
     - 多布局条目：创建多布局条目使用MultiViewBinder组合多个单布局条目即可。
 4. 创建MultiTypeAdapter并注册ViewBinder。
 
+关系图：
+![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
+
 注：具体细节参考**实例展示**或者查看**源代码**。
 
 #### b.实例
