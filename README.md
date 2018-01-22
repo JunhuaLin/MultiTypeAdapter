@@ -104,7 +104,7 @@ SingleViewBinder方法介绍：
 
 >public int onCountView(Item1 bean, int position)
 
-该方法返回用于初始化该布局View缓存的初始值，默认值为6，建议重写避免扩容和内存浪费。
+该方法返回用于初始化该布局View缓存大小的初始值，默认值为6，建议重写避免扩容和内存浪费。
 
 >public void onBindView(ViewHolder holder, Item1 bean, int position)
 
