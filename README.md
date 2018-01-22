@@ -165,4 +165,6 @@ protected void onViewDetachedFromWindow(ViewHolder holder)
 
 ## 结语
 
+感谢drakeet，部分优化参考[MultiType](https://github.com/drakeet/MultiType).
+
 欢迎PR 和 Issues。
