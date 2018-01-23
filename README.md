@@ -151,6 +151,7 @@ public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int draw
 
 BinderView：
 ```java
+public final MultiTypeAdapter getAdapter()
 protected long getItemId(@NonNull T bean) 
 protected void onViewRecycled(ViewHolder holder) 
 protected boolean onFailedToRecycleView(ViewHolder holder)
