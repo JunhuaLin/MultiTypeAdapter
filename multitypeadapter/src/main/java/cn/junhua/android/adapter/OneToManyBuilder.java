@@ -1,12 +1,10 @@
 package cn.junhua.android.adapter;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import android.support.annotation.CheckResult;
 
-import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
+import cn.junhua.android.adapter.imp.TypeMatcher;
 
 /**
  * MultiTypeViewBinder Builder
@@ -16,18 +14,21 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
 
     private MultiTypeAdapter mMultiTypeAdapter;
     private Class<T> mBeanClass;
-    private List<ViewBinder<T>> mViewBinderList;
+    private ViewBinder<T>[] mViewBinderList;
 
     OneToManyBuilder(MultiTypeAdapter mMultiTypeAdapter, Class<T> mBeanClass) {
         this.mMultiTypeAdapter = mMultiTypeAdapter;
         this.mBeanClass = mBeanClass;
-        mViewBinderList = Collections.emptyList();
     }
 
     @Override
+    @CheckResult
     @SafeVarargs
     public final OneToManyMatcher<T> mapping(ViewBinder<T>... viewBinderList) {
-        mViewBinderList = Arrays.asList(viewBinderList);
+        if (viewBinderList == null) {
+            throw new NullPointerException();
+        }
+        mViewBinderList = viewBinderList;
         return this;
     }
 

@@ -1,6 +1,5 @@
 package cn.junhua.android.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import cn.junhua.android.adapter.imp.OneToManyMapper;
  * a common adapter for RecyclerView on Android
  * created by linjunhua on 2016/5/18 0026.
  */
-@SuppressWarnings("unused")
 public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     private static final String TAG = MultiTypeAdapter.class.getSimpleName();
     // data res
@@ -32,15 +30,6 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     public MultiTypeAdapter() {
         mViewBinderMap = new HashMap<>(3);
         mList = Collections.emptyList();
-    }
-
-    /**
-     * @see cn.junhua.android.adapter.MultiTypeAdapter#MultiTypeAdapter()
-     */
-    @Deprecated
-    public MultiTypeAdapter(Context context) {
-        this();
-        mLayoutInflater = LayoutInflater.from(context);
     }
 
     public void register(ViewBinder viewBinder) {

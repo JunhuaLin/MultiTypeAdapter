@@ -2,7 +2,6 @@ package cn.junhua.android.adapter;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
@@ -17,9 +16,9 @@ public class MultiViewBinder<T> extends ViewBinder<T> {
     private TypeMatcher<T> mTypeMatcher;
 
 
-    public MultiViewBinder(Class<T> beanClass, List<ViewBinder<T>> viewBinderList, TypeMatcher<T> matchViewBinder) {
+    MultiViewBinder(Class<? extends T> beanClass, ViewBinder<T>[] viewBinderList, TypeMatcher<T> matchViewBinder) {
         super(beanClass);
-        mViewBinderManager = new HashMap<>(viewBinderList.size());
+        mViewBinderManager = new HashMap<>(viewBinderList.length);
         for (ViewBinder<T> viewBinder : viewBinderList) {
             mViewBinderManager.put(viewBinder.getClass(), viewBinder);
         }

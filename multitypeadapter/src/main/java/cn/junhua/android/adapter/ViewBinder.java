@@ -10,10 +10,10 @@ import android.support.v7.widget.RecyclerView;
  */
 public abstract class ViewBinder<T> {
 
-    private Class<T> mBeanClass;
+    private Class<? extends T> mBeanClass;
     private MultiTypeAdapter adapter;
 
-    public ViewBinder(Class<T> clazz) {
+    public ViewBinder(Class<? extends T> clazz) {
         this.mBeanClass = clazz;
     }
 
@@ -29,7 +29,7 @@ public abstract class ViewBinder<T> {
         this.adapter = adapter;
     }
 
-    final Class<T> getBeanClass() {
+    final Class<? extends T> getBeanClass() {
         return mBeanClass;
     }
 
