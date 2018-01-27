@@ -31,9 +31,11 @@ dependencies {
 4. 创建MultiTypeAdapter并注册ViewBinder。
 
 关系图：
+
 ![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
 
 UML图：
+
 ![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml图.png)
 
 
