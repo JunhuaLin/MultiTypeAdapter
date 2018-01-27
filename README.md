@@ -33,6 +33,10 @@ dependencies {
 关系图：
 ![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
 
+UML图：
+![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml图.png)
+
+
 注：具体细节参考**实例展示**或者查看**源代码**。
 
 #### b.实例
@@ -136,8 +140,7 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 #### c.效果图jpg
 ![基础用法](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/基础用法.jpg)
 
-### 3.UML以及更多方法
-![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml图.png)
+### 3.更多方法
 
 ViewHolder：
 ```java
