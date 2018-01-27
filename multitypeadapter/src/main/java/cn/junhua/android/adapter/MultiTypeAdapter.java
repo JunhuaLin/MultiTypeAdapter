@@ -98,10 +98,9 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
         mViewBinderMap.get(bean.getClass()).onBindView(holder, bean, position);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public long getItemId(int position) {
-        return getCurrentViewBinder(position).getItemId(mList.get(position));
+        return getCurrentViewBinder(position).getItemId(position);
     }
 
     @Override

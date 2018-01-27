@@ -1,7 +1,6 @@
 package cn.junhua.android.commonadapter.binder.taobao;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -49,8 +48,8 @@ public class BannerViewBinder extends SingleViewBinder<BannerBean> {
     }
 
     @Override
-    protected long getItemId(@NonNull BannerBean bean) {
-        return super.getItemId(bean);
+    protected long getItemId(int position) {
+        return super.getItemId(position);
     }
 
     @Override

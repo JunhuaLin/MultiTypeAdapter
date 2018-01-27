@@ -31,7 +31,7 @@ dependencies {
 4. 创建MultiTypeAdapter并注册ViewBinder。
 
 关系图：
-![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图1.png)
+![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
 
 注：具体细节参考**实例展示**或者查看**源代码**。
 
@@ -137,7 +137,7 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 ![基础用法](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/基础用法.jpg)
 
 ### 3.UML以及更多方法
-![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/uml.png)
+![UML](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/UML.png)
 
 ViewHolder：
 ```java
@@ -152,7 +152,7 @@ public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int draw
 BinderView：
 ```java
 public final MultiTypeAdapter getAdapter()
-protected long getItemId(@NonNull T bean) 
+protected long getItemId(int position)
 protected void onViewRecycled(ViewHolder holder) 
 protected boolean onFailedToRecycleView(ViewHolder holder)
 protected void onViewAttachedToWindow(ViewHolder holder)

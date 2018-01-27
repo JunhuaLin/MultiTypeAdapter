@@ -1,7 +1,6 @@
 package cn.junhua.android.adapter;
 
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -19,7 +18,7 @@ public abstract class ViewBinder<T> {
 
     public final MultiTypeAdapter getAdapter() {
         if (adapter == null) {
-            throw new IllegalStateException("ItemViewBinder " + this + " not attached to MultiTypeAdapter. " +
+            throw new IllegalStateException(getClass().getName() + " not attached to MultiTypeAdapter. " +
                     "You should not call the method before registering the binder.");
         }
         return adapter;
@@ -45,7 +44,7 @@ public abstract class ViewBinder<T> {
 
     public abstract void onBindView(ViewHolder holder, T bean, int position);
 
-    protected long getItemId(@NonNull T bean) {
+    protected long getItemId(int position) {
         return RecyclerView.NO_ID;
     }
 

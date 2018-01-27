@@ -5,8 +5,8 @@ rootProject.ext {
             applicationId    : "cn.junhua.android.commonadapter",
             minSdkVersion    : 14,
             targetSdkVersion : 27,
-            versionCode      : 8,
-            versionName      : "2.3.0"
+            versionCode      : 9,
+            versionName      : "2.3.1"
     ]
 
     supportVersion = "27.0.2"
