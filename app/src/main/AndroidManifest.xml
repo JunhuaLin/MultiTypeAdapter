@@ -32,6 +32,10 @@
             android:name=".activity.BasisActivity"
             android:label="@string/basis"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.DefaultViewBinderActivity"
+            android:label="@string/default_view_binder"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

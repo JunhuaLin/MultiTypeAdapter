@@ -20,12 +20,21 @@
         android:id="@+id/btn_taobao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/taobao" />
 
     <Button
         android:id="@+id/btn_one2many"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/one2many" />
+
+    <Button
+        android:id="@+id/btn_default_view_binder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/default_view_binder" />
 
 </LinearLayout>

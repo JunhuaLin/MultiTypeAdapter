@@ -32,7 +32,7 @@ dependencies {
 
 关系图：
 
-![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
+![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图1.png)
 
 UML图：
 
@@ -144,6 +144,14 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 
 ### 3.更多方法
 
+MultiTypeAdapter：
+```java
+public void setDefaultViewBinder(ViewBinder viewBinder)
+public void register(ViewBinder viewBinder)
+public <T> OneToManyMapper<T> register(Class<T> beanClass)
+public void unregister(ViewBinder viewBinder)
+```
+
 ViewHolder：
 ```java
 public <T extends View> T findView(@IdRes int viewId)
@@ -175,7 +183,5 @@ protected void onViewDetachedFromWindow(ViewHolder holder)
 ## 结语
 
 感谢drakeet，部分优化参考[MultiType](https://github.com/drakeet/MultiType).
-
-下步更新计划：可以自定义ViewHolder。
 
 欢迎PR 和 Issues。

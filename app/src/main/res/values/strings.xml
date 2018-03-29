@@ -3,4 +3,5 @@
     <string name="taobao">淘宝首页效果(基本用法)</string>
     <string name="one2many">朋友圈效果(一对多)</string>
     <string name="basis">用法展示</string>
+    <string name="default_view_binder">使用默认ViewBinder(基于淘宝首页)</string>
 </resources>

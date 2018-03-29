@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn_basis).setOnClickListener(this);
         findViewById(R.id.btn_taobao).setOnClickListener(this);
         findViewById(R.id.btn_one2many).setOnClickListener(this);
+        findViewById(R.id.btn_default_view_binder).setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_taobao:
                 target = TaobaoActivity.class;
+                break;
+            case R.id.btn_default_view_binder:
+                target = DefaultViewBinderActivity.class;
                 break;
         }
         intent.setClass(this, target);
