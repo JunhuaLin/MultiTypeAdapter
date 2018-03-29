@@ -26,10 +26,18 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Map<Class, ViewBinder> mViewBinderMap;
     // count view
     private int mViewSizeTemp;
+    // default ViewBinder
+    private ViewBinder mDefaultViewBinder;
 
     public MultiTypeAdapter() {
         mViewBinderMap = new HashMap<>(3);
         mList = Collections.emptyList();
+    }
+
+    public void setDefaultViewBinder(ViewBinder viewBinder) {
+        if (viewBinder == null) return;
+        viewBinder.setAdapter(this);
+        mDefaultViewBinder = viewBinder;
     }
 
     public void register(ViewBinder viewBinder) {
@@ -73,10 +81,14 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     public int getItemViewType(int position) {
         Object bean = mList.get(position);
         Class beanClass = bean.getClass();
-        if (!mViewBinderMap.containsKey(beanClass)) {
+        ViewBinder viewBinder;
+        if (mViewBinderMap.containsKey(beanClass)) {
+            viewBinder = mViewBinderMap.get(beanClass);
+        } else if (mDefaultViewBinder != null) {
+            viewBinder = mDefaultViewBinder;
+        } else {
             throw new ViewBinderNotFoundException(beanClass);
         }
-        ViewBinder viewBinder = mViewBinderMap.get(beanClass);
         mViewSizeTemp = viewBinder.onCountView(bean, position);
         return viewBinder.onCreateItemView(bean, position);
     }
@@ -95,7 +107,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Object bean = mList.get(position);
-        mViewBinderMap.get(bean.getClass()).onBindView(holder, bean, position);
+        getCurrentViewBinder(position).onBindView(holder, bean, position);
     }
 
     @Override
@@ -124,6 +136,10 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     private ViewBinder getCurrentViewBinder(int position) {
-        return mViewBinderMap.get(mList.get(position).getClass());
+        ViewBinder viewBinder = mViewBinderMap.get(mList.get(position).getClass());
+        if (viewBinder == null) {
+            viewBinder = mDefaultViewBinder;
+        }
+        return viewBinder;
     }
 }
