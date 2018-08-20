@@ -3,6 +3,8 @@ package cn.junhua.android.adapter;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
 /**
  * the base class for binding view.
  * Created by junhua.lin on 2017/12/27.
@@ -41,6 +43,10 @@ public abstract class ViewBinder<T> {
      */
     public abstract @LayoutRes
     int onCreateItemView(T bean, int position);
+
+    public void onBindView(ViewHolder holder, T bean, int position, List<Object> payloads) {
+        onBindView(holder, bean, position);
+    }
 
     public abstract void onBindView(ViewHolder holder, T bean, int position);
 

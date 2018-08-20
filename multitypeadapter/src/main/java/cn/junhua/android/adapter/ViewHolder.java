@@ -18,11 +18,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
     private RecyclerView mRecyclerView;
+    private ViewBinder mViewBinder;
 
-    public ViewHolder(View root, ViewGroup parent, int initialCapacity) {
+    public ViewHolder(View root, ViewGroup parent, ViewBinder viewBinder, int initialCapacity) {
         super(root);
         this.mViews = new SparseArray<>(initialCapacity >= 0 ? initialCapacity : 6);
         this.mConvertView = root;
+        this.mViewBinder = viewBinder;
         this.mRecyclerView = (RecyclerView) parent;
     }
 
@@ -62,4 +64,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public ViewBinder getViewBinder() {
+        return mViewBinder;
+    }
 }

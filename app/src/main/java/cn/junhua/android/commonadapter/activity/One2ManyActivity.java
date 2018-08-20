@@ -1,14 +1,13 @@
 package cn.junhua.android.commonadapter.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
-import cn.junhua.android.adapter.ViewBinder;
-import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
 import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto1ViewBinder;
@@ -40,19 +39,18 @@ public class One2ManyActivity extends AppCompatActivity {
                 .mapping(new FriendPhoto1ViewBinder(),
                         new FriendPhoto3ViewBinder(),
                         new FriendPhoto4ViewBinder())
-                .match(new TypeMatcher<FriendBean>() {
-                    @Override
-                    public Class<? extends ViewBinder<FriendBean>> onMatch(FriendBean bean, int position) {
-                        int size = bean.getPhotos().size();
-                        if (size == 0 || size == 1) return FriendPhoto1ViewBinder.class;
-                        if (size == 4) return FriendPhoto4ViewBinder.class;
-                        return FriendPhoto3ViewBinder.class;
-                    }
+                .match((bean, position) -> {
+                    int size = bean.getPhotos().size();
+                    if (size == 0 || size == 1) return FriendPhoto1ViewBinder.class;
+                    if (size == 4) return FriendPhoto4ViewBinder.class;
+                    return FriendPhoto3ViewBinder.class;
                 });
 
         mMultiTypeAdapter.setList(FriendBean.getRandomFriend());
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recycler_view.setAdapter(mMultiTypeAdapter);
+
+        new Handler().postDelayed(() -> mMultiTypeAdapter.notifyDataSetChanged(), 3000);
     }
 }
