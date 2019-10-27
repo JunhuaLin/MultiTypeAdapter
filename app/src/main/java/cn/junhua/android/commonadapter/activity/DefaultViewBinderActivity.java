@@ -17,10 +17,10 @@ import cn.junhua.android.commonadapter.bean.taobao.BigTitleBean;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 import cn.junhua.android.commonadapter.bean.taobao.LikeBean;
 import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
-import cn.junhua.android.commonadapter.binder.defaults.DefaultViewBinder;
-import cn.junhua.android.commonadapter.binder.taobao.BigTitleViewHinder;
-import cn.junhua.android.commonadapter.binder.taobao.GoodsShowViewHinder;
-import cn.junhua.android.commonadapter.binder.taobao.MenuViewHinder;
+import cn.junhua.android.commonadapter.binder.defaults.DefaultItemViewBinder;
+import cn.junhua.android.commonadapter.binder.taobao.BigTitleItemViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.GoodsShowItemViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.MenuItemViewHinder;
 
 /**
  * 淘宝首页
@@ -58,10 +58,10 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter();
         //注册ViewBinder
-        multiTypeAdapter.register(new MenuViewHinder());
-        multiTypeAdapter.register(new GoodsShowViewHinder());
-        multiTypeAdapter.register(new BigTitleViewHinder());
-        multiTypeAdapter.setDefaultViewBinder(new DefaultViewBinder());
+        multiTypeAdapter.register(MenuBean.class, new MenuItemViewHinder());
+        multiTypeAdapter.register(GoodsShowBean.class, new GoodsShowItemViewHinder());
+        multiTypeAdapter.register(BigTitleBean.class, new BigTitleItemViewHinder());
+        multiTypeAdapter.setDefaultViewBinder(new DefaultItemViewBinder());
 
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);

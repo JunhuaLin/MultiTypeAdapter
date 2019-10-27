@@ -1,12 +1,10 @@
 package cn.junhua.android.adapter.imp;
 
-import cn.junhua.android.adapter.MultiViewBinder;
-
 /**
  * OneToManyMatcher
  * Created by junhua.lin on 2017/12/28.
  */
 public interface OneToManyMatcher<T> {
 
-    MultiViewBinder<T> match(TypeMatcher<T> typeMatcher);
+    void match(TypeMatcher<T> typeMatcher);
 }

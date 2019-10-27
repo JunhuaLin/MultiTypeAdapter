@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import cn.junhua.android.adapter.MultiTypeAdapter;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
-import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto1ViewBinder;
-import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto3ViewBinder;
-import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto4ViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto1ItemViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto3ItemViewBinder;
+import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto4ItemViewBinder;
 
 /**
  * 朋友圈效果
@@ -36,14 +36,14 @@ public class One2ManyActivity extends AppCompatActivity {
         //注册ViewBinder
         //一对多条目注册
         mMultiTypeAdapter.register(FriendBean.class)
-                .mapping(new FriendPhoto1ViewBinder(),
-                        new FriendPhoto3ViewBinder(),
-                        new FriendPhoto4ViewBinder())
+                .mapping(new FriendPhoto1ItemViewBinder(),
+                        new FriendPhoto3ItemViewBinder(),
+                        new FriendPhoto4ItemViewBinder())
                 .match((bean, position) -> {
                     int size = bean.getPhotos().size();
-                    if (size == 0 || size == 1) return FriendPhoto1ViewBinder.class;
-                    if (size == 4) return FriendPhoto4ViewBinder.class;
-                    return FriendPhoto3ViewBinder.class;
+                    if (size == 0 || size == 1) return FriendPhoto1ItemViewBinder.class;
+                    if (size == 4) return FriendPhoto4ItemViewBinder.class;
+                    return FriendPhoto3ItemViewBinder.class;
                 });
 
         mMultiTypeAdapter.setList(FriendBean.getRandomFriend());

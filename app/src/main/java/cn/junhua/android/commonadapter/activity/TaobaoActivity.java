@@ -1,7 +1,6 @@
 package cn.junhua.android.commonadapter.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,11 +16,11 @@ import cn.junhua.android.commonadapter.bean.taobao.BigTitleBean;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 import cn.junhua.android.commonadapter.bean.taobao.LikeBean;
 import cn.junhua.android.commonadapter.bean.taobao.MenuBean;
-import cn.junhua.android.commonadapter.binder.taobao.BannerViewBinder;
-import cn.junhua.android.commonadapter.binder.taobao.GoodsShowViewHinder;
-import cn.junhua.android.commonadapter.binder.taobao.LikeViewHinder;
-import cn.junhua.android.commonadapter.binder.taobao.MenuViewHinder;
-import cn.junhua.android.commonadapter.binder.taobao.BigTitleViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.BannerItemViewBinder;
+import cn.junhua.android.commonadapter.binder.taobao.BigTitleItemViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.GoodsShowItemViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.LikeItemViewHinder;
+import cn.junhua.android.commonadapter.binder.taobao.MenuItemViewHinder;
 import cn.junhua.android.commonadapter.imp.SpanSize;
 
 /**
@@ -69,11 +68,11 @@ public class TaobaoActivity extends AppCompatActivity {
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter();
         //注册ViewBinder
-        multiTypeAdapter.register(new BannerViewBinder());
-        multiTypeAdapter.register(new MenuViewHinder());
-        multiTypeAdapter.register(new LikeViewHinder());
-        multiTypeAdapter.register(new GoodsShowViewHinder());
-        multiTypeAdapter.register(new BigTitleViewHinder());
+        multiTypeAdapter.register(BannerBean.class, new BannerItemViewBinder());
+        multiTypeAdapter.register(MenuBean.class, new MenuItemViewHinder());
+        multiTypeAdapter.register(LikeBean.class, new LikeItemViewHinder());
+        multiTypeAdapter.register(GoodsShowBean.class, new GoodsShowItemViewHinder());
+        multiTypeAdapter.register(BigTitleBean.class, new BigTitleItemViewHinder());
 
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);

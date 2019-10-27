@@ -4,63 +4,52 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import cn.junhua.android.adapter.exception.ViewBinderNotFoundException;
+import cn.junhua.android.adapter.imp.Matcher;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 
 /**
  * a common adapter for RecyclerView on Android
  * created by linjunhua on 2016/5/18 0026.
  */
-public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = MultiTypeAdapter.class.getSimpleName();
     // data res
     private List<?> mList;
     private LayoutInflater mLayoutInflater;
-    // save ViewBinder
-    private Map<Class, ViewBinder> mViewBinderMap;
-    // count view
-    private int mViewSizeTemp;
-    private ViewBinder mViewBinderTemp;
-    // default ViewBinder
-    private ViewBinder mDefaultViewBinder;
+
+    // save ItemViewBinder
+    private ViewTypeManager mViewTypeManager;
+    // default ItemViewBinder
+    private ItemViewBinder mDefaultItemViewBinder;
 
     public MultiTypeAdapter() {
-        mViewBinderMap = new HashMap<>(3);
+        mViewTypeManager = new ViewTypeManager();
         mList = Collections.emptyList();
     }
 
-    public void setDefaultViewBinder(ViewBinder viewBinder) {
-        if (viewBinder == null) return;
-        viewBinder.setAdapter(this);
-        mDefaultViewBinder = viewBinder;
+    public <T> void setDefaultViewBinder(ItemViewBinder<T, ?> binder) {
+        if (binder == null) return;
+        binder.adapter = this;
+        mDefaultItemViewBinder = binder;
     }
 
-    public void register(ViewBinder viewBinder) {
-        if (viewBinder == null) return;
-        viewBinder.setAdapter(this);
-        mViewBinderMap.put(viewBinder.getBeanClass(), viewBinder);
+    public <T> void register(Class<T> clazz, ItemViewBinder<T, ?> binder) {
+        if (binder == null) return;
+        register(new ViewType(clazz, binder));
+    }
+
+    public void register(ViewType viewType) {
+        if (viewType == null) return;
+        viewType.binder.adapter = this;
+        mViewTypeManager.add(viewType);
     }
 
     public <T> OneToManyMapper<T> register(Class<T> beanClass) {
         return new OneToManyBuilder<>(this, beanClass);
-    }
-
-    public void register(Collection<? extends ViewBinder> viewBinderCollection) {
-        if (viewBinderCollection == null) return;
-        for (ViewBinder vb : viewBinderCollection) {
-            register(vb);
-        }
-    }
-
-    public void unregister(ViewBinder viewBinder) {
-        if (viewBinder == null) return;
-        mViewBinderMap.remove(viewBinder.getBeanClass());
     }
 
     public List<?> getList() {
@@ -73,82 +62,94 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public int getItemCount() {
+    public final int getItemCount() {
         return mList.size();
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public int getItemViewType(int position) {
-        Object bean = mList.get(position);
-        mViewBinderTemp = getCurrentViewBinder(position);
-        mViewSizeTemp = mViewBinderTemp.onCountView(bean, position);
-        return mViewBinderTemp.onCreateItemView(bean, position);
+    public final int getItemViewType(int position) {
+        Object data = mList.get(position);
+        int index = mViewTypeManager.indexByClass(data.getClass());
+        int subIndex = 0;
+        if (index != -1) {
+            ViewType viewType = mViewTypeManager.get(index);
+            Matcher<Object> matcher = (Matcher<Object>) viewType.matcher;
+            subIndex = matcher.onMatch(data, position);
+        }
+
+        if (index != -1 && subIndex != -1) {
+            return index + subIndex;
+        }
+
+        if (mDefaultItemViewBinder != null) {
+            return Integer.MAX_VALUE;
+        }
+
+        throw new ViewBinderNotFoundException(data.getClass());
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mLayoutInflater == null) {
             mLayoutInflater = LayoutInflater.from(parent.getContext());
         }
-        return new ViewHolder(
-                mLayoutInflater.inflate(viewType, parent, false),
-                parent, mViewBinderTemp, mViewSizeTemp);
+
+        return getBinderByViewType(viewType).onCreateViewHolder(mLayoutInflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         onBindViewHolder(holder, position, Collections.emptyList());
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
-        Object bean = mList.get(position);
-        holder.getViewBinder().onBindView(holder, bean, position, payloads);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return getCurrentViewBinder(position).getItemId(position);
-    }
-
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
-        holder.getViewBinder().onViewRecycled(holder);
-    }
-
-    @Override
-    public boolean onFailedToRecycleView(ViewHolder holder) {
-        return holder.getViewBinder().onFailedToRecycleView(holder);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(ViewHolder holder) {
-        holder.getViewBinder().onViewAttachedToWindow(holder);
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(ViewHolder holder) {
-        holder.getViewBinder().onViewDetachedFromWindow(holder);
+    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        int viewType = getItemViewType(position);
+        Object data = mList.get(position);
+        getBinderByViewType(viewType).onBindViewHolder(holder, data, position, payloads);
     }
 
     @SuppressWarnings("unchecked")
-    private ViewBinder getCurrentViewBinder(int position) {
-        Object bean = mList.get(position);
-        Class beanClass = bean.getClass();
-        ViewBinder viewBinder;
-        if (mViewBinderMap.containsKey(beanClass)) {
-            viewBinder = mViewBinderMap.get(beanClass);
-            if (viewBinder instanceof MultiViewBinder) {
-                MultiViewBinder multiViewBinder = (MultiViewBinder) viewBinder;
-                viewBinder = multiViewBinder.getViewBinder(bean, position);
-            }
-        } else if (mDefaultViewBinder != null) {
-            viewBinder = mDefaultViewBinder;
-        } else {
-            throw new ViewBinderNotFoundException(beanClass);
-        }
-        return viewBinder;
+    @Override
+    public final long getItemId(int position) {
+        int viewType = getItemViewType(position);
+        Object data = mList.get(position);
+        return getBinderByViewType(viewType).getItemId(data, position);
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public final void onViewRecycled(RecyclerView.ViewHolder holder) {
+        getBinderByViewType(holder.getItemViewType()).onViewRecycled(holder);
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public final boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
+        return getBinderByViewType(holder.getItemViewType()).onFailedToRecycleView(holder);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public final void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        getBinderByViewType(holder.getItemViewType()).onViewAttachedToWindow(holder);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public final void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        getBinderByViewType(holder.getItemViewType()).onViewDetachedFromWindow(holder);
+    }
+
+    private ItemViewBinder getBinderByViewType(int itemViewType) {
+        if (itemViewType == Integer.MAX_VALUE) {
+            return mDefaultItemViewBinder;
+        }
+
+        return mViewTypeManager.get(itemViewType).binder;
+    }
+
 }

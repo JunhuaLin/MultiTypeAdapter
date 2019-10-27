@@ -3,28 +3,19 @@ package cn.junhua.android.commonadapter.binder.basis;
 import android.view.View;
 import android.widget.Toast;
 
-import cn.junhua.android.adapter.SingleViewBinder;
-import cn.junhua.android.adapter.ViewHolder;
+import cn.junhua.android.adapter.CommonViewHolder;
+import cn.junhua.android.adapter.SimpleItemViewBinder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.basis.BasisTextBean;
 
 /**
- * ImgBinderView
+ * ImgBinderItemView
  * Created by Administrator on 2018/1/21.
  */
-public class TextRightBinderView extends SingleViewBinder<BasisTextBean> {
-
-    public TextRightBinderView() {
-        super(BasisTextBean.class, R.layout.binder_right_text);
-    }
+public class TextRightBinderItemView extends SimpleItemViewBinder<BasisTextBean> {
 
     @Override
-    public int onCountView(BasisTextBean bean, int position) {
-        return 3;
-    }
-
-    @Override
-    public void onBindView(ViewHolder holder, BasisTextBean bean, final int position) {
+    public void onBindViewHolder(CommonViewHolder holder, BasisTextBean bean, final int position) {
         holder.setText(R.id.tv_type_right, "R.layout.binder_right_text")
                 .setText(R.id.tv_class_right, bean.getText());
 
@@ -35,5 +26,10 @@ public class TextRightBinderView extends SingleViewBinder<BasisTextBean> {
             }
         });
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.binder_right_text;
     }
 }

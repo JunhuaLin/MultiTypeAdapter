@@ -4,7 +4,7 @@ import android.view.View;
 
 import java.util.List;
 
-import cn.junhua.android.adapter.ViewHolder;
+import cn.junhua.android.adapter.CommonViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
 
@@ -12,11 +12,11 @@ import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
  * 朋友圈2-3或5-9张图片
  * Created by linjunhua on 2018/1/6.
  */
-public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
+public class FriendPhoto3ItemViewBinder extends FriendPhotoItemViewBinder {
 
     private int[] imageViewIds;
 
-    public FriendPhoto3ViewBinder() {
+    public FriendPhoto3ItemViewBinder() {
         super(R.layout.binder_friend_photo3);
         imageViewIds = new int[]{
                 R.id.iv_photo1,
@@ -34,12 +34,7 @@ public class FriendPhoto3ViewBinder extends FriendPhotoViewBinder {
     }
 
     @Override
-    public int onCountView(FriendBean bean, int position) {
-        return 3 + 9;
-    }
-
-    @Override
-    public void onBindImage(ViewHolder holder, FriendBean bean, int position) {
+    public void onBindImage(CommonViewHolder holder, FriendBean bean, int position) {
         List<Integer> urls = bean.getPhotos();
         int size = urls.size();
         for (int i = 0; i < imageViewIds.length; i++) {

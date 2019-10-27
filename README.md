@@ -146,10 +146,10 @@ ViewHolder的setImageResource()和setBackgroundResource()是用来快速填充�
 
 MultiTypeAdapter：
 ```java
-public void setDefaultViewBinder(ViewBinder viewBinder)
-public void register(ViewBinder viewBinder)
+public void setDefaultViewBinder(ViewBinder itemViewBinder)
+public void register(ViewBinder itemViewBinder)
 public <T> OneToManyMapper<T> register(Class<T> beanClass)
-public void unregister(ViewBinder viewBinder)
+public void unregister(ViewBinder itemViewBinder)
 ```
 
 ViewHolder：

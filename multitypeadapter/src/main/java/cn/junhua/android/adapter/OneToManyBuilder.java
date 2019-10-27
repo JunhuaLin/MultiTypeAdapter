@@ -1,7 +1,6 @@
 package cn.junhua.android.adapter;
 
-import android.support.annotation.CheckResult;
-
+import cn.junhua.android.adapter.imp.Matcher;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
 import cn.junhua.android.adapter.imp.TypeMatcher;
@@ -12,30 +11,38 @@ import cn.junhua.android.adapter.imp.TypeMatcher;
  */
 public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher<T> {
 
-    private MultiTypeAdapter mMultiTypeAdapter;
+    private MultiTypeAdapter adapter;
     private Class<T> mBeanClass;
-    private ViewBinder<T>[] mViewBinderList;
+    private ItemViewBinder<T, ?>[] binders;
 
     OneToManyBuilder(MultiTypeAdapter mMultiTypeAdapter, Class<T> mBeanClass) {
-        this.mMultiTypeAdapter = mMultiTypeAdapter;
+        this.adapter = mMultiTypeAdapter;
         this.mBeanClass = mBeanClass;
     }
 
+
     @Override
-    @CheckResult
-    @SafeVarargs
-    public final OneToManyMatcher<T> mapping(ViewBinder<T>... viewBinderList) {
-        if (viewBinderList == null) {
-            throw new NullPointerException();
-        }
-        mViewBinderList = viewBinderList;
+    public OneToManyMatcher<T> mapping(ItemViewBinder<T, ?>... binders) {
+        this.binders = binders;
         return this;
     }
 
+
     @Override
-    public MultiViewBinder<T> match(TypeMatcher<T> typeMatcher) {
-        MultiViewBinder<T> viewBinder = new MultiViewBinder<>(mBeanClass, mViewBinderList, typeMatcher);
-        mMultiTypeAdapter.register(viewBinder);
-        return viewBinder;
+    public void match(final TypeMatcher<T> typeMatcher) {
+        for (ItemViewBinder<T, ?> binder : binders) {
+            adapter.register(new ViewType(mBeanClass, binder, new Matcher<T>() {
+                @Override
+                public int onMatch(T bean, int position) {
+                    Class<? extends ItemViewBinder<T, ?>> binderClazz = typeMatcher.onMatch(bean, position);
+                    for (int i = 0; i < binders.length; i++) {
+                        if (binders[i].getClass() == binderClazz) {
+                            return i;
+                        }
+                    }
+                    return -1;
+                }
+            }));
+        }
     }
 }

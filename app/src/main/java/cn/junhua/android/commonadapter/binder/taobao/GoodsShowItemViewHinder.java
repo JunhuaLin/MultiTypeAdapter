@@ -4,8 +4,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import cn.junhua.android.adapter.SingleViewBinder;
-import cn.junhua.android.adapter.ViewHolder;
+import cn.junhua.android.adapter.SimpleItemViewBinder;
+import cn.junhua.android.adapter.CommonViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
 
@@ -13,19 +13,15 @@ import cn.junhua.android.commonadapter.bean.taobao.GoodsShowBean;
  * 淘宝商品展示
  * Created by junhua.lin on 2017/12/29.
  */
-public class GoodsShowViewHinder extends SingleViewBinder<GoodsShowBean> {
+public class GoodsShowItemViewHinder extends SimpleItemViewBinder<GoodsShowBean> {
 
-    public GoodsShowViewHinder() {
-        super(GoodsShowBean.class, R.layout.binder_goods_show);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.binder_goods_show;
     }
 
     @Override
-    public int onCountView(GoodsShowBean bean, int position) {
-        return 21;
-    }
-
-    @Override
-    public void onBindView(ViewHolder holder, GoodsShowBean bean, int position) {
+    public void onBindViewHolder(CommonViewHolder holder, GoodsShowBean bean, int position) {
         holder.setText(R.id.tv_goods_title, bean.getTitle())
                 .setText(R.id.tv_title1, bean.getTitle1())
                 .setText(R.id.tv_title2, bean.getTitle2())
@@ -50,7 +46,7 @@ public class GoodsShowViewHinder extends SingleViewBinder<GoodsShowBean> {
         setImage(holder, bean.getPhoto6_2(), R.id.iv_goods_photo6_2);
     }
 
-    private void setImage(ViewHolder holder, String url, int id) {
+    private void setImage(CommonViewHolder holder, String url, int id) {
         ImageView iv_goods_photo1 = holder.findView(id);
         Glide.with(iv_goods_photo1.getContext()).load(url).into(iv_goods_photo1);
     }

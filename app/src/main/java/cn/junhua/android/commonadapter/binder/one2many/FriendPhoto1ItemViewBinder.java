@@ -4,7 +4,7 @@ import android.view.View;
 
 import java.util.List;
 
-import cn.junhua.android.adapter.ViewHolder;
+import cn.junhua.android.adapter.CommonViewHolder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
 
@@ -12,14 +12,14 @@ import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
  * 朋友圈0-1张图片
  * Created by linjunhua on 2018/1/6.
  */
-public class FriendPhoto1ViewBinder extends FriendPhotoViewBinder {
+public class FriendPhoto1ItemViewBinder extends FriendPhotoItemViewBinder {
 
-    public FriendPhoto1ViewBinder() {
+    public FriendPhoto1ItemViewBinder() {
         super(R.layout.binder_friend_photo1);
     }
 
     @Override
-    public void onBindImage(ViewHolder holder, FriendBean bean, int position) {
+    public void onBindImage(CommonViewHolder holder, FriendBean bean, int position) {
         List<Integer> urls = bean.getPhotos();
         int size = urls.size();
         if (1 == size) {

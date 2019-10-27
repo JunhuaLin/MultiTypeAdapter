@@ -7,8 +7,8 @@ import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
-import cn.junhua.android.adapter.SingleViewBinder;
-import cn.junhua.android.adapter.ViewHolder;
+import cn.junhua.android.adapter.CommonViewHolder;
+import cn.junhua.android.adapter.SimpleItemViewBinder;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
 
@@ -16,19 +16,15 @@ import cn.junhua.android.commonadapter.bean.taobao.BannerBean;
  * 淘宝banner
  * Created by junhua.lin on 2017/12/29.
  */
-public class BannerViewBinder extends SingleViewBinder<BannerBean> {
+public class BannerItemViewBinder extends SimpleItemViewBinder<BannerBean> {
 
-    public BannerViewBinder() {
-        super(BannerBean.class, R.layout.binder_banner);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.binder_banner;
     }
 
     @Override
-    public int onCountView(BannerBean bean, int position) {
-        return 2;
-    }
-
-    @Override
-    public void onBindView(ViewHolder holder, BannerBean bean, int position) {
+    public void onBindViewHolder(CommonViewHolder holder, BannerBean bean, int position) {
         Banner banner = holder.findView(R.id.banner);
 
         ImageLoader imageLoader = new ImageLoader() {
@@ -47,28 +43,24 @@ public class BannerViewBinder extends SingleViewBinder<BannerBean> {
         banner.start();
     }
 
-    @Override
-    protected long getItemId(int position) {
-        return super.getItemId(position);
-    }
 
     @Override
-    protected void onViewRecycled(ViewHolder holder) {
+    protected void onViewRecycled(CommonViewHolder holder) {
         super.onViewRecycled(holder);
     }
 
     @Override
-    protected boolean onFailedToRecycleView(ViewHolder holder) {
+    protected boolean onFailedToRecycleView(CommonViewHolder holder) {
         return super.onFailedToRecycleView(holder);
     }
 
     @Override
-    protected void onViewAttachedToWindow(ViewHolder holder) {
+    protected void onViewAttachedToWindow(CommonViewHolder holder) {
         super.onViewAttachedToWindow(holder);
     }
 
     @Override
-    protected void onViewDetachedFromWindow(ViewHolder holder) {
+    protected void onViewDetachedFromWindow(CommonViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
     }
 }

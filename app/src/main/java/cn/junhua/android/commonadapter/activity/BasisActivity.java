@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
-import cn.junhua.android.adapter.ViewBinder;
+import cn.junhua.android.adapter.ItemViewBinder;
 import cn.junhua.android.adapter.imp.TypeMatcher;
 import cn.junhua.android.commonadapter.R;
 import cn.junhua.android.commonadapter.bean.basis.BasisImgBean;
 import cn.junhua.android.commonadapter.bean.basis.BasisTextBean;
-import cn.junhua.android.commonadapter.binder.basis.ImgBinderView;
-import cn.junhua.android.commonadapter.binder.basis.TextLeftBinderView;
-import cn.junhua.android.commonadapter.binder.basis.TextRightBinderView;
+import cn.junhua.android.commonadapter.binder.basis.ImgBinderItemView;
+import cn.junhua.android.commonadapter.binder.basis.TextLeftBinderItemView;
+import cn.junhua.android.commonadapter.binder.basis.TextRightBinderItemView;
 
 /**
  * 基本用法
@@ -35,7 +35,7 @@ public class BasisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
 
-        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_view = findViewById(R.id.recycler_view);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -46,15 +46,12 @@ public class BasisActivity extends AppCompatActivity {
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter();
         //注册ViewBinder
-        multiTypeAdapter.register(new ImgBinderView());//一对一
+        multiTypeAdapter.register(BasisImgBean.class, new ImgBinderItemView());//一对一
         multiTypeAdapter.register(BasisTextBean.class)//一对多
-                .mapping(new TextLeftBinderView(), new TextRightBinderView())
-                .match(new TypeMatcher<BasisTextBean>() {
-                    @Override
-                    public Class<? extends ViewBinder<BasisTextBean>> onMatch(BasisTextBean bean, int position) {
-                        if (bean.getType() == 1) return TextLeftBinderView.class;
-                        return TextRightBinderView.class;
-                    }
+                .mapping(new TextLeftBinderItemView(), new TextRightBinderItemView())
+                .match((bean, position) -> {
+                    if (bean.getType() == 1) return TextLeftBinderItemView.class;
+                    return TextRightBinderItemView.class;
                 });
 
         multiTypeAdapter.setList(getDataList());

@@ -11,20 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * the common ViewHolder
+ * the common view holder
  */
 @SuppressWarnings({"unused", "unchecked"})
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class CommonViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
     private RecyclerView mRecyclerView;
-    private ViewBinder mViewBinder;
 
-    public ViewHolder(View root, ViewGroup parent, ViewBinder viewBinder, int initialCapacity) {
+    public CommonViewHolder(View root, ViewGroup parent, int initialCapacity) {
         super(root);
         this.mViews = new SparseArray<>(initialCapacity >= 0 ? initialCapacity : 6);
         this.mConvertView = root;
-        this.mViewBinder = viewBinder;
         this.mRecyclerView = (RecyclerView) parent;
     }
 
@@ -41,30 +39,27 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return mRecyclerView;
     }
 
-    public ViewHolder setText(@IdRes int viewId, String text) {
+    public CommonViewHolder setText(@IdRes int viewId, String text) {
         TextView textView = findView(viewId);
         textView.setText(text);
         return this;
     }
 
-    public ViewHolder setText(@IdRes int viewId, @StringRes int resId) {
+    public CommonViewHolder setText(@IdRes int viewId, @StringRes int resId) {
         TextView textView = findView(viewId);
         textView.setText(resId);
         return this;
     }
 
-    public ViewHolder setImageResource(@IdRes int imageViewId, @DrawableRes int drawableId) {
+    public CommonViewHolder setImageResource(@IdRes int imageViewId, @DrawableRes int drawableId) {
         ImageView imageView = findView(imageViewId);
         imageView.setImageResource(drawableId);
         return this;
     }
 
-    public ViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId) {
+    public CommonViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId) {
         findView(viewId).setBackgroundResource(drawableId);
         return this;
     }
 
-    public ViewBinder getViewBinder() {
-        return mViewBinder;
-    }
 }
