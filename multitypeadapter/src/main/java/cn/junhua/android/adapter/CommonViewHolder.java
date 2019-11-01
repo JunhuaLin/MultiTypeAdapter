@@ -49,7 +49,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
 	 */
 	public CommonViewHolder(View itemView, ViewGroup parent, int initialCapacity) {
         super(itemView);
-        this.initialCapacity = initialCapacity >= 0 ? initialCapacity : 6;
+        this.initialCapacity = initialCapacity <= 4 ? 8 : initialCapacity;
         this.mRecyclerView = (RecyclerView) parent;
     }
 	//endregion
