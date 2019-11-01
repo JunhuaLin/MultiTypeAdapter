@@ -1,29 +1,5 @@
 apply plugin: 'com.android.library'
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'multitypeadapter'
-
-    //GROUP_ID:ARTIFACT_ID:VERSION dependencies format
-    publishedGroupId = 'cn.junhua.android.adapter'
-    artifact = 'multitypeadapter'
-    libraryVersion = rootProject.android.versionName
-    //cn.junhua.android.adapter:multitypeadapter:x.y.z
-    libraryName = 'MultiTypeAdapter'
-
-    libraryDescription = 'a common adapter for RecyclerView on Android'
-
-    siteUrl = 'https://github.com/JunhuaLin/MultiTypeAdapter'
-    gitUrl = 'https://github.com/JunhuaLin/MultiTypeAdapter.git'
-
-    developerId = 'linjunhua'
-    developerName = 'linjunhua'
-    developerEmail = 'linjunhua92@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
@@ -46,13 +22,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     //supportLib
     implementation rootProject.ext.supportLib['recyclerview-v7']
     implementation rootProject.ext.supportLib['support-annotations']
 }
 
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+//$ ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+publish {
+    userOrg = ''
+    groupId = 'cn.junhua.android.adapter'
+    artifactId = 'multitypeadapter'
+    publishVersion = rootProject.android.versionName
+    desc = 'a common adapter for RecyclerView on Android'
+    website = 'https://github.com/JunhuaLin/MultiTypeAdapter'
+}
 
