@@ -17,9 +17,22 @@ public abstract class SimpleItemViewBinder<T> extends ItemViewBinder<T, CommonVi
     @Override
     public CommonViewHolder onCreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
         View root = inflater.inflate(getLayoutId(), parent, false);
+        initialCapacity = onInitialCapacity();
         return new CommonViewHolder(root, parent, initialCapacity);
     }
 
+    /**
+     * 当初始化CommonViewHolder时会调
+     * @return initialCapacity View缓存池的初始化大小
+     */
+    protected int onInitialCapacity(){
+        return initialCapacity;
+    }
+
+    /**
+     * 获取布局文件
+     * @return layout res id
+     */
     protected abstract @LayoutRes
     int getLayoutId();
 
