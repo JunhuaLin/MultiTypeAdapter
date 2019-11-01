@@ -23,7 +23,11 @@ public abstract class SimpleItemViewBinder<T> extends ItemViewBinder<T, CommonVi
     protected abstract @LayoutRes
     int getLayoutId();
 
-    public void setInitialCapacity(int initialCapacity) {
+    /**
+     * 要在CommonViewHolder创建之前调用才能生效，即构造函数中调用
+     * @param initialCapacity View缓存池的初始大小
+     */
+    protected void setInitialCapacity(int initialCapacity) {
         this.initialCapacity = initialCapacity;
     }
 }

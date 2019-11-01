@@ -1,5 +1,7 @@
 package cn.junhua.android.adapter;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
@@ -16,20 +18,18 @@ import android.widget.TextView;
 @SuppressWarnings({"unused", "unchecked"})
 public class CommonViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
-    private View mConvertView;
     private RecyclerView mRecyclerView;
 
     public CommonViewHolder(View root, ViewGroup parent, int initialCapacity) {
         super(root);
         this.mViews = new SparseArray<>(initialCapacity >= 0 ? initialCapacity : 6);
-        this.mConvertView = root;
         this.mRecyclerView = (RecyclerView) parent;
     }
 
     public <T extends View> T findView(@IdRes int viewId) {
         View view = mViews.get(viewId);
         if (view == null) {
-            view = mConvertView.findViewById(viewId);
+            view = itemView.findViewById(viewId);
             mViews.put(viewId, view);
         }
         return (T) view;
@@ -60,6 +60,14 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
     public CommonViewHolder setBackgroundResource(@IdRes int viewId, @DrawableRes int drawableId) {
         findView(viewId).setBackgroundResource(drawableId);
         return this;
+    }
+
+    public Context getContext() {
+        return itemView.getContext();
+    }
+
+    public Resources getResources() {
+        return itemView.getResources();
     }
 
 }

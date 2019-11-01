@@ -11,14 +11,15 @@ class ViewTypeManager extends ArrayList<ViewType> {
 
     int indexByClass(Class<?> clazz) {
         Class<?> tempClazz;
-        for (int i = 0; i < size(); i++) {
+        int len = size();
+        for (int i = 0; i < len; i++) {
             tempClazz = get(i).clazz;
             if (tempClazz == clazz) {
                 return i;
             }
         }
 
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < len; i++) {
             tempClazz = get(i).clazz;
             if (tempClazz.isAssignableFrom(clazz)) {
                 return i;

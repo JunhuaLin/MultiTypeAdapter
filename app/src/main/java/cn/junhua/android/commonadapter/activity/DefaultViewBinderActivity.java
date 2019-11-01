@@ -61,7 +61,7 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
         multiTypeAdapter.register(MenuBean.class, new MenuItemViewHinder());
         multiTypeAdapter.register(GoodsShowBean.class, new GoodsShowItemViewHinder());
         multiTypeAdapter.register(BigTitleBean.class, new BigTitleItemViewHinder());
-        multiTypeAdapter.setDefaultViewBinder(new DefaultItemViewBinder());
+        multiTypeAdapter.registerDefault(new DefaultItemViewBinder());
 
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);

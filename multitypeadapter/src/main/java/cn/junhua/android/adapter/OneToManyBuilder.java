@@ -30,6 +30,8 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
 
     @Override
     public void match(final TypeMatcher<T> typeMatcher) {
+        if (binders == null || typeMatcher == null) return;
+
         for (ItemViewBinder<T, ?> binder : binders) {
             adapter.register(new ViewType(mBeanClass, binder, new Matcher<T>() {
                 @Override

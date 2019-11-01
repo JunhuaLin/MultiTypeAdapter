@@ -31,7 +31,17 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mList = Collections.emptyList();
     }
 
-    public <T> void setDefaultViewBinder(ItemViewBinder<T, ?> binder) {
+    /**
+     * 设置默认的ItemViewBinder<br/>
+     * <p>
+     * 当没有默认ItemViewBinder时，如果数据的class没有匹配到对应的ItemViewBinder时候，会抛出异常提示没有匹配成功。<br/>
+     * </p>
+	 * <p>
+     * 当设置了默认ItemViewBinder时，如果数据的class没有匹配到对应的ItemViewBinder时候，不会抛出异常而是使用该ItemViewBinder处理了。<br/>
+     * </p>
+     * @param binder {@link ItemViewBinder}
+     */
+    public void registerDefault(ItemViewBinder<Object, ?> binder) {
         if (binder == null) return;
         binder.adapter = this;
         mDefaultItemViewBinder = binder;
@@ -42,7 +52,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         register(new ViewType(clazz, binder));
     }
 
-    public void register(ViewType viewType) {
+    void register(ViewType viewType) {
         if (viewType == null) return;
         viewType.binder.adapter = this;
         mViewTypeManager.add(viewType);
@@ -57,8 +67,12 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void setList(List<?> list) {
-        mList.clear();
-        mList = list;
+		mList.clear();
+		if (list == null){
+			mList = Collections.emptyList();
+		}else{
+			mList = list;
+		}
     }
 
     @Override
