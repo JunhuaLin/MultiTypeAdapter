@@ -47,9 +47,15 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mDefaultItemViewBinder = binder;
     }
 
-    public <T> void register(Class<T> clazz, ItemViewBinder<T, ?> binder) {
+	/**
+	 * 为不同数据条目注册ItemViewBinder
+	 * @param beanClass  数据类的class
+	 * @param binder ItemViewBinder
+	 * @param <T> 数据结构泛型
+	 */
+    public <T> void register(Class<T> beanClass, ItemViewBinder<T, ?> binder) {
         if (binder == null) return;
-        register(new ViewType(clazz, binder));
+        register(new ViewType(beanClass, binder));
     }
 
     void register(ViewType viewType) {
@@ -58,6 +64,11 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mViewTypeManager.add(viewType);
     }
 
+	/**
+	 * 为同一个数据类型注册不同的ItemViewBinder，处理一种数据类型对应多种ItemViewBinder情况
+	 * @param beanClass 数据类的class
+	 * @param <T> 数据结构泛型
+	 */
     public <T> OneToManyMapper<T> register(Class<T> beanClass) {
         return new OneToManyBuilder<>(this, beanClass);
     }

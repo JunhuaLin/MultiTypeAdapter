@@ -8,23 +8,16 @@ import java.util.ArrayList;
  */
 class ViewTypeManager extends ArrayList<ViewType> {
 
-
     int indexByClass(Class<?> clazz) {
         Class<?> tempClazz;
         int len = size();
         for (int i = 0; i < len; i++) {
             tempClazz = get(i).clazz;
-            if (tempClazz == clazz) {
+            if (tempClazz == clazz || tempClazz.isAssignableFrom(clazz)) {
                 return i;
             }
         }
 
-        for (int i = 0; i < len; i++) {
-            tempClazz = get(i).clazz;
-            if (tempClazz.isAssignableFrom(clazz)) {
-                return i;
-            }
-        }
         return -1;
     }
 
