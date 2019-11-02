@@ -35,8 +35,8 @@ public abstract class SimpleItemViewBinder<T> extends ItemViewBinder<T, CommonVi
      *
      * @return layout res id
      */
-    protected abstract @LayoutRes
-    int getLayoutId();
+    @LayoutRes
+    protected abstract int getLayoutId();
 
     /**
      * 要在CommonViewHolder创建之前调用才能生效，即构造函数中调用

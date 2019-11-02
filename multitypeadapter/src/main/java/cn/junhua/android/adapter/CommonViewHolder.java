@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class CommonViewHolder extends RecyclerView.ViewHolder {
 
     //region filed
-    private SparseArray<View> mViews;
+    private SparseArray<View> mViewPool;
     private RecyclerView mRecyclerView;
     /**
      * 内部View缓存池的默认大小
@@ -70,14 +70,14 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
      */
     public <T extends View> T findView(@IdRes int viewId) {
         //延迟初始化
-        if (mViews == null) {
-            mViews = new SparseArray<>(mInitialCapacity);
+        if (mViewPool == null) {
+            mViewPool = new SparseArray<>(mInitialCapacity);
         }
 
-        View view = mViews.get(viewId);
+        View view = mViewPool.get(viewId);
         if (view == null) {
             view = itemView.findViewById(viewId);
-            mViews.put(viewId, view);
+            mViewPool.put(viewId, view);
         }
         return (T) view;
     }
@@ -177,6 +177,15 @@ public class CommonViewHolder extends RecyclerView.ViewHolder {
     public CommonViewHolder setOnItemClickListener(View.OnClickListener onClickListener) {
         itemView.setOnClickListener(onClickListener);
         return this;
+    }
+
+    /**
+     * 清除View缓存，一般不需要调用
+     */
+    public void clear() {
+        if (mViewPool != null) {
+            mViewPool.clear();
+        }
     }
     //endregion
 

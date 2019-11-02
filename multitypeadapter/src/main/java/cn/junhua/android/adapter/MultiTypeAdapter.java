@@ -61,7 +61,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     /**
-     * 为不同数据条目注册不同的ItemViewBinder
+     * 为数据条目注册ItemViewBinder
      *
      * @param beanClass 数据类的class
      * @param binder    ItemViewBinder
