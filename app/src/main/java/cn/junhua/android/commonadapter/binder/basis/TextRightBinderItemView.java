@@ -16,16 +16,16 @@ public class TextRightBinderItemView extends SimpleItemViewBinder<BasisTextBean>
 
     @Override
     public void onBindViewHolder(CommonViewHolder holder, BasisTextBean bean, final int position) {
+        holder.getPosition();
+
         holder.setText(R.id.tv_type_right, "R.layout.binder_right_text")
-                .setText(R.id.tv_class_right, bean.getText());
-
-        holder.findView(R.id.rl_root).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "clock item " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                .setText(R.id.tv_class_right, bean.getText())
+                .setOnItemClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(view.getContext(), "clock item " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

@@ -48,7 +48,7 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
             dataList.add(new LikeBean());
         }
 
-        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_view = findViewById(R.id.recycler_view);
 
         //设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -61,7 +61,7 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
         multiTypeAdapter.register(MenuBean.class, new MenuItemViewHinder());
         multiTypeAdapter.register(GoodsShowBean.class, new GoodsShowItemViewHinder());
         multiTypeAdapter.register(BigTitleBean.class, new BigTitleItemViewHinder());
-        multiTypeAdapter.registerDefault(new DefaultItemViewBinder());
+        multiTypeAdapter.setDefaultViewBinder(new DefaultItemViewBinder());
 
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);

@@ -12,8 +12,12 @@ import java.util.List;
  */
 public abstract class ItemViewBinder<T, VH extends RecyclerView.ViewHolder> {
 
+    //region filed
     MultiTypeAdapter adapter;
 
+    //endregion
+
+    //region public method
     public final MultiTypeAdapter getAdapter() {
         if (adapter == null) {
             throw new IllegalStateException(getClass().getName() + " not attached to MultiTypeAdapter. " +
@@ -22,7 +26,6 @@ public abstract class ItemViewBinder<T, VH extends RecyclerView.ViewHolder> {
         return adapter;
     }
 
-    //region public method
     public abstract VH onCreateViewHolder(LayoutInflater inflater, ViewGroup parent);
 
     public void onBindViewHolder(VH holder, T bean, int position, List<Object> payloads) {
