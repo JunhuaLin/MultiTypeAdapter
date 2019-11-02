@@ -1,5 +1,7 @@
 package cn.junhua.android.adapter;
 
+import android.support.annotation.NonNull;
+
 import cn.junhua.android.adapter.imp.Matcher;
 import cn.junhua.android.adapter.imp.OneToManyMapper;
 import cn.junhua.android.adapter.imp.OneToManyMatcher;
@@ -29,8 +31,8 @@ public class OneToManyBuilder<T> implements OneToManyMapper<T>, OneToManyMatcher
 
 
     @Override
-    public void match(final TypeMatcher<T> typeMatcher) {
-        if (binders == null || typeMatcher == null) return;
+    public void match(@NonNull final TypeMatcher<T> typeMatcher) {
+        if (binders == null) return;
 
         for (ItemViewBinder<T, ?> binder : binders) {
             adapter.register(new ViewType(mBeanClass, binder, new Matcher<T>() {

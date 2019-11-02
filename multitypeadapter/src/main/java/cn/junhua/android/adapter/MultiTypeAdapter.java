@@ -1,5 +1,7 @@
 package cn.junhua.android.adapter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -51,9 +53,10 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param binder {@link ItemViewBinder}
      */
-    public void setDefaultViewBinder(ItemViewBinder<Object, ?> binder) {
-        if (binder == null) return;
-        binder.adapter = this;
+    public void setDefaultViewBinder(@Nullable ItemViewBinder<Object, ?> binder) {
+        if (binder != null) {
+            binder.adapter = this;
+        }
         mDefaultItemViewBinder = binder;
     }
 
@@ -64,8 +67,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param binder    ItemViewBinder
      * @param <T>       数据结构泛型
      */
-    public <T> void register(Class<T> beanClass, ItemViewBinder<T, ?> binder) {
-        if (binder == null) return;
+    public <T> void register(@NonNull Class<T> beanClass, @NonNull ItemViewBinder<T, ?> binder) {
         register(new ViewType(beanClass, binder));
     }
 
@@ -75,10 +77,16 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param beanClass 数据类的class
      * @param <T>       数据结构泛型
      */
-    public <T> OneToManyMapper<T> register(Class<T> beanClass) {
+    public <T> OneToManyMapper<T> register(@NonNull Class<T> beanClass) {
         return new OneToManyBuilder<>(this, beanClass);
     }
 
+    /**
+     * 获取数据集合
+     *
+     * @return List
+     */
+    @NonNull
     public List<?> getList() {
         return mList;
     }
@@ -88,7 +96,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param list {@link List}
      */
-    public void setList(List<?> list) {
+    public void setList(@Nullable List<?> list) {
         mList.clear();
         if (list == null) {
             mList = Collections.emptyList();
@@ -192,8 +200,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param viewType {@link ViewType}
      */
-    void register(ViewType viewType) {
-        if (viewType == null) return;
+    void register(@NonNull ViewType viewType) {
         viewType.binder.adapter = this;
         mViewTypeManager.add(viewType);
     }
