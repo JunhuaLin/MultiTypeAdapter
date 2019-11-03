@@ -22,7 +22,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     //region filed
 
     // data res
-    private List<?> mList;
+    private List<Object> mList;
     private LayoutInflater mLayoutInflater;
 
     // save ItemViewBinder
@@ -87,7 +87,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @return List
      */
     @NonNull
-    public List<?> getList() {
+    public List<Object> getList() {
         return mList;
     }
 
@@ -96,7 +96,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param list {@link List}
      */
-    public void setList(@Nullable List<?> list) {
+    public void setList(@Nullable List<Object> list) {
         mList.clear();
         if (list == null) {
             mList = Collections.emptyList();
