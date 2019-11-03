@@ -6,10 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.junhua.android.adapter.MultiTypeAdapter;
 import cn.junhua.android.commonadapter.R;
+import cn.junhua.android.commonadapter.bean.hint.HintBean;
 import cn.junhua.android.commonadapter.bean.one2many.FriendBean;
+import cn.junhua.android.commonadapter.binder.hint.HintItemViewBinder;
 import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto1ItemViewBinder;
 import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto3ItemViewBinder;
 import cn.junhua.android.commonadapter.binder.one2many.FriendPhoto4ItemViewBinder;
@@ -23,6 +29,8 @@ public class One2ManyActivity extends AppCompatActivity {
 
     private RecyclerView recycler_view;
     private MultiTypeAdapter mMultiTypeAdapter;
+    private List<Object> mList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,7 @@ public class One2ManyActivity extends AppCompatActivity {
         //再创建MultiTypeAdapter
         mMultiTypeAdapter = new MultiTypeAdapter();
         //注册ViewBinder
+        mMultiTypeAdapter.register(HintBean.class, new HintItemViewBinder());//一对一
         //一对多条目注册
         mMultiTypeAdapter.register(FriendBean.class)
                 .mapping(new FriendPhoto1ItemViewBinder(),
@@ -46,11 +55,18 @@ public class One2ManyActivity extends AppCompatActivity {
                     return FriendPhoto3ItemViewBinder.class;
                 });
 
-        mMultiTypeAdapter.setList(FriendBean.getRandomFriend());
+        mList.addAll(FriendBean.getRandomFriend());
+
+        mMultiTypeAdapter.setList(mList);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recycler_view.setAdapter(mMultiTypeAdapter);
 
-        new Handler().postDelayed(() -> mMultiTypeAdapter.notifyDataSetChanged(), 3000);
+        new Handler().postDelayed(() -> {
+            mList.add(new HintBean());
+            mList.addAll(FriendBean.getRandomFriend());
+            mMultiTypeAdapter.notifyDataSetChanged();
+            Toast.makeText(One2ManyActivity.this, "追加数据", Toast.LENGTH_SHORT).show();
+        }, 3000);
     }
 }
