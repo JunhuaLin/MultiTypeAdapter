@@ -1,12 +1,10 @@
 # MultiTypeAdapter
-RecyclerView在我们开发的过程中使用频率极高，而在创建适配器的时候每次都要写很多相同的代码，每次都这样操作效率很低。
-当在处理多类型条目时候，虽然写几个判断条件创建不同的ViewHolder和对应布局就可以了，但是当布局非常复杂的时候这种方式就很难维护了。
-因此该项目将适配器创建的过程进行了封装，使代码量大幅降低同时还使适配器的复用粒度降低到布局条目级别。
+RecyclerView多条目适配器，灵活处理一对一，一对多条目，更小的复用粒度。
 
 MultiTypeAdapter的优点如下：
-- 1.易维护
+- 1.易维护、易上手
 - 2.复用粒度更细
-- 3.易上手
+- 3.一对一，一对多条目展示
 
 ## 快速使用
 
@@ -17,9 +15,13 @@ MultiTypeAdapter的优点如下：
 在build.gradle中添加如下代码：
 ```groovy
 dependencies {
-    compile 'cn.junhua.android.adapter:multitypeadapter:2.3.3'
+    compile 'cn.junhua.android.adapter:multitypeadapter:3.0.0-beta'
 }
 ```
+
+关系图：
+
+![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图3.png)
 
 ### 2.基本用法
 #### a.步骤
