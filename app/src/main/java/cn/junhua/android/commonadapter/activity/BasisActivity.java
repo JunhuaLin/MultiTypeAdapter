@@ -47,6 +47,7 @@ public class BasisActivity extends AppCompatActivity {
         });
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter();
+        multiTypeAdapter.notifyDataSetChanged();//测试刷新点
         //注册ViewBinder
         multiTypeAdapter.register(HintBean.class, new HintItemViewBinder());//一对一
         multiTypeAdapter.register(BasisImgBean.class, new ImgBinderItemView());//一对一
@@ -60,13 +61,13 @@ public class BasisActivity extends AppCompatActivity {
         genDataList(true);
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);
-        multiTypeAdapter.notifyDataSetChanged();
+        multiTypeAdapter.notifyDataSetChanged();//测试刷新点
 
 
         new Handler().postDelayed(() -> {
             genDataList(false);
-            multiTypeAdapter.notifyDataSetChanged();
-            Toast.makeText(BasisActivity.this, "追加数据", Toast.LENGTH_SHORT).show();
+            multiTypeAdapter.notifyDataSetChanged();//测试刷新点
+            Toast.makeText(BasisActivity.this, "自动追加数据", Toast.LENGTH_SHORT).show();
         }, 5000);
     }
 

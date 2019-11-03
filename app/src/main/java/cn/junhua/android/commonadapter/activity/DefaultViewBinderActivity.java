@@ -48,6 +48,7 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
 
         //初始化MultiTypeAdapter
         multiTypeAdapter = new MultiTypeAdapter();
+        multiTypeAdapter.notifyDataSetChanged();//测试刷新点
         //注册ViewBinder
         multiTypeAdapter.register(HintBean.class, new HintItemViewBinder());//一对一
         multiTypeAdapter.register(MenuBean.class, new MenuItemViewHinder());
@@ -58,12 +59,12 @@ public class DefaultViewBinderActivity extends AppCompatActivity {
         genDataList(true);
         multiTypeAdapter.setList(dataList);
         recycler_view.setAdapter(multiTypeAdapter);
-        multiTypeAdapter.notifyDataSetChanged();
+        multiTypeAdapter.notifyDataSetChanged();//测试刷新点
 
         new Handler().postDelayed(() -> {
             genDataList(false);
-            multiTypeAdapter.notifyDataSetChanged();
-            Toast.makeText(DefaultViewBinderActivity.this, "追加数据", Toast.LENGTH_SHORT).show();
+            multiTypeAdapter.notifyDataSetChanged();//测试刷新点
+            Toast.makeText(DefaultViewBinderActivity.this, "自动追加数据", Toast.LENGTH_SHORT).show();
         }, 5000);
     }
 

@@ -75,7 +75,7 @@ public class TaobaoActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             genDataList(false);
             multiTypeAdapter.notifyDataSetChanged();
-            Toast.makeText(TaobaoActivity.this, "追加数据", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TaobaoActivity.this, "自动追加数据", Toast.LENGTH_SHORT).show();
         }, 3000);
     }
 

@@ -41,6 +41,7 @@ public class One2ManyActivity extends AppCompatActivity {
 
         //再创建MultiTypeAdapter
         mMultiTypeAdapter = new MultiTypeAdapter();
+        mMultiTypeAdapter.notifyDataSetChanged();//测试刷新点
         //注册ViewBinder
         mMultiTypeAdapter.register(HintBean.class, new HintItemViewBinder());//一对一
         //一对多条目注册
@@ -65,8 +66,9 @@ public class One2ManyActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             mList.add(new HintBean());
             mList.addAll(FriendBean.getRandomFriend());
-            mMultiTypeAdapter.notifyDataSetChanged();
-            Toast.makeText(One2ManyActivity.this, "追加数据", Toast.LENGTH_SHORT).show();
+            mMultiTypeAdapter.notifyDataSetChanged();//测试刷新点
+
+            Toast.makeText(One2ManyActivity.this, "自动追加数据", Toast.LENGTH_SHORT).show();
         }, 3000);
     }
 }
