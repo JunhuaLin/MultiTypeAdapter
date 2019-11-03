@@ -15,9 +15,13 @@ MultiTypeAdapter的优点如下：
 在build.gradle中添加如下代码：
 ```groovy
 dependencies {
-    compile 'cn.junhua.android.adapter:multitypeadapter:3.0.0-beta'
+    implementation 'cn.junhua.android.adapter:multitypeadapter:3.0.0-beta'
 }
 ```
+
+注：3.x版本较2.x版本改动非常大，不兼容之前版本。2.x最后一版``2.3.3``
+
+
 
 关系图：
 
