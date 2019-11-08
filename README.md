@@ -1,10 +1,10 @@
 # MultiTypeAdapter
 
 
-[![GitHub license](https://img.shields.io/github/license/JunhuaLin/MultiTypeAdapter.svg?style=plastic)](https://github.com/JunhuaLin/PermissionAgent/blob/master/LICENSE)
-[![latest release](https://img.shields.io/github/release/JunhuaLin/MultiTypeAdapter.svg?style=plastic)](https://github.com/JunhuaLin/PermissionAgent/releases)
-[![pull requests welcome](https://img.shields.io/badge/pull%20requests-welcome-brightgreen.svg?style=plastic)](https://github.com/JunhuaLin/PermissionAgent/pulls)
-[![issues welcome](https://img.shields.io/badge/issues-welcome-brightgreen.svg?style=plastic)](https://github.com/JunhuaLin/PermissionAgent/issues)
+[![GitHub license](https://img.shields.io/github/license/JunhuaLin/MultiTypeAdapter.svg?style=plastic)](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/LICENSE)
+[![latest release](https://img.shields.io/github/release/JunhuaLin/MultiTypeAdapter.svg?style=plastic)](https://github.com/JunhuaLin/MultiTypeAdapter/releases)
+[![pull requests welcome](https://img.shields.io/badge/pull%20requests-welcome-brightgreen.svg?style=plastic)](https://github.com/JunhuaLin/MultiTypeAdapter/pulls)
+[![issues welcome](https://img.shields.io/badge/issues-welcome-brightgreen.svg?style=plastic)](https://github.com/JunhuaLin/MultiTypeAdapter/issues)
 
 
 RecyclerView多条目适配器，灵活处理一对一，一对多条目，更小的复用粒度。
