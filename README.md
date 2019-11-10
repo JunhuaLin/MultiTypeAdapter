@@ -25,7 +25,7 @@ dependencies {
 
 关系图：
 
-![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图3.png)
+![关系图](https://github.com/JunhuaLin/MultiTypeAdapter/blob/master/photo/关系图.png)
 
 ### 2.基本用法
 #### a.步骤
